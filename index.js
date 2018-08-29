@@ -6,11 +6,9 @@ var app = new Vue({
     radomY: null,
     foodX: null,
     foodY: null,
-    beanX: null,
-    beanY: null,
     context: null,
     one: 0,
-    snaker: [],
+    snaker: []
   },
   methods: {
     //随机生成x坐标
@@ -24,19 +22,17 @@ var app = new Vue({
       return this.radomY;
     },
     //随机生成头的坐标
-    bean() {
+    addSnaker() {
       // this.snaker.splice(0,this.snaker.length);
-      this.beanX = this.radomx() * 20;
-      this.beanY = this.radomy() * 20;
-      this.snaker.push([this.beanX,this.beanY]);
-      // console.log(this.snaker)
+      this.snaker.push([this.radomx() * 20, this.radomy() * 20]);
+      console.log(this.snaker);
     },
-    //显示食物的坐标红色，且不能和豌豆在同一个位置。
+    //显示食物的坐标红色，且不能和蛇头在同一个位置。
     food() {
       this.foodX = this.radomx() * 20;
       this.foodY = this.radomy() * 20;
       //判断食物不能和头重复了。
-      if (this.foodX == this.beanX && this.foodY == this.beanY) {
+      if (this.foodX == this.snaker[0][0] && this.foodY == this.snaker[0][1]) {
         this.foodX = this.radomx() * 20;
         this.foodY = this.radomy() * 20;
       }
@@ -46,16 +42,19 @@ var app = new Vue({
       this.context.fillRect(this.foodX, this.foodY, 20, 20);
     },
     ifAdd() {
-      if (this.foodX == this.snaker[0][0] && this.foodY == this.snaker[0][1]) {
-        console.log(this.foodX + "+" + this.foodY)
-        this.snaker.push([this.foodX, this.foodY]);
-        for (var i = 0; i < this.snaker.length; i++) {
-          this.context.fillRect(this.snaker[i][0], this.snaker[i][1], 20, 20);
-        }
-        console.log(this.snaker);
-        this.food();
-        this.scope = this.scope + 1;
-      }
+      // if (this.foodX == this.snaker[0][0] && this.foodY == this.snaker[0][1]) {
+      //   console.log(this.foodX + "+" + this.foodY);
+      //   this.snaker.push([this.foodX - 20, this.foodY - 20]);
+      //   console.log(this.snaker);
+      //   this.context.fillRect(
+      //     this.snaker[this.snaker.length - 1][0],
+      //     this.snaker[this.snaker.length - 1][1],
+      //     20,
+      //     20
+      //   );
+      //   this.food();
+      //   this.scope = this.scope + 1;
+      // }
     },
     ifOut() {
       if (
@@ -79,12 +78,17 @@ var app = new Vue({
         this.one = 0;
         this.scope = 0;
         this.context.clearRect(this.foodX, this.foodY, 20, 20);
-        this.context.clearRect(this.beanX, this.beanY, 20, 20);
+        // this.context.clearRect(this.beanX, this.beanY, 20, 20);清除蛇
+        for (var i = 0; i < this.snaker.length; i++) {
+          this.context.clearRect(this.snaker[i][0], this.snaker[i][1], 20, 20);
+        }
       } else {
-        this.bean();
+        this.addSnaker();
         this.food();
         this.context.fillStyle = "#00FF80";
-        this.context.fillRect(this.beanX, this.beanY, 20, 20);
+        for (var i = 0; i < this.snaker.length; i++) {
+          this.context.fillRect(this.snaker[i][0], this.snaker[i][1], 20, 20);
+        }
         this.one = 1;
         $("#title").html("");
         $("#title").html("游戏结束");
@@ -92,50 +96,146 @@ var app = new Vue({
       }
     },
     goRight() {
-      for (var i = this.snaker.length - 1; i > 0; i--) {
-        this.context.clearRect(this.snaker[i][0], this.snaker[i][1], 20, 20);
-        this.snaker[i] = this.snaker[i - 1];
+      this.context.clearRect(this.snaker[this.snaker.length - 1][0], this.snaker[this.snaker.length - 1][1], 20, 20);
+      for (var i = this.snaker.length - 1; i >= 0; i--) {
+        // this.context.clearRect(this.snaker[i][0], this.snaker[i][1], 20, 20);
+        if (i == 0) {
+          this.snaker[0][0] = this.snaker[0][0] + 20;
+        } else {
+          this.snaker[i][0] = this.snaker[i - 1][0];
+          this.snaker[i][1] = this.snaker[i - 1][1];
+        }
+        this.context.fillRect(this.snaker[i][0], this.snaker[i][1], 20, 20);
+        this.painBean();
       }
-      console.log(this.snaker[0][0]);
-      this.snaker[0][0] = this.snaker[0][0] + 20;
-      //先清空原来的
-      this.painBean();
+      if (this.foodX == this.snaker[0][0] && this.foodY == this.snaker[0][1]) {
+        console.log(this.foodX + "+" + this.foodY);
+        this.snaker.push([this.foodX - 20, this.foodY]);
+        console.log(this.snaker);
+        this.context.fillRect(
+          this.snaker[this.snaker.length - 1][0],
+          this.snaker[this.snaker.length - 1][1],
+          20,
+          20
+        );
+        this.painBean();
+        this.food();
+        this.scope = this.scope + 1;
+      }
+      console.log('changge' + this.snaker)
     },
     goLeft() {
-      for (var i = this.snaker.length - 1; i > 0; i--) {
-        this.context.clearRect(this.snaker[i][0], this.snaker[i][1], 20, 20);
-        this.snaker[i] = this.snaker[i - 1];
+      this.context.clearRect(this.snaker[this.snaker.length - 1][0], this.snaker[this.snaker.length - 1][1], 20, 20);
+      for (var i = this.snaker.length - 1; i >= 0; i--) {
+        // this.context.clearRect(this.snaker[i][0], this.snaker[i][1], 20, 20);
+        if (i == 0) {
+          this.snaker[0][0] = this.snaker[0][0] - 20;
+        } else {
+          this.snaker[i][0] = this.snaker[i - 1][0];
+          this.snaker[i][1] = this.snaker[i - 1][1];
+        }
+        this.context.fillRect(this.snaker[i][0], this.snaker[i][1], 20, 20);
+        this.painBean();
       }
-      this.snaker[0][0] = this.snaker[0][0] - 20;
-      this.painBean();
+      if (this.foodX == this.snaker[0][0] && this.foodY == this.snaker[0][1]) {
+        console.log(this.foodX + "+" + this.foodY);
+        this.snaker.push([this.foodX + 20, this.foodY]);
+        console.log(this.snaker);
+        this.context.fillRect(
+          this.snaker[this.snaker.length - 1][0],
+          this.snaker[this.snaker.length - 1][1],
+          20,
+          20
+        );
+        this.painBean();
+        this.food();
+        this.scope = this.scope + 1;
+      }
+      console.log('changge' + this.snaker)
     },
     goUp() {
-      for (var i = this.snaker.length - 1; i > 0; i--) {
-        this.context.clearRect(this.snaker[i][0], this.snaker[i][1], 20, 20);
-        this.snaker[i] = this.snaker[i - 1];
+      this.context.clearRect(this.snaker[this.snaker.length - 1][0], this.snaker[this.snaker.length - 1][1], 20, 20);
+      for (var i = this.snaker.length - 1; i >= 0; i--) {
+        // this.context.clearRect(this.snaker[i][0], this.snaker[i][1], 20, 20);
+        if (i == 0) {
+          this.snaker[0][1] = this.snaker[0][1] - 20;
+        } else {
+          this.snaker[i][0] = this.snaker[i - 1][0];
+          this.snaker[i][1] = this.snaker[i - 1][1];
+        }
+        this.context.fillRect(this.snaker[i][0], this.snaker[i][1], 20, 20);
+        this.painBean();
       }
-      this.snaker[0][1] = this.snaker[0][1] - 20;
-      this.painBean();
+      if (this.foodX == this.snaker[0][0] && this.foodY == this.snaker[0][1]) {
+        console.log(this.foodX + "+" + this.foodY);
+        this.snaker.push([this.foodX, this.foodY + 20]);
+        console.log(this.snaker);
+        this.context.fillRect(
+          this.snaker[this.snaker.length - 1][0],
+          this.snaker[this.snaker.length - 1][1],
+          20,
+          20
+        );
+        this.painBean();
+        this.food();
+        this.scope = this.scope + 1;
+      }
+      console.log('changge' + this.snaker)
     },
     goDown() {
-      for (var i = this.snaker.length - 1; i > 0; i--) {
-        this.context.clearRect(this.snaker[i][0], this.snaker[i][1], 20, 20);
-        this.snaker[i] = this.snaker[i - 1];
+      this.context.clearRect(this.snaker[this.snaker.length - 1][0], this.snaker[this.snaker.length - 1][1], 20, 20);
+      for (var i = this.snaker.length - 1; i >= 0; i--) {
+        if (i == 0) {
+          this.snaker[0][1] = this.snaker[0][1] + 20;
+        } else {
+          this.snaker[i][0] = this.snaker[i - 1][0];
+          this.snaker[i][1] = this.snaker[i - 1][1];
+        }
         this.context.fillRect(this.snaker[i][0], this.snaker[i][1], 20, 20);
+        this.painBean();
       }
-      this.snaker[0][1] = this.snaker[0][1] + 20;
-      this.context.fillRect(this.snaker[0][0], this.snaker[0][1], 20, 20);
-      this.painBean();
+      if (this.foodX == this.snaker[0][0] && this.foodY == this.snaker[0][1]) {
+        console.log(this.foodX + "+" + this.foodY);
+        this.snaker.push([this.foodX, this.foodY - 20]);
+        console.log(this.snaker);
+        this.context.fillRect(
+          this.snaker[this.snaker.length - 1][0],
+          this.snaker[this.snaker.length - 1][1],
+          20,
+          20
+        );
+        this.painBean();
+        this.food();
+        this.scope = this.scope + 1;
+      }
+      console.log('changge' + this.snaker)
     },
     painBean() {
       this.context.fillStyle = "#00FF80";
-      this.context.fillRect(this.beanX, this.beanY, 20, 20);
       this.ifOut();
       // console.log(this.beanX);
       this.ifAdd();
     }
   },
-  mounted() {},
+  mounted() {
+    // var a = [[1,2],[3,4], [5,6], [7,8], [9,10]];
+    // var b = 1;
+    // while (b < 5) {
+    //   for (var i = a.length - 1; i >= 0; i--) {
+    //     if (i == 0) {
+    //       a[0][1] = a[0][1] + 10;
+    //     } else {
+    //       a[i][0] = a[i - 1][0];
+    //       a[i][1] = a[i - 1][1];
+    //     }
+    //   }
+    //   a.forEach(i => {
+    //     console.log(i);
+    //   });
+    //   console.log(`分界线`);
+    //   b++;
+    // }
+  },
   watch: {}
 });
 var startx, starty;
