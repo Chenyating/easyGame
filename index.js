@@ -23,7 +23,7 @@ var app = new Vue({
     },
     //随机生成头的坐标
     addSnaker() {
-      // this.snaker.splice(0,this.snaker.length);
+      this.snaker.splice(0, this.snaker.length);
       this.snaker.push([this.radomx() * 20, this.radomy() * 20]);
       console.log(this.snaker);
     },
@@ -32,41 +32,29 @@ var app = new Vue({
       this.foodX = this.radomx() * 20;
       this.foodY = this.radomy() * 20;
       //判断食物不能和头重复了。
-      if (this.foodX == this.snaker[0][0] && this.foodY == this.snaker[0][1]) {
-        this.foodX = this.radomx() * 20;
-        this.foodY = this.radomy() * 20;
+      for (var i = 0; i < this.snaker.length; i++) {
+        if (this.foodX == this.snaker[i][0] && this.foodY == this.snaker[i][1]) {
+          return this.food();
+        }
       }
       var c = document.getElementById("tanchi");
       this.context = c.getContext("2d");
       this.context.fillStyle = "#FE4C40";
       this.context.fillRect(this.foodX, this.foodY, 20, 20);
     },
-    ifAdd() {
-      // if (this.foodX == this.snaker[0][0] && this.foodY == this.snaker[0][1]) {
-      //   console.log(this.foodX + "+" + this.foodY);
-      //   this.snaker.push([this.foodX - 20, this.foodY - 20]);
-      //   console.log(this.snaker);
-      //   this.context.fillRect(
-      //     this.snaker[this.snaker.length - 1][0],
-      //     this.snaker[this.snaker.length - 1][1],
-      //     20,
-      //     20
-      //   );
-      //   this.food();
-      //   this.scope = this.scope + 1;
-      // }
-    },
     ifOut() {
       if (
         0 > this.snaker[0][0] ||
-        this.snaker[0][0] > 340 ||
-        480 < this.snaker[0][1] ||
+        this.snaker[0][0] > 780 ||
+        980 < this.snaker[0][1] ||
         this.snaker[0][1] < 0
       ) {
         alert("游戏结束,你跳出方框了！");
+        this.snaker.splice(0, this.snaker.length);
         this.one = 0;
         this.scope = 0;
-        this.context.clearRect(this.foodX, this.foodY, 20, 20);
+        //清空整个画布
+        this.context.clearRect(0, 0, 800, 1000);
         $("#title").html("");
         $("#title").html("游戏开始");
       }
@@ -77,40 +65,34 @@ var app = new Vue({
         $("#title").html("游戏开始");
         this.one = 0;
         this.scope = 0;
-        this.context.clearRect(this.foodX, this.foodY, 20, 20);
-        // this.context.clearRect(this.beanX, this.beanY, 20, 20);清除蛇
-        for (var i = 0; i < this.snaker.length; i++) {
-          this.context.clearRect(this.snaker[i][0], this.snaker[i][1], 20, 20);
-        }
+        //清空整个画布
+        this.context.clearRect(0, 0, 800, 1000);
       } else {
         this.addSnaker();
         this.food();
         this.context.fillStyle = "#00FF80";
-        for (var i = 0; i < this.snaker.length; i++) {
-          this.context.fillRect(this.snaker[i][0], this.snaker[i][1], 20, 20);
-        }
+        this.context.fillRect(this.snaker[0][0], this.snaker[0][1], 20, 20);
         this.one = 1;
         $("#title").html("");
         $("#title").html("游戏结束");
         //绘制食物
       }
     },
-    goRight() {
+    changgeX(x) {
       this.context.clearRect(this.snaker[this.snaker.length - 1][0], this.snaker[this.snaker.length - 1][1], 20, 20);
       for (var i = this.snaker.length - 1; i >= 0; i--) {
-        // this.context.clearRect(this.snaker[i][0], this.snaker[i][1], 20, 20);
         if (i == 0) {
-          this.snaker[0][0] = this.snaker[0][0] + 20;
+          this.snaker[0][0] = this.snaker[0][0] + x;
         } else {
           this.snaker[i][0] = this.snaker[i - 1][0];
           this.snaker[i][1] = this.snaker[i - 1][1];
         }
         this.context.fillRect(this.snaker[i][0], this.snaker[i][1], 20, 20);
-        this.painBean();
+        this.painSnakerBody();
       }
       if (this.foodX == this.snaker[0][0] && this.foodY == this.snaker[0][1]) {
         console.log(this.foodX + "+" + this.foodY);
-        this.snaker.push([this.foodX - 20, this.foodY]);
+        this.snaker.push([this.foodX - x, this.foodY]);
         console.log(this.snaker);
         this.context.fillRect(
           this.snaker[this.snaker.length - 1][0],
@@ -118,28 +100,27 @@ var app = new Vue({
           20,
           20
         );
-        this.painBean();
+        this.painSnakerBody();
         this.food();
         this.scope = this.scope + 1;
       }
       console.log('changge' + this.snaker)
     },
-    goLeft() {
+    changgeY(y) {
       this.context.clearRect(this.snaker[this.snaker.length - 1][0], this.snaker[this.snaker.length - 1][1], 20, 20);
       for (var i = this.snaker.length - 1; i >= 0; i--) {
-        // this.context.clearRect(this.snaker[i][0], this.snaker[i][1], 20, 20);
         if (i == 0) {
-          this.snaker[0][0] = this.snaker[0][0] - 20;
+          this.snaker[0][1] = this.snaker[0][1] - y;
         } else {
           this.snaker[i][0] = this.snaker[i - 1][0];
           this.snaker[i][1] = this.snaker[i - 1][1];
         }
         this.context.fillRect(this.snaker[i][0], this.snaker[i][1], 20, 20);
-        this.painBean();
+        this.painSnakerBody();
       }
       if (this.foodX == this.snaker[0][0] && this.foodY == this.snaker[0][1]) {
         console.log(this.foodX + "+" + this.foodY);
-        this.snaker.push([this.foodX + 20, this.foodY]);
+        this.snaker.push([this.foodX, this.foodY + y]);
         console.log(this.snaker);
         this.context.fillRect(
           this.snaker[this.snaker.length - 1][0],
@@ -147,95 +128,18 @@ var app = new Vue({
           20,
           20
         );
-        this.painBean();
+        this.painSnakerBody();
         this.food();
         this.scope = this.scope + 1;
       }
       console.log('changge' + this.snaker)
     },
-    goUp() {
-      this.context.clearRect(this.snaker[this.snaker.length - 1][0], this.snaker[this.snaker.length - 1][1], 20, 20);
-      for (var i = this.snaker.length - 1; i >= 0; i--) {
-        // this.context.clearRect(this.snaker[i][0], this.snaker[i][1], 20, 20);
-        if (i == 0) {
-          this.snaker[0][1] = this.snaker[0][1] - 20;
-        } else {
-          this.snaker[i][0] = this.snaker[i - 1][0];
-          this.snaker[i][1] = this.snaker[i - 1][1];
-        }
-        this.context.fillRect(this.snaker[i][0], this.snaker[i][1], 20, 20);
-        this.painBean();
-      }
-      if (this.foodX == this.snaker[0][0] && this.foodY == this.snaker[0][1]) {
-        console.log(this.foodX + "+" + this.foodY);
-        this.snaker.push([this.foodX, this.foodY + 20]);
-        console.log(this.snaker);
-        this.context.fillRect(
-          this.snaker[this.snaker.length - 1][0],
-          this.snaker[this.snaker.length - 1][1],
-          20,
-          20
-        );
-        this.painBean();
-        this.food();
-        this.scope = this.scope + 1;
-      }
-      console.log('changge' + this.snaker)
-    },
-    goDown() {
-      this.context.clearRect(this.snaker[this.snaker.length - 1][0], this.snaker[this.snaker.length - 1][1], 20, 20);
-      for (var i = this.snaker.length - 1; i >= 0; i--) {
-        if (i == 0) {
-          this.snaker[0][1] = this.snaker[0][1] + 20;
-        } else {
-          this.snaker[i][0] = this.snaker[i - 1][0];
-          this.snaker[i][1] = this.snaker[i - 1][1];
-        }
-        this.context.fillRect(this.snaker[i][0], this.snaker[i][1], 20, 20);
-        this.painBean();
-      }
-      if (this.foodX == this.snaker[0][0] && this.foodY == this.snaker[0][1]) {
-        console.log(this.foodX + "+" + this.foodY);
-        this.snaker.push([this.foodX, this.foodY - 20]);
-        console.log(this.snaker);
-        this.context.fillRect(
-          this.snaker[this.snaker.length - 1][0],
-          this.snaker[this.snaker.length - 1][1],
-          20,
-          20
-        );
-        this.painBean();
-        this.food();
-        this.scope = this.scope + 1;
-      }
-      console.log('changge' + this.snaker)
-    },
-    painBean() {
+    painSnakerBody() {
       this.context.fillStyle = "#00FF80";
       this.ifOut();
-      // console.log(this.beanX);
-      this.ifAdd();
     }
   },
-  mounted() {
-    // var a = [[1,2],[3,4], [5,6], [7,8], [9,10]];
-    // var b = 1;
-    // while (b < 5) {
-    //   for (var i = a.length - 1; i >= 0; i--) {
-    //     if (i == 0) {
-    //       a[0][1] = a[0][1] + 10;
-    //     } else {
-    //       a[i][0] = a[i - 1][0];
-    //       a[i][1] = a[i - 1][1];
-    //     }
-    //   }
-    //   a.forEach(i => {
-    //     console.log(i);
-    //   });
-    //   console.log(`分界线`);
-    //   b++;
-    // }
-  },
+  mounted() {},
   watch: {}
 });
 var startx, starty;
@@ -281,7 +185,9 @@ document.addEventListener(
   },
   false
 );
+
 //手指离开屏幕
+let timer = null;
 document.addEventListener(
   "touchend",
   function (e) {
@@ -292,23 +198,26 @@ document.addEventListener(
     endx = e.changedTouches[0].pageX;
     endy = e.changedTouches[0].pageY;
     var direction = getDirection(startx, starty, endx, endy);
-    switch (direction) {
-      case 0:
-        break;
-      case 1:
-        app.goUp();
-        break;
-      case 2:
-        app.goDown();
-        break;
-      case 3:
-        app.goLeft();
-        break;
-      case 4:
-        app.goRight();
-
-        break;
-      default:
+    clearInterval(timer);
+    if (direction == 1) {
+      timer = setInterval(() => {
+        app.changgeY(20);
+      }, 500)
+    }
+    if (direction == 2) {
+      timer = setInterval(() => {
+        app.changgeY(-20);
+      }, 500)
+    }
+    if (direction == 3) {
+      timer = setInterval(() => {
+        app.changgeX(-20);
+      }, 500)
+    }
+    if (direction == 4) {
+      timer = setInterval(() => {
+        app.changgeX(20);
+      }, 500)
     }
   },
   false
