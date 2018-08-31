@@ -8,12 +8,7 @@ var app = new Vue({
     foodY: null,
     context: null,
     gameState: 0,
-<<<<<<< HEAD
-    snaker: [],
-    v:300,
-=======
     snaker: []
->>>>>>> eac8468563581e9b74b78df87568470e8d03ff87
   },
   methods: {
     //随机生成x坐标
@@ -82,28 +77,16 @@ var app = new Vue({
       this.gameState = 0;
       this.scope = 0;
       //清空整个画布
-<<<<<<< HEAD
       this.context.clearRect(0, 0, 800, 1500);
       $("#title").html("");
       $("#title").html("游戏开始");
     },
     //游戏开始
-=======
-      this.context.clearRect(0, 0, 800, 1000);
-      $("#title").html("");
-      $("#title").html("START");
-    },
-    //START
->>>>>>> eac8468563581e9b74b78df87568470e8d03ff87
     begin() {
       if (this.gameState != 0) {
         //游戏结束状态
         $("#title").html("");
-<<<<<<< HEAD
         $("#title").html("游戏开始");
-=======
-        $("#title").html("START");
->>>>>>> eac8468563581e9b74b78df87568470e8d03ff87
         this.gameState = 0;
         this.scope = 0;
         //清空整个画布
@@ -115,11 +98,7 @@ var app = new Vue({
         this.painSnakerHead()
         this.gameState = 1;
         $("#title").html("");
-<<<<<<< HEAD
         $("#title").html("游戏结束");
-=======
-        $("#title").html("OVER");
->>>>>>> eac8468563581e9b74b78df87568470e8d03ff87
       }
     },
     //蛇在x轴的变化
@@ -182,19 +161,11 @@ var app = new Vue({
     },
     //画蛇身
     painSnakerBody() {
-<<<<<<< HEAD
       this.context.fillStyle = "#363636";
     },
     //画蛇头
     painSnakerHead() {
       this.context.fillStyle = "#00755E";
-=======
-      this.context.fillStyle = "#376956";
-    },
-    //画蛇头
-    painSnakerHead() {
-      this.context.fillStyle = "#00FF80";
->>>>>>> eac8468563581e9b74b78df87568470e8d03ff87
       this.context.fillRect(this.snaker[0][0], this.snaker[0][1], 20, 20);
     },
   },
@@ -251,17 +222,10 @@ document.addEventListener(
 //手指离开屏幕
 let timer = null;
 //速度控制
-<<<<<<< HEAD
 app.v = 300;
 if (app.scope >= 10) {
   var j = parseInt(app.scope / 10);
   app.v = 300 - 20 * j;
-=======
-var v = 300;
-if (app.scope >= 10) {
-  var j = parseInt(app.scope / 10);
-  v = 300 - 20 * j;
->>>>>>> eac8468563581e9b74b78df87568470e8d03ff87
 }
 document.addEventListener(
   "touchend",
@@ -277,38 +241,22 @@ document.addEventListener(
     if (direction == 1) {
       timer = setInterval(() => {
         app.changgeY(20);
-<<<<<<< HEAD
       }, app.v)
-=======
-      }, v)
->>>>>>> eac8468563581e9b74b78df87568470e8d03ff87
     }
     if (direction == 2) {
       timer = setInterval(() => {
         app.changgeY(-20);
-<<<<<<< HEAD
       }, app.v)
-=======
-      }, v)
->>>>>>> eac8468563581e9b74b78df87568470e8d03ff87
     }
     if (direction == 3) {
       timer = setInterval(() => {
         app.changgeX(-20);
-<<<<<<< HEAD
       }, app.v)
-=======
-      }, v)
->>>>>>> eac8468563581e9b74b78df87568470e8d03ff87
     }
     if (direction == 4) {
       timer = setInterval(() => {
         app.changgeX(20);
-<<<<<<< HEAD
       }, app.v)
-=======
-      }, v)
->>>>>>> eac8468563581e9b74b78df87568470e8d03ff87
     }
     if (direction == 0) {
       clearInterval(timer);
