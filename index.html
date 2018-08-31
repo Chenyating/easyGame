@@ -38,6 +38,7 @@
       font-weight: bold;
     }
 
+<<<<<<< HEAD
     .stage {
       display: flex;
       flex-wrap: nowrap;
@@ -61,12 +62,37 @@
     }
 
     .inf {
+=======
+    #tanchi {
+      background: ghostwhite;
+      border: solid 0.1rem #000000;
+      width: 70%;
+      height: 100%;
+      ;
+      margin: 0 0.5rem 1rem 0.5rem;
+    }
+
+    .stage {
+      display: flex;
+      flex-wrap: nowrap;
+    }
+
+    .operation {
+      text-align: center;
+      border: solid 0.1rem black;
+      margin-right: 0.5rem;
+      margin-bottom: 1rem;
+    }
+
+    .scope {
+>>>>>>> eac8468563581e9b74b78df87568470e8d03ff87
       font-size: 1rem;
       padding: 0.5rem 0;
       background: black;
       color: white;
       font-weight: bold;
       width: 100%;
+<<<<<<< HEAD
     }
     .explain {
       padding: 0.1rem 0.6rem;
@@ -77,6 +103,19 @@
     }
     p{
       padding: 1rem;
+=======
+      margin: 0 auto;
+    }
+    span{
+      margin: 0.5rem;
+    }
+    #title {
+      margin-top: 3rem;
+      background: black;
+      color: white;
+      padding: 0.5rem 0;
+      width: 100%;
+>>>>>>> eac8468563581e9b74b78df87568470e8d03ff87
     }
   </style>
 </head>
@@ -88,6 +127,7 @@
       <canvas id="tanchi" width=800 height=1500>
       </canvas>
       <div class="operation">
+<<<<<<< HEAD
         <p>分值</p>
         <div class="inf">{{scope}}</div>
         <p>GAME</p>
@@ -103,6 +143,16 @@
     <div class="explain">
       Fingers slide up and down in the screen, click on the screen to pause.If you bump into yourself, the game is over.
       <div class="chinese">手指在屏幕中上下左右滑动，点击屏幕暂停。如果撞到自己或墙，游戏结束</div>
+=======
+          <span >SCOPE</span>
+        <div class="scope">{{scope}}</div>
+        <div id="title" @click="begin()">
+          START
+        </div>
+        <div>游戏说明：点击游戏开始，用手指在屏幕中上下左右滑动，点击屏幕，暂停。
+        </div>
+      </div>
+>>>>>>> eac8468563581e9b74b78df87568470e8d03ff87
     </div>
   </div>
   <script src="index.js"></script>
