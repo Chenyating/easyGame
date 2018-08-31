@@ -8,7 +8,8 @@ var app = new Vue({
     foodY: null,
     context: null,
     gameState: 0,
-    snaker: []
+    snaker: [],
+    v:300,
   },
   methods: {
     //随机生成x坐标
