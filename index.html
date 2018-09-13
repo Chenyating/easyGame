@@ -68,14 +68,17 @@
       font-weight: bold;
       width: 100%;
     }
+
     .explain {
       padding: 0.1rem 0.6rem;
       text-align: center;
     }
+
     .chinese {
       font-size: 0.5rem;
     }
-    p{
+
+    p {
       padding: 1rem;
     }
   </style>
@@ -92,7 +95,7 @@
         <div class="inf">{{scope}}</div>
         <p>GAME</p>
         <div class="inf" id="title" @click="begin()">
-            游戏开始
+          游戏开始
         </div>
         <p>VELOCITY</p>
         <div class="inf">{{v}}</div>
@@ -101,11 +104,19 @@
       </div>
     </div>
     <div class="explain">
-      Fingers slide up and down in the screen, click on the screen to pause.If you bump into yourself, the game is over.
+      Fingers slide up and down in the screen, click on the screen to pause.If you bump into yourself, the game is
+      over.
       <div class="chinese">手指在屏幕中上下左右滑动，点击屏幕暂停。如果撞到自己或墙，游戏结束</div>
     </div>
   </div>
   <script src="index.js"></script>
+  <script>
+    document.body.addEventListener('touchmove', function (e) {
+      e.preventDefault(); //阻止默认的处理方式(阻止下拉滑动的效果)
+    }, {
+      passive: false
+    }); //passive 参数不能省略，用来兼容ios和android
+  </script>
 </body>
 
 </html>
