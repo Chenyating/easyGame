@@ -223,11 +223,8 @@ document.addEventListener(
 //手指离开屏幕
 let timer = null;
 //速度控制
-app.v = 300;
-if (app.scope >= 10) {
-  var j = parseInt(app.scope / 10);
-  app.v = 300 - 20 * j;
-}
+app.v = 300 - app.scope;
+
 document.addEventListener(
   "touchend",
   function (e) {
