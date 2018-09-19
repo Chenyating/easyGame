@@ -9,10 +9,11 @@ var app = new Vue({
         context: null, //画布
         direction: 1, //方块移动方向
         pushAll: 0,
-        rotateID: null, //旋转的状态,
+        rotateID: 0, //旋转的状态,
         testArr: [],
         defaultX: 400,
-        defaultY: 0
+        defaultY: 0,
+        shapName: null
     },
     methods: {
         //绘制
@@ -36,8 +37,8 @@ var app = new Vue({
         //随机绘制图形
         radomShap() {
             this.pain();
-            // this.radomID = parseInt(Math.random() * 7);
-            this.radomID = 2;
+            this.radomID = parseInt(Math.random() * 7);
+            this.shap.splice(0, this.shap.length); //清空存放图形的数组 
             //开始存储不同形状的数组
             switch (this.radomID) {
                 case 0:
@@ -46,14 +47,14 @@ var app = new Vue({
                         this.defaultX = 400;
                         if (i == 2) {
                             this.$set(this.shap, i, [
-                                [this.defaultX += 20, this.defaultY, 1],
+                                [this.defaultX, this.defaultY, 1],
                                 [this.defaultX += 20, this.defaultY, 1],
                                 [this.defaultX += 20, this.defaultY, 1],
                                 [this.defaultX += 20, this.defaultY, 1]
                             ]);
                         } else {
                             this.$set(this.shap, i, [
-                                [this.defaultX += 20, this.defaultY, 0],
+                                [this.defaultX, this.defaultY, 0],
                                 [this.defaultX += 20, this.defaultY, 0],
                                 [this.defaultX += 20, this.defaultY, 0],
                                 [this.defaultX += 20, this.defaultY, 0]
@@ -62,6 +63,7 @@ var app = new Vue({
                         }
                         this.defaultY += 20;
                     }
+                    this.shapName = "长条";
                     break;
                 case 1:
                     //正方形
@@ -73,106 +75,164 @@ var app = new Vue({
                         [420, 0, 1],
                         [420, 20, 1]
                     ]);
+                    this.shapName = "正方形";
                     break;
                 case 2:
                     //正7
+                    this.$set(this.shap, 0, [
+                        [400, 0, 1],
+                        [420, 0, 1],
+                        [440, 0, 0],
+                    ]);
                     this.$set(this.shap, 1, [
+                        [400, 20, 0],
+                        [420, 20, 1],
+                        [440, 20, 0],
+                    ]);
+                    this.$set(this.shap, 2, [
+                        [400, 40, 0],
+                        [420, 40, 1],
+                        [440, 40, 0],
+                    ]);
+                    this.shapName = "正7";
+                    break;
+                case 3:
+                    //反7
+                    this.$set(this.shap, 0, [
                         [400, 0, 0],
                         [420, 0, 1],
                         [440, 0, 1],
                     ]);
-                    this.$set(this.shap, 2, [
+                    this.$set(this.shap, 1, [
                         [400, 20, 0],
-                        [420, 20, 0],
-                        [440, 20, 1],
+                        [420, 20, 1],
+                        [440, 20, 0],
                     ]);
-                    this.$set(this.shap, 3, [
+                    this.$set(this.shap, 2, [
                         [400, 40, 0],
-                        [420, 40, 0],
-                        [440, 40, 1],
+                        [420, 40, 1],
+                        [440, 40, 0],
                     ]);
-                    break;
-                case 3:
-                    //反7
-                    this.shap.push([400, 0]);
-                    this.shap.push([400 + 20, 0]);
-                    this.shap.push([400, 20]);
-                    this.shap.push([400, 40]);
+                    this.shapName = "反7";
                     break;
                 case 4:
                     //正2
-                    this.shap.push([400, 0]);
-                    this.shap.push([400 + 20, 0]);
-                    this.shap.push([400 + 20, 20]);
-                    this.shap.push([400 + 40, 20]);
+                    this.$set(this.shap, 0, [
+                        [400, 0, 1],
+                        [420, 0, 1],
+                        [440, 0, 0],
+                    ]);
+                    this.$set(this.shap, 1, [
+                        [400, 20, 0],
+                        [420, 20, 1],
+                        [440, 20, 1],
+                    ]);
+                    this.$set(this.shap, 2, [
+                        [400, 40, 0],
+                        [420, 40, 0],
+                        [440, 40, 0],
+                    ]);
+                    this.shapName = "正2";
                     break;
                 case 5:
                     //反2
-                    this.shap.push([400, 0]);
-                    this.shap.push([400 + 20, 0]);
-                    this.shap.push([400 - 20, 20]);
-                    this.shap.push([400, 20]);
+                    this.$set(this.shap, 0, [
+                        [400, 0, 0],
+                        [420, 0, 1],
+                        [440, 0, 1],
+                    ]);
+                    this.$set(this.shap, 1, [
+                        [400, 20, 0],
+                        [420, 20, 1],
+                        [440, 20, 1],
+                    ]);
+                    this.$set(this.shap, 2, [
+                        [400, 40, 0],
+                        [420, 40, 0],
+                        [440, 40, 0],
+                    ]);
+                    this.shapName = "反2";
                     break;
                 case 6:
                     //土
-                    this.shap.push([400, 0]);
-                    this.shap.push([400 - 20, 20]);
-                    this.shap.push([400, 20]);
-                    this.shap.push([400 + 20, 20]);
-                    break;
+                    this.$set(this.shap, 0, [
+                        [400, 0, 0],
+                        [420, 0, 1],
+                        [440, 0, 0],
+                    ]);
+                    this.$set(this.shap, 1, [
+                        [400, 20, 1],
+                        [420, 20, 1],
+                        [440, 20, 1],
+                    ]);
+                    this.$set(this.shap, 2, [
+                        [400, 40, 0],
+                        [420, 40, 0],
+                        [440, 40, 0],
+                    ]);
+                    this.shapName = "土";
+                    break
                 default:
                     break;
             }
-            console.log(this.shap)
-            console.log(this.shap.length);
-            for (var i = 0; i < this.shap.length; i++) {
-                for (var j = 0; j < this.shap[i].length; j++) {
-                    if (this.shap[i][j][2] == 1) {
-                        this.context.fillRect(this.shap[i][j][0], this.shap[i][j][1], 20, 20); //绘制
-                    }
-                }
-            }
-            this.shap.splice(0, this.shap.length); //清空存放图形的数组 
+            console.log("this ramdomID is" + this.shapName)
+            this.painShap();
         },
         //旋转的图形变化
         rotate() {
-            this.rotateID = parseInt(Math.random() * 4);
-            switch (this.radomID) {
-                case 0:
-                    for (var i = 0; i < this.shap.length; i++) {
-                        this.shap[i][0] = this.shap[i][0] + 20;
-                        this.shap[i][1] = this.shap[i][0] + 20;
-                    }
-                    break;
-                case 1:
-                    //正方形不需要变化
-                    break;
-                case 2:
-                    //正方形不需要变化
-                    break;
-                case 3:
-                    //正方形不需要变化
-                    break;
-                case 4:
-                    //正方形不需要变化
-                    break;
-                case 5:
-                    //正方形不需要变化
-                    break;
-                case 6:
-                    for (var i = 0; i < this.shap.length; i++) {
-                        this.shap[i][0] = this.shap[i][0] + 20;
-                        this.shap[i][1] = this.shap[i][0] + 20;
-                    }
-                    break;
-                default:
-                    break;
+            for (let i = 0; i < this.shap.length; i++) {
+                for (let j = 0; j < this.shap[i].length; j++) {
+                    var cap;
+                    cap = this.shap[i][j][2];
+                    this.shap[i][j][2] = this.shap[this.shap[i].length-1-j][this.shap[i].length-1-i][2];
+                    console.log(i+j+"<=>"+this.shap[i].length-1-j+this.shap[i].length-1-i);
+                    this.shap[this.shap[i].length-1-j][this.shap[i].length-1-i][2] = cap;
+                }
+            }
+            // switch (this.rotateID) {
+            //     //1->2
+            //     case 0:
+            //     this.rotateID =1;
+            //         for (let i = 0; i < this.shap.length; i++) {
+            //             for (let j = i + 1; j < this.shap[i].length; j++) {
+            //                 var cap;
+            //                 cap = this.shap[i][j][2];
+            //                 this.shap[i][j][2] = this.shap[j][i][2];
+            //                 this.shap[j][i][2] = cap;
+            //             }
+            //         }
+            //         console.log("1-->2")
+            //         break;
+            //         //2-->3
+            //     case 1:
+            //     this.rotateID =0;
+            //         for (let i = 0; i < this.shap.length; i++) {
+            //             for (let j = 0; j < this.shap[i].length; j++) {
+            //                 var cap;
+            //                 cap = this.shap[i][j][2];
+            //                 this.shap[i][j][2] = this.shap[this.shap[i].length-1-j][this.shap.length-1-i][2];
+            //                 this.shap[this.shap[i].length-1-j][this.shap.length-1-i][2] = cap;
+            //             }
+            //         }
+            //         console.log("2-->3")
+            //         break;
+            //     default:
+            //         break;
+            // }
+            for (var i = 0; i < this.shap.length; i++) {
+                for (var j = 0; j < this.shap[i].length; j++) {
+                    console.log(this.shap[i][j][0] + ":" + this.shap[i][j][1] + ":" + this.shap[i][j][2])
+                }
+                console.log("---------")
             }
         },
         //向下移动
         down() {
-            for (var i = 0; i < this.shap.length; i++) {
-
+            for (let i = 0; i < this.shap.length; i++) {
+                for (let j = 0; j < this.shap[i].length; j++) {
+                    this.context.clearRect(this.shap[i][j][0], this.shap[i][j][1], 20, 20);
+                    this.shap[i][j][1] += 20;
+                }
             }
             this.painShap()
         },
