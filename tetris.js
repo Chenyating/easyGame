@@ -11,9 +11,7 @@ var app = new Vue({
         pushAll: 0,
         rotateID: 0, //旋转的状态,
         testArr: [],
-        defaultX: 400,
-        defaultY: 0,
-        shapName: null
+        shapName: null,
     },
     methods: {
         //绘制
@@ -26,42 +24,46 @@ var app = new Vue({
         //绘制图像
         painShap() {
             for (var i = 0; i < this.shap.length; i++) {
-                console.log(this.shap[i].length);
                 for (var j = 0; j < this.shap[i].length; j++) {
                     if (this.shap[i][j][2] == 1) {
                         this.context.fillRect(this.shap[i][j][0], this.shap[i][j][1], 20, 20); //绘制
+                        console.log("[" + i + "," + j + "]" + ":" + "[" + this.shap[i][j][0] + "," + this.shap[i][j][1] + "," + this.shap[i][j][2] + "]")
                     }
                 }
             }
+            console.log("--------------")
         },
         //随机绘制图形
         radomShap() {
             this.pain();
             this.radomID = parseInt(Math.random() * 7);
+            this.deleteShap();
             this.shap.splice(0, this.shap.length); //清空存放图形的数组 
             //开始存储不同形状的数组
             switch (this.radomID) {
                 case 0:
                     //长条
+                    let defaultX = 400;
+                    let defaultY = 0;
                     for (var i = 0; i < 4; i++) {
-                        this.defaultX = 400;
-                        if (i == 2) {
+                        defaultX = 400;
+                        if (i == 0) {
                             this.$set(this.shap, i, [
-                                [this.defaultX, this.defaultY, 1],
-                                [this.defaultX += 20, this.defaultY, 1],
-                                [this.defaultX += 20, this.defaultY, 1],
-                                [this.defaultX += 20, this.defaultY, 1]
+                                [defaultX, defaultY, 1],
+                                [defaultX += 20, defaultY, 1],
+                                [defaultX += 20, defaultY, 1],
+                                [defaultX += 20, defaultY, 1]
                             ]);
                         } else {
                             this.$set(this.shap, i, [
-                                [this.defaultX, this.defaultY, 0],
-                                [this.defaultX += 20, this.defaultY, 0],
-                                [this.defaultX += 20, this.defaultY, 0],
-                                [this.defaultX += 20, this.defaultY, 0]
+                                [defaultX, defaultY, 0],
+                                [defaultX += 20, defaultY, 0],
+                                [defaultX += 20, defaultY, 0],
+                                [defaultX += 20, defaultY, 0]
                             ]);
 
                         }
-                        this.defaultY += 20;
+                        defaultY += 20;
                     }
                     this.shapName = "长条";
                     break;
@@ -178,53 +180,26 @@ var app = new Vue({
             console.log("this ramdomID is" + this.shapName)
             this.painShap();
         },
-        //旋转的图形变化
-        rotate() {
+        deleteShap(){
             for (let i = 0; i < this.shap.length; i++) {
                 for (let j = 0; j < this.shap[i].length; j++) {
-                    var cap;
-                    cap = this.shap[i][j][2];
-                    this.shap[i][j][2] = this.shap[this.shap[i].length-1-j][this.shap[i].length-1-i][2];
-                    console.log(i+j+"<=>"+this.shap[i].length-1-j+this.shap[i].length-1-i);
-                    this.shap[this.shap[i].length-1-j][this.shap[i].length-1-i][2] = cap;
+                    this.context.clearRect(this.shap[i][j][0], this.shap[i][j][1], 20, 20);
                 }
             }
-            // switch (this.rotateID) {
-            //     //1->2
-            //     case 0:
-            //     this.rotateID =1;
-            //         for (let i = 0; i < this.shap.length; i++) {
-            //             for (let j = i + 1; j < this.shap[i].length; j++) {
-            //                 var cap;
-            //                 cap = this.shap[i][j][2];
-            //                 this.shap[i][j][2] = this.shap[j][i][2];
-            //                 this.shap[j][i][2] = cap;
-            //             }
-            //         }
-            //         console.log("1-->2")
-            //         break;
-            //         //2-->3
-            //     case 1:
-            //     this.rotateID =0;
-            //         for (let i = 0; i < this.shap.length; i++) {
-            //             for (let j = 0; j < this.shap[i].length; j++) {
-            //                 var cap;
-            //                 cap = this.shap[i][j][2];
-            //                 this.shap[i][j][2] = this.shap[this.shap[i].length-1-j][this.shap.length-1-i][2];
-            //                 this.shap[this.shap[i].length-1-j][this.shap.length-1-i][2] = cap;
-            //             }
-            //         }
-            //         console.log("2-->3")
-            //         break;
-            //     default:
-            //         break;
-            // }
-            for (var i = 0; i < this.shap.length; i++) {
-                for (var j = 0; j < this.shap[i].length; j++) {
-                    console.log(this.shap[i][j][0] + ":" + this.shap[i][j][1] + ":" + this.shap[i][j][2])
+        },
+        //旋转90度的方法
+        rotate() {
+            this.deleteShap();
+            let shap1 = [];
+            // 深拷贝
+            shap1 = JSON.parse(JSON.stringify(this.shap));
+            //行变列。列变行
+            for (let i = 0; i < this.shap.length; i++) {
+                for (let j = this.shap[i].length - 1; j >= 0; j--) {
+                    this.shap[i][j][2] = shap1[this.shap[i].length - 1 - j][i][2]
                 }
-                console.log("---------")
             }
+            this.painShap();
         },
         //向下移动
         down() {
@@ -236,6 +211,48 @@ var app = new Vue({
             }
             this.painShap()
         },
+        // 向左
+        left() {
+            //先判断最左边的数值and有上色的。有没有靠墙
+            for (let i = 0; i < this.shap.length; i++) {
+                if (this.shap[i][0][0] <= 0 && this.shap[i][0][2] == 1) {
+                    //两个同时成立退出；
+                    return
+                }
+            }
+            for (let i = 0; i < this.shap.length; i++) {
+                for (let j = 0; j < this.shap[i].length; j++) {
+                    if (this.shap[i][j][0] <= 0 && this.shap[i][j][2] == 1) {
+                        //两个同时成立退出；
+                        return
+                    }
+                    this.context.clearRect(this.shap[i][j][0], this.shap[i][j][1], 20, 20);
+                    this.shap[i][j][0] -= 20;
+                }
+            }
+            this.painShap();
+        },
+        // 向右
+        right() {
+            //先判断最左边的数值and有上色的。有没有靠墙
+            for (let i = 0; i < this.shap.length; i++) {
+                if (this.shap[i][0][0] >= 780 && this.shap[i][0][2] == 1) {
+                    //两个同时成立退出；
+                    return
+                }
+            }
+            for (let i = 0; i < this.shap.length; i++) {
+                for (let j = 0; j < this.shap[i].length; j++) {
+                    if (this.shap[i][j][0] >= 780 && this.shap[i][j][2] == 1) {
+                        //两个同时成立退出；
+                        return
+                    }
+                    this.context.clearRect(this.shap[i][j][0], this.shap[i][j][1], 20, 20);
+                    this.shap[i][j][0] += 20;
+                }
+            }
+            this.painShap();
+        },
         //旋转
         //是否重叠
         ifOverlap() {
@@ -244,16 +261,6 @@ var app = new Vue({
                     alert("游戏结束，你撞到你自己啦！")
                     this.gameOver();
                 }
-            }
-        },
-        behavior() {
-            switch (direction) {
-                case 1:
-
-                    break;
-
-                default:
-                    break;
             }
         }
     },
