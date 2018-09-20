@@ -27,17 +27,17 @@ var app = new Vue({
                 for (var j = 0; j < this.shap[i].length; j++) {
                     if (this.shap[i][j][2] == 1) {
                         this.context.fillRect(this.shap[i][j][0], this.shap[i][j][1], 20, 20); //绘制
-                        console.log("[" + i + "," + j + "]" + ":" + "[" + this.shap[i][j][0] + "," + this.shap[i][j][1] + "," + this.shap[i][j][2] + "]")
+                        // console.log("[" + i + "," + j + "]" + ":" + "[" + this.shap[i][j][0] + "," + this.shap[i][j][1] + "," + this.shap[i][j][2] + "]")
                     }
                 }
             }
-            console.log("--------------")
+            // console.log("--------------")
         },
         //随机绘制图形
         radomShap() {
             this.pain();
             this.radomID = parseInt(Math.random() * 7);
-            this.deleteShap();
+            // this.deleteShap();
             this.shap.splice(0, this.shap.length); //清空存放图形的数组 
             //开始存储不同形状的数组
             switch (this.radomID) {
@@ -180,7 +180,7 @@ var app = new Vue({
             console.log("this ramdomID is" + this.shapName)
             this.painShap();
         },
-        deleteShap(){
+        deleteShap() {
             for (let i = 0; i < this.shap.length; i++) {
                 for (let j = 0; j < this.shap[i].length; j++) {
                     this.context.clearRect(this.shap[i][j][0], this.shap[i][j][1], 20, 20);
@@ -196,12 +196,12 @@ var app = new Vue({
             //行变列。列变行,把结果先存在shap1里；
             for (let i = 0; i < this.shap.length; i++) {
                 for (let j = this.shap[i].length - 1; j >= 0; j--) {
-                   shap1[i][j][2] = this.shap[this.shap[i].length - 1 - j][i][2]
+                    shap1[i][j][2] = this.shap[this.shap[i].length - 1 - j][i][2]
                 }
             }
             //判断一下，改变方向以后，会不会超出墙（验证最左边和最右边就可以了）,可以允许正好等于边界；
             for (let i = 0; i < shap1.length; i++) {
-                if ((shap1[i][0][0] < 0 && shap1[i][0][2] == 1)|| (shap1[i][shap1.length-1][0] > 780 && shap1[i][shap1.length-1][2] == 1)) {
+                if ((shap1[i][0][0] < 0 && shap1[i][0][2] == 1) || (shap1[i][shap1.length - 1][0] > 780 && shap1[i][shap1.length - 1][2] == 1)) {
                     //两个同时成立退出；
                     console.log("变化会超过墙")
                     this.painShap();
@@ -220,6 +220,7 @@ var app = new Vue({
                     this.shap[i][j][1] += 20;
                 }
             }
+            this.ifOverlap();
             this.painShap()
         },
         // 向左
@@ -249,7 +250,7 @@ var app = new Vue({
         right() {
             //先判断最左边的数值and有上色的。有没有靠墙,每一行的最后一个；
             for (let i = 0; i < this.shap.length; i++) {
-                if (this.shap[i][this.shap.length-1][0] >= 780 && this.shap[i][this.shap.length-1][2] == 1) {
+                if (this.shap[i][this.shap.length - 1][0] >= 780 && this.shap[i][this.shap.length - 1][2] == 1) {
                     //两个同时成立退出；
                     return
                 }
@@ -267,13 +268,11 @@ var app = new Vue({
             }
             this.painShap();
         },
-        //旋转
         //是否重叠
         ifOverlap() {
-            for (var i = this.shap.length - 1; i > 0; i--) {
-                if (this.shap[0][0] == this.shap[i][0] && this.shap[0][1] == this.shap[i][1]) {
-                    alert("游戏结束，你撞到你自己啦！")
-                    this.gameOver();
+            for (let i = 0; i < this.shap.length; i++) {
+                for (let j = 0; j < this.shap[i].length; j++) {
+
                 }
             }
         }
