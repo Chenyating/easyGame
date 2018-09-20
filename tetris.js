@@ -144,9 +144,9 @@ var app = new Vue({
                         [440, 0, 1],
                     ]);
                     this.$set(this.shap, 1, [
-                        [400, 20, 0],
+                        [400, 20, 1],
                         [420, 20, 1],
-                        [440, 20, 1],
+                        [440, 20, 0],
                     ]);
                     this.$set(this.shap, 2, [
                         [400, 40, 0],
@@ -193,12 +193,23 @@ var app = new Vue({
             let shap1 = [];
             // 深拷贝
             shap1 = JSON.parse(JSON.stringify(this.shap));
-            //行变列。列变行
+            //行变列。列变行,把结果先存在shap1里；
             for (let i = 0; i < this.shap.length; i++) {
                 for (let j = this.shap[i].length - 1; j >= 0; j--) {
-                    this.shap[i][j][2] = shap1[this.shap[i].length - 1 - j][i][2]
+                   shap1[i][j][2] = this.shap[this.shap[i].length - 1 - j][i][2]
                 }
             }
+            //判断一下，改变方向以后，会不会超出墙（验证最左边和最右边就可以了）,可以允许正好等于边界；
+            for (let i = 0; i < shap1.length; i++) {
+                if ((shap1[i][0][0] < 0 && shap1[i][0][2] == 1)|| (shap1[i][shap1.length-1][0] > 780 && shap1[i][shap1.length-1][2] == 1)) {
+                    //两个同时成立退出；
+                    console.log("变化会超过墙")
+                    this.painShap();
+                    return
+                }
+            }
+            //那么就把shap1的值赋给shap
+            this.shap = JSON.parse(JSON.stringify(shap1));
             this.painShap();
         },
         //向下移动
@@ -213,15 +224,17 @@ var app = new Vue({
         },
         // 向左
         left() {
-            //先判断最左边的数值and有上色的。有没有靠墙
+            //先判断最左边的数值and有上色的。有没有靠墙。每一行的第0个判断一下。
             for (let i = 0; i < this.shap.length; i++) {
                 if (this.shap[i][0][0] <= 0 && this.shap[i][0][2] == 1) {
                     //两个同时成立退出；
                     return
                 }
             }
+            //判断完之后开始对向左进行操作；
             for (let i = 0; i < this.shap.length; i++) {
                 for (let j = 0; j < this.shap[i].length; j++) {
+                    //还是都先判断一下，每一个的数值and有上色的。有没有靠墙
                     if (this.shap[i][j][0] <= 0 && this.shap[i][j][2] == 1) {
                         //两个同时成立退出；
                         return
@@ -234,15 +247,16 @@ var app = new Vue({
         },
         // 向右
         right() {
-            //先判断最左边的数值and有上色的。有没有靠墙
+            //先判断最左边的数值and有上色的。有没有靠墙,每一行的最后一个；
             for (let i = 0; i < this.shap.length; i++) {
-                if (this.shap[i][0][0] >= 780 && this.shap[i][0][2] == 1) {
+                if (this.shap[i][this.shap.length-1][0] >= 780 && this.shap[i][this.shap.length-1][2] == 1) {
                     //两个同时成立退出；
                     return
                 }
             }
             for (let i = 0; i < this.shap.length; i++) {
                 for (let j = 0; j < this.shap[i].length; j++) {
+                    //还是都先判断一下，每一个的数值and有上色的。有没有靠墙
                     if (this.shap[i][j][0] >= 780 && this.shap[i][j][2] == 1) {
                         //两个同时成立退出；
                         return
