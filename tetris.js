@@ -12,7 +12,7 @@ var app = new Vue({
     rotateID: 0, //旋转的状态,
     shapName: null,
     stopStatus: false,
-    haha:[]
+    allLength:null
   },
   methods: {
     //绘制
@@ -39,10 +39,13 @@ var app = new Vue({
       }
       // console.log("--------------")
     },
-    //随机绘制图形
+    //随机绘制图形；
     radomShap() {
+      console.log("------------------")
       this.pain();
-      this.radomID = parseInt(Math.random() * 7);
+      // this.radomID = parseInt(Math.random() * 7);
+      this.radomID = 0;
+
       // this.deleteShap();
       this.shap.splice(0, this.shap.length); //清空存放图形的数组
       //开始存储不同形状的数组
@@ -119,6 +122,7 @@ var app = new Vue({
       console.log("this ramdomID is" + this.shapName);
       this.painShap();
     },
+    //清楚形状；
     deleteShap() {
       for (let i = 0; i < this.shap.length; i++) {
         for (let j = 0; j < this.shap[i].length; j++) {
@@ -164,11 +168,53 @@ var app = new Vue({
     },
     //向下移动
     down() {
+      //如果一整行都满了。那就清空；
+      for (let i = 0; i < this.all.length; i++) {
+        var num=0;
+        for (let j = 0; j < this.all[i].length; j++) {
+          //如果没有
+          if(this.all[i][j]!=1){
+            break;
+          }
+          else{
+            num++;
+            if (num==this.allLength) {
+              this.context.clearRect(
+                0,
+                i*20,
+                800,
+                20
+              );
+              //清除以后all值为1的数，改成0；
+              for (let j = 0; j < this.all[i].length; j++) {
+                this.all[i][j]=0;
+              }
+              //然后全体往下移动；
+              return;
+            }
+          }
+        }
+        // console.log(this.all);
+        this.stopStatus = false;
+      }
+      // 判断是否超出；
       this.ifOverlap();
       if (this.stopStatus) {
-        this.stopStatus=false;
+        for (let i = 0; i < this.shap.length; i++) {
+          for (let j = 0; j < this.shap[i].length; j++) {
+            if (this.shap[i][j][2] == 1) {
+              var y = this.shap[i][j][1] / 20;
+              var x = this.shap[i][j][0] / 20;
+              // console.log(y+":"+x)
+              this.all[y][x] = 1;
+            }
+          }
+          this.stopStatus = false;
+        }
+        console.log(this.all);
         return;
       }
+      //向下的方法
       for (let i = 0; i < this.shap.length; i++) {
         for (let j = 0; j < this.shap[i].length; j++) {
           if (this.shap[i][j][2] == 1) {
@@ -180,6 +226,9 @@ var app = new Vue({
             );
           }
           this.shap[i][j][1] += 20;
+          var y = this.shap[i][j][1] / 20;
+          var x = this.shap[i][j][0] / 20;
+          // console.log(y+":"+x)
         }
       }
       this.painShap();
@@ -246,22 +295,35 @@ var app = new Vue({
     ifOverlap() {
       for (let i = 0; i < this.shap.length; i++) {
         for (let j = 0; j < this.shap[i].length; j++) {
-          if (this.shap[i][j][1] >= 100&&this.shap[i][j][2] == 1) {
-            console.log(this.shap[i][j][1]);
+          var y = this.shap[i][j][1] / 20;
+              var x = this.shap[i][j][0] / 20;
+          if ((this.shap[i][j][1] >= 100 && this.shap[i][j][2] == 1)||(this.shap[i][j][2]==1&&this.all[y+1][x]==1)) {
             this.stopStatus = true;
             break;
           }
         }
       }
+    },
+    allDown(){
+      for (let i = this.all.length-1; i >= 1; i--) {
+        if (i=0) {
+          //最顶层值都为0
+          for (let j = 0; j < this.shap[i].length; j++) {
+            this.all[i][j]=0;
+          }
+        }
+        //其他层向下移动一层；
+        this.all[i+1]=this.all[i]
+      }
     }
   },
   mounted() {
-    for (let i = 0; i < 5; i++) {
-        this.all[i] = new Array(0);
-        for (let j = 0; j < 40; j++) {
-            this.all[i][j] = 0;
-        }
+    for (let i = 0; i < 6; i++) {
+      this.all[i] = new Array(0);
+      for (let j = 0; j < 40; j++) {
+        this.all[i][j] = 0;
       }
-      console.log(this.all);
     }
+    this.allLength=this.all[0].length;
+  }
 });
