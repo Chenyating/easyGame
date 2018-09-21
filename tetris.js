@@ -186,6 +186,8 @@ var app = new Vue({
               }
               //然后全体往下移动；
               this.allDown();
+              this.deletAll();
+              this.painAll();
               return;
             }
           }
@@ -314,6 +316,34 @@ var app = new Vue({
       this.all[0] = a5;
       console.log("交换位置拉");
       console.log(this.all);
+    },
+    deletAll(){
+      for (let i = 0; i < this.all.length; i++) {
+        for (let j = 0; j < this.all[i].length; j++) {
+          if (this.all[i][j]== 1) {
+            this.context.clearRect(
+              j*20,
+              i*20,
+              20,
+              20
+            );
+          }
+        }
+      }
+    },
+    painAll(){
+      for (let i = 0; i < this.all.length; i++) {
+        for (let j = 0; j < this.all[i].length; j++) {
+          if (this.all[i][j]== 1) {
+            this.context.fillRect(
+              j*20,
+              i*20,
+              20,
+              20
+            );
+          }
+        }
+      }
     }
   },
   mounted() {
