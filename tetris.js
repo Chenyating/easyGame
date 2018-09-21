@@ -12,7 +12,7 @@ var app = new Vue({
     rotateID: 0, //旋转的状态,
     shapName: null,
     stopStatus: false,
-    allLength:null
+    allLength: null
   },
   methods: {
     //绘制
@@ -41,7 +41,7 @@ var app = new Vue({
     },
     //随机绘制图形；
     radomShap() {
-      console.log("------------------")
+      console.log("------------------");
       this.pain();
       // this.radomID = parseInt(Math.random() * 7);
       this.radomID = 0;
@@ -170,26 +170,22 @@ var app = new Vue({
     down() {
       //如果一整行都满了。那就清空；
       for (let i = 0; i < this.all.length; i++) {
-        var num=0;
+        var num = 0;
         for (let j = 0; j < this.all[i].length; j++) {
           //如果没有
-          if(this.all[i][j]!=1){
-            break;
-          }
-          else{
+          if (this.all[i][j] != 1) {
+            continue;
+          } else {
             num++;
-            if (num==this.allLength) {
-              this.context.clearRect(
-                0,
-                i*20,
-                800,
-                20
-              );
+            if (num == this.allLength) {
+              console.log("满格了啊！！！！")
+              this.context.clearRect(0, i * 20, 800, 20);
               //清除以后all值为1的数，改成0；
               for (let j = 0; j < this.all[i].length; j++) {
-                this.all[i][j]=0;
+                this.all[i][j] = 0;
               }
               //然后全体往下移动；
+              this.allDown();
               return;
             }
           }
@@ -212,6 +208,7 @@ var app = new Vue({
           this.stopStatus = false;
         }
         console.log(this.all);
+        this.radomShap();
         return;
       }
       //向下的方法
@@ -296,25 +293,27 @@ var app = new Vue({
       for (let i = 0; i < this.shap.length; i++) {
         for (let j = 0; j < this.shap[i].length; j++) {
           var y = this.shap[i][j][1] / 20;
-              var x = this.shap[i][j][0] / 20;
-          if ((this.shap[i][j][1] >= 100 && this.shap[i][j][2] == 1)||(this.shap[i][j][2]==1&&this.all[y+1][x]==1)) {
+          var x = this.shap[i][j][0] / 20;
+          if (
+            (this.shap[i][j][1] >= 100 && this.shap[i][j][2] == 1) ||
+            (this.shap[i][j][2] == 1 && this.all[y + 1][x] == 1)
+          ) {
             this.stopStatus = true;
             break;
           }
         }
       }
     },
-    allDown(){
-      for (let i = this.all.length-1; i >= 1; i--) {
-        if (i=0) {
-          //最顶层值都为0
-          for (let j = 0; j < this.shap[i].length; j++) {
-            this.all[i][j]=0;
-          }
-        }
-        //其他层向下移动一层；
-        this.all[i+1]=this.all[i]
+    allDown() {
+      //整体往下移动
+      this.allLength = this.all[0].length;
+      var a5 = JSON.parse(JSON.stringify(this.all[this.all.length - 1]));
+      for (let i = this.all.length - 2; i >= 0; i--) {
+        this.all[i + 1] = this.all[i];
       }
+      this.all[0] = a5;
+      console.log("交换位置拉");
+      console.log(this.all);
     }
   },
   mounted() {
@@ -324,6 +323,6 @@ var app = new Vue({
         this.all[i][j] = 0;
       }
     }
-    this.allLength=this.all[0].length;
+    this.allLength = this.all[0].length;
   }
 });
