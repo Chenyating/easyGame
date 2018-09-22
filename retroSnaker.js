@@ -57,7 +57,7 @@ var app = new Vue({
       if (
         0 > this.snaker[0][0] ||
         this.snaker[0][0] > 780 ||
-        1480 < this.snaker[0][1] ||
+        1580 < this.snaker[0][1] ||
         this.snaker[0][1] < 0
       ) {
         alert("游戏结束,你撞到墙了");
@@ -78,7 +78,7 @@ var app = new Vue({
       this.gameState = 0;
       this.scope = 0;
       //清空整个画布
-      this.context.clearRect(0, 0, 800, 1500);
+      this.context.clearRect(0, 0, 800, 1600);
       $("#title").html("");
       $("#title").html("游戏开始");
     },
@@ -91,7 +91,7 @@ var app = new Vue({
         this.gameState = 0;
         this.scope = 0;
         //清空整个画布
-        this.context.clearRect(0, 0, 800, 1500);
+        this.context.clearRect(0, 0, 800, 1600);
       } else {
         //游戏开始状态
         this.food();

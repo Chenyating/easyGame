@@ -52,10 +52,10 @@ var app = new Vue({
       switch (this.radomID) {
         case 0:
           //长条
-          let defaultX = 400;
+          let defaultX = 200;
           let defaultY = 0;
           for (var i = 0; i < 4; i++) {
-            defaultX = 400;
+            defaultX = 200;
             if (i == 0) {
               this.$set(this.shap, i, [
                 [defaultX, defaultY, 1],
@@ -78,107 +78,107 @@ var app = new Vue({
         case 1:
           //正方形
           this.$set(this.shap, 0, [
-            [400, 0, 1],
-            [400, 20, 1]
+            [200, 0, 1],
+            [200, 20, 1]
           ]);
           this.$set(this.shap, 1, [
-            [420, 0, 1],
-            [420, 20, 1]
+            [220, 0, 1],
+            [220, 20, 1]
           ]);
           this.shapName = "正方形";
           break;
         case 2:
           //正7
           this.$set(this.shap, 0, [
-            [400, 0, 1],
-            [420, 0, 1],
-            [440, 0, 0]
+            [200, 0, 1],
+            [220, 0, 1],
+            [240, 0, 0]
           ]);
           this.$set(this.shap, 1, [
-            [400, 20, 0],
-            [420, 20, 1],
-            [440, 20, 0]
+            [200, 20, 0],
+            [220, 20, 1],
+            [240, 20, 0]
           ]);
           this.$set(this.shap, 2, [
-            [400, 40, 0],
-            [420, 40, 1],
-            [440, 40, 0]
+            [200, 40, 0],
+            [220, 40, 1],
+            [240, 40, 0]
           ]);
           this.shapName = "正7";
           break;
         case 3:
           //反7
           this.$set(this.shap, 0, [
-            [400, 0, 0],
-            [420, 0, 1],
-            [440, 0, 1]
+            [200, 0, 0],
+            [220, 0, 1],
+            [240, 0, 1]
           ]);
           this.$set(this.shap, 1, [
-            [400, 20, 0],
-            [420, 20, 1],
-            [440, 20, 0]
+            [200, 20, 0],
+            [220, 20, 1],
+            [240, 20, 0]
           ]);
           this.$set(this.shap, 2, [
-            [400, 40, 0],
-            [420, 40, 1],
-            [440, 40, 0]
+            [200, 40, 0],
+            [220, 40, 1],
+            [240, 40, 0]
           ]);
           this.shapName = "反7";
           break;
         case 4:
           //正2
           this.$set(this.shap, 0, [
-            [400, 0, 1],
-            [420, 0, 1],
-            [440, 0, 0]
+            [200, 0, 1],
+            [220, 0, 1],
+            [240, 0, 0]
           ]);
           this.$set(this.shap, 1, [
-            [400, 20, 0],
-            [420, 20, 1],
-            [440, 20, 1]
+            [200, 20, 0],
+            [220, 20, 1],
+            [240, 20, 1]
           ]);
           this.$set(this.shap, 2, [
-            [400, 40, 0],
-            [420, 40, 0],
-            [440, 40, 0]
+            [200, 40, 0],
+            [220, 40, 0],
+            [240, 40, 0]
           ]);
           this.shapName = "正2";
           break;
         case 5:
           //反2
           this.$set(this.shap, 0, [
-            [400, 0, 0],
-            [420, 0, 1],
-            [440, 0, 1]
+            [200, 0, 0],
+            [220, 0, 1],
+            [240, 0, 1]
           ]);
           this.$set(this.shap, 1, [
-            [400, 20, 1],
-            [420, 20, 1],
-            [440, 20, 0]
+            [200, 20, 1],
+            [220, 20, 1],
+            [240, 20, 0]
           ]);
           this.$set(this.shap, 2, [
-            [400, 40, 0],
-            [420, 40, 0],
-            [440, 40, 0]
+            [200, 40, 0],
+            [220, 40, 0],
+            [240, 40, 0]
           ]);
           this.shapName = "反2";
           break;
         case 6:
           //土
           this.$set(this.shap, 0, [
-            [400, 0, 0],
-            [420, 0, 1],
-            [440, 0, 0]
+            [200, 0, 0],
+            [220, 0, 1],
+            [240, 0, 0]
           ]);
           this.$set(this.shap, 1, [
-            [400, 20, 1],
-            [420, 20, 1],
-            [440, 20, 1]
+            [200, 20, 1],
+            [220, 20, 1],
+            [240, 20, 1]
           ]);
           this.$set(this.shap, 2, [
-            [400, 40, 0],
-            [420, 40, 0],
-            [440, 40, 0]
+            [200, 40, 0],
+            [220, 40, 0],
+            [240, 40, 0]
           ]);
           this.shapName = "土";
           break;
@@ -187,6 +187,7 @@ var app = new Vue({
       }
       // console.log("this ramdomID is" + this.shapName);
       this.painShap();
+      console.log(this.shap)
     },
     //清除单方块形状
     deleteShap() {
@@ -238,7 +239,7 @@ var app = new Vue({
           var y = this.shap[i][j][1] / 20;
           var x = this.shap[i][j][0] / 20;
           if (
-            (this.shap[i][j][1] >= 1480 || this.all[y + 1][x] == 1) && this.shap[i][j][2] == 1
+            (this.shap[i][j][1] >= 780 || this.all[y + 1][x] == 1) && this.shap[i][j][2] == 1
           ) {
             //会的话，那就就开始把shap加入this。all；
             for (let i = 0; i < this.shap.length; i++) {
@@ -385,7 +386,7 @@ var app = new Vue({
           try {
             //因为x可能会等于0；所以用try，catch过滤掉好了。不想管。。。。
             if (
-              (this.shap[i][j][0] > 760 || this.all[y][x + 1] == 1) && this.shap[i][j][2] == 1
+              (this.shap[i][j][0] > 360 || this.all[y][x + 1] == 1) && this.shap[i][j][2] == 1
             ) {
               // console.log("右边有障碍")
               return;
@@ -486,9 +487,9 @@ var app = new Vue({
   },
   mounted() {
     //初始化堆积方块
-    for (let i = 0; i < 75; i++) {
+    for (let i = 0; i < 40; i++) {
       this.all[i] = new Array(0);
-      for (let j = 0; j < 40; j++) {
+      for (let j = 0; j < 20; j++) {
         this.all[i][j] = 0;
       }
     }
