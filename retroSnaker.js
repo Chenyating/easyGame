@@ -9,7 +9,7 @@ var app = new Vue({
     context: null,
     gameState: 0,
     snaker: [],
-    v:300,
+    v: 300,
   },
   methods: {
     //随机生成x坐标
@@ -28,9 +28,9 @@ var app = new Vue({
       this.snaker.splice(0, this.snaker.length);
       this.snaker.push([this.radomx() * 20, this.radomy() * 20]);
       //蛇头也不能和食物重复；
-        if (this.foodX == this.snaker[0][0] && this.foodY == this.snaker[0][1]) {
-          return this.snakerHead();
-        }
+      if (this.foodX == this.snaker[0][0] && this.foodY == this.snaker[0][1]) {
+        return this.snakerHead();
+      }
     },
     //随机生成食物的坐标，且不能和蛇身，蛇头重合
     food() {
@@ -100,65 +100,71 @@ var app = new Vue({
         this.gameState = 1;
         $("#title").html("");
         $("#title").html("游戏结束");
+        clearInterval(timer);
       }
     },
     //蛇在x轴的变化
     changgeX(x) {
-      this.context.clearRect(this.snaker[this.snaker.length - 1][0], this.snaker[this.snaker.length - 1][1], 20, 20);
-      for (var i = this.snaker.length - 1; i >= 0; i--) {
-        if (i == 0) {
-          this.snaker[0][0] = this.snaker[0][0] + x;
-          this.painSnakerHead();
-        } else {
-          this.snaker[i][0] = this.snaker[i - 1][0];
-          this.snaker[i][1] = this.snaker[i - 1][1];
-          this.painSnakerBody();
-          this.context.fillRect(this.snaker[i][0], this.snaker[i][1], 20, 20);
+      try {
+        this.context.clearRect(this.snaker[this.snaker.length - 1][0], this.snaker[this.snaker.length - 1][1], 20, 20);
+        for (var i = this.snaker.length - 1; i >= 0; i--) {
+          if (i == 0) {
+            this.snaker[0][0] = this.snaker[0][0] + x;
+            this.painSnakerHead();
+          } else {
+            this.snaker[i][0] = this.snaker[i - 1][0];
+            this.snaker[i][1] = this.snaker[i - 1][1];
+            this.painSnakerBody();
+            this.context.fillRect(this.snaker[i][0], this.snaker[i][1], 20, 20);
+          }
         }
-      }
-      //食物出现的位置和蛇头重合，则在末尾加上食物的位置，就是y轴最后+-20；
-      if (this.foodX == this.snaker[0][0] && this.foodY == this.snaker[0][1]) {
-        this.snaker.push([this.foodX - x, this.foodY]);
-        this.context.fillRect(
-          this.snaker[this.snaker.length - 1][0],
-          this.snaker[this.snaker.length - 1][1],
-          20,
-          20
-        );
-        this.painSnakerBody();
-        this.food();
-        this.scope = this.scope + 1;
-      }
-      this.ifOut();
+        //食物出现的位置和蛇头重合，则在末尾加上食物的位置，就是y轴最后+-20；
+        if (this.foodX == this.snaker[0][0] && this.foodY == this.snaker[0][1]) {
+          this.snaker.push([this.foodX - x, this.foodY]);
+          this.context.fillRect(
+            this.snaker[this.snaker.length - 1][0],
+            this.snaker[this.snaker.length - 1][1],
+            20,
+            20
+          );
+          this.painSnakerBody();
+          this.food();
+          this.scope = this.scope + 1;
+        }
+        this.ifOut();
+      } catch (error) {}
+
     },
     //蛇在y轴的变化
     changgeY(y) {
-      this.context.clearRect(this.snaker[this.snaker.length - 1][0], this.snaker[this.snaker.length - 1][1], 20, 20);
-      for (var i = this.snaker.length - 1; i >= 0; i--) {
-        if (i == 0) {
-          this.snaker[0][1] = this.snaker[0][1] - y;
-          this.painSnakerHead();
-        } else {
-          this.snaker[i][0] = this.snaker[i - 1][0];
-          this.snaker[i][1] = this.snaker[i - 1][1];
-          this.painSnakerBody();
-          this.context.fillRect(this.snaker[i][0], this.snaker[i][1], 20, 20);
+      try {
+        this.context.clearRect(this.snaker[this.snaker.length - 1][0], this.snaker[this.snaker.length - 1][1], 20, 20);
+        for (var i = this.snaker.length - 1; i >= 0; i--) {
+          if (i == 0) {
+            this.snaker[0][1] = this.snaker[0][1] - y;
+            this.painSnakerHead();
+          } else {
+            this.snaker[i][0] = this.snaker[i - 1][0];
+            this.snaker[i][1] = this.snaker[i - 1][1];
+            this.painSnakerBody();
+            this.context.fillRect(this.snaker[i][0], this.snaker[i][1], 20, 20);
+          }
         }
-      }
-      //食物出现的位置和蛇头重合，则在末尾加上食物的位置，就是y轴最后+-20；
-      if (this.foodX == this.snaker[0][0] && this.foodY == this.snaker[0][1]) {
-        this.snaker.push([this.foodX, this.foodY + y]);
-        this.context.fillRect(
-          this.snaker[this.snaker.length - 1][0],
-          this.snaker[this.snaker.length - 1][1],
-          20,
-          20
-        );
-        this.painSnakerBody();
-        this.food();
-        this.scope = this.scope + 1;
-      }
-      this.ifOut();
+        //食物出现的位置和蛇头重合，则在末尾加上食物的位置，就是y轴最后+-20；
+        if (this.foodX == this.snaker[0][0] && this.foodY == this.snaker[0][1]) {
+          this.snaker.push([this.foodX, this.foodY + y]);
+          this.context.fillRect(
+            this.snaker[this.snaker.length - 1][0],
+            this.snaker[this.snaker.length - 1][1],
+            20,
+            20
+          );
+          this.painSnakerBody();
+          this.food();
+          this.scope = this.scope + 1;
+        }
+        this.ifOut();
+      } catch (error) {}
     },
     //画蛇身
     painSnakerBody() {
@@ -170,8 +176,7 @@ var app = new Vue({
       this.context.fillRect(this.snaker[0][0], this.snaker[0][1], 20, 20);
     },
   },
-  mounted() {
-  },
+  mounted() {},
   watch: {}
 });
 var startx, starty;

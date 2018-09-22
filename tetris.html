@@ -5,7 +5,7 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <title>RETRO-SNAKER-YATING</title>
+  <title>俄罗斯方块-YATING</title>
   <!-- <meta name="viewport" content="width=device-width, initial-scale=1"> -->
   <!-- <link rel="stylesheet" href="index.less" /> -->
   <script src="vue.js"></script>
@@ -86,26 +86,26 @@
 
 <body>
   <div id="teris">
-    <div class="title">TETRIS</div>
+    <div class="title">TETRIS-俄罗斯方块</div>
     <div class="stage">
       <canvas id="stage" width=400 height=800>
       </canvas>
       <div class="operation">
           <p>分值</p>
           <div class="inf">{{scope}}</div>
-        <div class="inf" id="title" @click="begin()">
-          游戏开始
-        </div>
-        <div class="inf" @click="down()">向下</div>
-        <div class="inf" @click="rotate()">旋转</div>
-        <div class="inf" @click="left()">左</div>
-        <div class="inf" @click="right()">右</div>
+          <p>GAME</p>
+          <div class="inf" id="title" @click="begin()">
+            游戏开始
+          </div>
+          <p>VELOCITY</p>
+          <div class="inf">{{downV}}</div>
+          <p>AUTHOR</p>
+          <div class="inf">YATING</div>
       </div>
     </div>
     <div class="explain">
-      Fingers slide up and down in the screen, click on the screen to pause.If you bump into yourself, the game is
-      over.
-      <div class="chinese">手指在屏幕中上下左右滑动，点击屏幕暂停。如果撞到自己或墙，游戏结束</div>
+        Fingers slide around the screen and click on the screen to pause. Slide up and change the direction of the square.
+      <div class="chinese">手指在屏幕中左右滑动，点击屏幕暂停。向上滑动改变方块方向。</div>
     </div>
   </div>
   <script src="tetris.js"></script>
