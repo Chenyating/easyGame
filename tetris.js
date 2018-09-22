@@ -77,43 +77,109 @@ var app = new Vue({
           break;
         case 1:
           //正方形
-          this.$set(this.shap, 0, [[400, 0, 1], [400, 20, 1]]);
-          this.$set(this.shap, 1, [[420, 0, 1], [420, 20, 1]]);
+          this.$set(this.shap, 0, [
+            [400, 0, 1],
+            [400, 20, 1]
+          ]);
+          this.$set(this.shap, 1, [
+            [420, 0, 1],
+            [420, 20, 1]
+          ]);
           this.shapName = "正方形";
           break;
         case 2:
           //正7
-          this.$set(this.shap, 0, [[400, 0, 1], [420, 0, 1], [440, 0, 0]]);
-          this.$set(this.shap, 1, [[400, 20, 0], [420, 20, 1], [440, 20, 0]]);
-          this.$set(this.shap, 2, [[400, 40, 0], [420, 40, 1], [440, 40, 0]]);
+          this.$set(this.shap, 0, [
+            [400, 0, 1],
+            [420, 0, 1],
+            [440, 0, 0]
+          ]);
+          this.$set(this.shap, 1, [
+            [400, 20, 0],
+            [420, 20, 1],
+            [440, 20, 0]
+          ]);
+          this.$set(this.shap, 2, [
+            [400, 40, 0],
+            [420, 40, 1],
+            [440, 40, 0]
+          ]);
           this.shapName = "正7";
           break;
         case 3:
           //反7
-          this.$set(this.shap, 0, [[400, 0, 0], [420, 0, 1], [440, 0, 1]]);
-          this.$set(this.shap, 1, [[400, 20, 0], [420, 20, 1], [440, 20, 0]]);
-          this.$set(this.shap, 2, [[400, 40, 0], [420, 40, 1], [440, 40, 0]]);
+          this.$set(this.shap, 0, [
+            [400, 0, 0],
+            [420, 0, 1],
+            [440, 0, 1]
+          ]);
+          this.$set(this.shap, 1, [
+            [400, 20, 0],
+            [420, 20, 1],
+            [440, 20, 0]
+          ]);
+          this.$set(this.shap, 2, [
+            [400, 40, 0],
+            [420, 40, 1],
+            [440, 40, 0]
+          ]);
           this.shapName = "反7";
           break;
         case 4:
           //正2
-          this.$set(this.shap, 0, [[400, 0, 1], [420, 0, 1], [440, 0, 0]]);
-          this.$set(this.shap, 1, [[400, 20, 0], [420, 20, 1], [440, 20, 1]]);
-          this.$set(this.shap, 2, [[400, 40, 0], [420, 40, 0], [440, 40, 0]]);
+          this.$set(this.shap, 0, [
+            [400, 0, 1],
+            [420, 0, 1],
+            [440, 0, 0]
+          ]);
+          this.$set(this.shap, 1, [
+            [400, 20, 0],
+            [420, 20, 1],
+            [440, 20, 1]
+          ]);
+          this.$set(this.shap, 2, [
+            [400, 40, 0],
+            [420, 40, 0],
+            [440, 40, 0]
+          ]);
           this.shapName = "正2";
           break;
         case 5:
           //反2
-          this.$set(this.shap, 0, [[400, 0, 0], [420, 0, 1], [440, 0, 1]]);
-          this.$set(this.shap, 1, [[400, 20, 1], [420, 20, 1], [440, 20, 0]]);
-          this.$set(this.shap, 2, [[400, 40, 0], [420, 40, 0], [440, 40, 0]]);
+          this.$set(this.shap, 0, [
+            [400, 0, 0],
+            [420, 0, 1],
+            [440, 0, 1]
+          ]);
+          this.$set(this.shap, 1, [
+            [400, 20, 1],
+            [420, 20, 1],
+            [440, 20, 0]
+          ]);
+          this.$set(this.shap, 2, [
+            [400, 40, 0],
+            [420, 40, 0],
+            [440, 40, 0]
+          ]);
           this.shapName = "反2";
           break;
         case 6:
           //土
-          this.$set(this.shap, 0, [[400, 0, 0], [420, 0, 1], [440, 0, 0]]);
-          this.$set(this.shap, 1, [[400, 20, 1], [420, 20, 1], [440, 20, 1]]);
-          this.$set(this.shap, 2, [[400, 40, 0], [420, 40, 0], [440, 40, 0]]);
+          this.$set(this.shap, 0, [
+            [400, 0, 0],
+            [420, 0, 1],
+            [440, 0, 0]
+          ]);
+          this.$set(this.shap, 1, [
+            [400, 20, 1],
+            [420, 20, 1],
+            [440, 20, 1]
+          ]);
+          this.$set(this.shap, 2, [
+            [400, 40, 0],
+            [420, 40, 0],
+            [440, 40, 0]
+          ]);
           this.shapName = "土";
           break;
         default:
@@ -139,7 +205,6 @@ var app = new Vue({
     },
     //旋转90度的方法
     rotate() {
-      this.deleteShap();
       let shap1 = [];
       // 深拷贝
       shap1 = JSON.parse(JSON.stringify(this.shap));
@@ -149,28 +214,126 @@ var app = new Vue({
           shap1[i][j][2] = this.shap[this.shap[i].length - 1 - j][i][2];
         }
       }
-      //判断一下，改变方向以后，会不会超出墙（验证最左边和最右边就可以了）,可以允许正好等于边界；
+      //判断一下，改变方向以后，会不会超出墙||碰到堆积好的方块；
       for (let i = 0; i < shap1.length; i++) {
-        if (
-          (shap1[i][0][0] < 0 && shap1[i][0][2] == 1) ||
-          (shap1[i][shap1.length - 1][0] > 780 &&
-            shap1[i][shap1.length - 1][2] == 1)
-        ) {
-          //两个同时成立退出；
-          console.log("变化会超过墙");
-          this.painShap();
-          return;
+        for (let j = 0; j < shap1[i].length; j++) {
+          if (
+            ((shap1[i][j][0] < 0 || shap1[i][j][0] > 780) && shap1[i][j][2] == 1) || (this.all[this.shap[i][j][1] / 20][this.shap[i][j][0] / 20] == 1)) {
+            console.log("会碰到墙壁或者碰到已经堆积好的方块！！！");
+            //两个同时成立退出；
+            return;
+          }
         }
       }
+      this.deleteShap();
       //那么就把shap1的值赋给shap
       this.shap = JSON.parse(JSON.stringify(shap1));
       this.painShap();
     },
     //向下移动
     down() {
-      //如果一整行都满了。那就清空；
+      //判断下降过程中是否会与下一层堆积好的方块重叠；是否会超过范围；如果会的话，就开始把shap加入this.all然后退出；
+      for (let i = 0; i < this.shap.length; i++) {
+        for (let j = 0; j < this.shap[i].length; j++) {
+          var y = this.shap[i][j][1] / 20;
+          var x = this.shap[i][j][0] / 20;
+          if (
+            (this.shap[i][j][1] >= 180 || this.all[y + 1][x] == 1) && this.shap[i][j][2] == 1
+          ) {
+            //会的话，那就就开始把shap加入this。all；
+            for (let i = 0; i < this.shap.length; i++) {
+              for (let j = 0; j < this.shap[i].length; j++) {
+                if (this.shap[i][j][2] == 1) {
+                  var y = this.shap[i][j][1] / 20;
+                  var x = this.shap[i][j][0] / 20;
+                  this.all[y][x] = 1;
+                }
+              }
+            }
+            //放完以后退出
+            console.log(this.all)
+            this.radomShap();
+            return;
+          }
+        }
+      }
+
+
+      //先判断是否满格了,满格就退出；
       for (let i = 0; i < this.all.length; i++) {
-        var num = 0;
+        var num = 0; //一整行填满的方块数量
+        for (let j = 0; j < this.all[i].length; j++) {
+          //如果没有
+          if (this.all[i][j] != 1) {
+            continue;
+          } else {
+            num++;
+            if (num == this.allLength) {
+              console.log("满格了啊！！！！")
+              for (let j = 0; j < this.all[i].length; j++) {
+                this.context.clearRect(
+                  j*20,
+                  i*20,
+                  20,
+                  20
+                );
+                this.all[i][j] = 0;
+              }
+              //清空原来的堆积好的方块
+              this.deletAll();
+              //然后全体往下移动；
+              this.allDown();
+              //重绘
+              this.painAll();
+              this.radomShap();
+              return;
+            }
+          }
+        }
+      }
+
+
+      //经过两个判断结束以后，没有符合，继续向下移动
+      for (let i = 0; i < this.shap.length; i++) {
+        for (let j = 0; j < this.shap[i].length; j++) {
+          if (this.shap[i][j][2] == 1) {
+            this.context.clearRect(
+              this.shap[i][j][0],
+              this.shap[i][j][1],
+              20,
+              20
+            );
+          }
+          this.shap[i][j][1] += 20;
+        }
+      }
+      this.painShap();
+    },
+    // 向左
+    left() {
+      //判断左移动的过程中是否会与下一层堆积好的方块重叠；是否会超过范围；如果会的话，就开始把shap加入this.all然后退出；
+      for (let i = 0; i < this.shap.length; i++) {
+        for (let j = 0; j < this.shap[i].length; j++) {
+          var y = this.shap[i][j][1] / 20;
+          var x = this.shap[i][j][0] / 20;
+          try {
+            //因为x可能会等于0；所以用try，catch过滤掉好了。不想管。。。。
+            if (
+              (this.shap[i][j][0] < 20 || this.all[y][x - 1] == 1) && this.shap[i][j][2] == 1
+            ) {
+              console.log("左边有东西||或者靠墙了。不要向左了。")
+              //左边有东西||或者靠墙了。不要向左了。
+              return;
+            }
+          } catch (error) {
+            console.log("有bug")
+          }
+        }
+      }
+
+      //先判断是否满格了,满格就退出；
+      for (let i = 0; i < this.all.length; i++) {
+        var num = 0; //一整行填满的方块数量
         for (let j = 0; j < this.all[i].length; j++) {
           //如果没有
           if (this.all[i][j] != 1) {
@@ -184,36 +347,20 @@ var app = new Vue({
               for (let j = 0; j < this.all[i].length; j++) {
                 this.all[i][j] = 0;
               }
+              //清空原来的堆积好的方块
+              this.deletAll();
               //然后全体往下移动；
               this.allDown();
-              this.deletAll();
+              //重绘
               this.painAll();
               return;
             }
           }
         }
-        // console.log(this.all);
-        this.stopStatus = false;
       }
-      // 判断是否超出；
-      this.ifOverlap();
-      if (this.stopStatus) {
-        for (let i = 0; i < this.shap.length; i++) {
-          for (let j = 0; j < this.shap[i].length; j++) {
-            if (this.shap[i][j][2] == 1) {
-              var y = this.shap[i][j][1] / 20;
-              var x = this.shap[i][j][0] / 20;
-              // console.log(y+":"+x)
-              this.all[y][x] = 1;
-            }
-          }
-          this.stopStatus = false;
-        }
-        console.log(this.all);
-        this.radomShap();
-        return;
-      }
-      //向下的方法
+
+
+      //经过两个判断结束以后，没有符合，继续向左移动
       for (let i = 0; i < this.shap.length; i++) {
         for (let j = 0; j < this.shap[i].length; j++) {
           if (this.shap[i][j][2] == 1) {
@@ -224,37 +371,6 @@ var app = new Vue({
               20
             );
           }
-          this.shap[i][j][1] += 20;
-          var y = this.shap[i][j][1] / 20;
-          var x = this.shap[i][j][0] / 20;
-          // console.log(y+":"+x)
-        }
-      }
-      this.painShap();
-    },
-    // 向左
-    left() {
-      //先判断最左边的数值and有上色的。有没有靠墙。每一行的第0个判断一下。
-      for (let i = 0; i < this.shap.length; i++) {
-        if (this.shap[i][0][0] <= 0 && this.shap[i][0][2] == 1) {
-          //两个同时成立退出；
-          return;
-        }
-      }
-      //判断完之后开始对向左进行操作；
-      for (let i = 0; i < this.shap.length; i++) {
-        for (let j = 0; j < this.shap[i].length; j++) {
-          //还是都先判断一下，每一个的数值and有上色的。有没有靠墙
-          if (this.shap[i][j][0] <= 0 && this.shap[i][j][2] == 1) {
-            //两个同时成立退出；
-            return;
-          }
-          this.context.clearRect(
-            this.shap[i][j][0],
-            this.shap[i][j][1],
-            20,
-            20
-          );
           this.shap[i][j][0] -= 20;
         }
       }
@@ -262,49 +378,70 @@ var app = new Vue({
     },
     // 向右
     right() {
-      //先判断最左边的数值and有上色的。有没有靠墙,每一行的最后一个；
-      for (let i = 0; i < this.shap.length; i++) {
-        if (
-          this.shap[i][this.shap.length - 1][0] >= 780 &&
-          this.shap[i][this.shap.length - 1][2] == 1
-        ) {
-          //两个同时成立退出；
-          return;
-        }
-      }
-      for (let i = 0; i < this.shap.length; i++) {
-        for (let j = 0; j < this.shap[i].length; j++) {
-          //还是都先判断一下，每一个的数值and有上色的。有没有靠墙
-          if (this.shap[i][j][0] >= 780 && this.shap[i][j][2] == 1) {
-            //两个同时成立退出；
-            return;
-          }
-          this.context.clearRect(
-            this.shap[i][j][0],
-            this.shap[i][j][1],
-            20,
-            20
-          );
-          this.shap[i][j][0] += 20;
-        }
-      }
-      this.painShap();
-    },
-    //是否重叠
-    ifOverlap() {
+      //判断左移动的过程中是否会与右边堆积好的方块重叠；是否会超过范围；如果会的话退出；
       for (let i = 0; i < this.shap.length; i++) {
         for (let j = 0; j < this.shap[i].length; j++) {
           var y = this.shap[i][j][1] / 20;
           var x = this.shap[i][j][0] / 20;
-          if (
-            (this.shap[i][j][1] >= 100 && this.shap[i][j][2] == 1) ||
-            (this.shap[i][j][2] == 1 && this.all[y + 1][x] == 1)
-          ) {
-            this.stopStatus = true;
-            break;
+          try {
+            //因为x可能会等于0；所以用try，catch过滤掉好了。不想管。。。。
+            if (
+              (this.shap[i][j][0] > 760 || this.all[y][x + 1] == 1) && this.shap[i][j][2] == 1
+            ) {
+              console.log("右边有障碍")
+              return;
+            }
+          } catch (error) {
+            console.log("x太大l")
+          }
+
+        }
+      }
+
+      //先判断是否满格了,满格就退出；
+      for (let i = 0; i < this.all.length; i++) {
+        var num = 0; //一整行填满的方块数量
+        for (let j = 0; j < this.all[i].length; j++) {
+          //如果没有
+          if (this.all[i][j] != 1) {
+            continue;
+          } else {
+            num++;
+            if (num == this.allLength) {
+              console.log("满格了啊！！！！")
+              this.context.clearRect(0, i * 20, 800, 20);
+              //清除以后all值为1的数，改成0；
+              for (let j = 0; j < this.all[i].length; j++) {
+                this.all[i][j] = 0;
+              }
+              //清空原来的堆积好的方块
+              this.deletAll();
+              //然后全体往下移动；
+              this.allDown();
+              //重绘
+              this.painAll();
+              return;
+            }
           }
         }
       }
+
+
+      //经过两个判断结束以后，没有符合，继续向右移动
+      for (let i = 0; i < this.shap.length; i++) {
+        for (let j = 0; j < this.shap[i].length; j++) {
+          if (this.shap[i][j][2] == 1) {
+            this.context.clearRect(
+              this.shap[i][j][0],
+              this.shap[i][j][1],
+              20,
+              20
+            );
+          }
+          this.shap[i][j][0] += 20;
+        }
+      }
+      this.painShap();
     },
     allDown() {
       //整体往下移动
@@ -317,13 +454,13 @@ var app = new Vue({
       console.log("交换位置拉");
       console.log(this.all);
     },
-    deletAll(){
+    deletAll() {
       for (let i = 0; i < this.all.length; i++) {
         for (let j = 0; j < this.all[i].length; j++) {
-          if (this.all[i][j]== 1) {
+          if (this.all[i][j] == 1) {
             this.context.clearRect(
-              j*20,
-              i*20,
+              j * 20,
+              i * 20,
               20,
               20
             );
@@ -331,13 +468,13 @@ var app = new Vue({
         }
       }
     },
-    painAll(){
+    painAll() {
       for (let i = 0; i < this.all.length; i++) {
         for (let j = 0; j < this.all[i].length; j++) {
-          if (this.all[i][j]== 1) {
+          if (this.all[i][j] == 1) {
             this.context.fillRect(
-              j*20,
-              i*20,
+              j * 20,
+              i * 20,
               20,
               20
             );
@@ -347,7 +484,7 @@ var app = new Vue({
     }
   },
   mounted() {
-    for (let i = 0; i < 6; i++) {
+    for (let i = 0; i < 10; i++) {
       this.all[i] = new Array(0);
       for (let j = 0; j < 40; j++) {
         this.all[i][j] = 0;
