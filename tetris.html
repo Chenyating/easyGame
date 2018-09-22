@@ -91,10 +91,12 @@
       <canvas id="stage" width=400 height=800>
       </canvas>
       <div class="operation">
-        <div class="inf" @click="down()">向下</div>
-        <div class="inf" id="title" @click="radomShap()">
+          <p>分值</p>
+          <div class="inf">{{scope}}</div>
+        <div class="inf" id="title" @click="begin()">
           游戏开始
         </div>
+        <div class="inf" @click="down()">向下</div>
         <div class="inf" @click="rotate()">旋转</div>
         <div class="inf" @click="left()">左</div>
         <div class="inf" @click="right()">右</div>

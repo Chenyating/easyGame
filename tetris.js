@@ -7,14 +7,39 @@ var app = new Vue({
     shap: [], //存放图形
     all: new Array(), //存放所有已经内容
     context: null, //画布
-    direction: 1, //方块移动方向
-    pushAll: 0,
     rotateID: 0, //旋转的状态,
-    shapName: null,
-    stopStatus: false,
-    allLength: null
+    allLength: null,
+    gameState: 0
   },
   methods: {
+    begin() {
+      if (this.gameState != 0) {
+        //游戏结束状态
+        $("#title").html("");
+        $("#title").html("游戏开始");
+        this.gameState = 0;
+        this.scope = 0;
+        this.all.splice(0, this.all.length); //清空存放单方块的数组
+        //清空整个画布
+        this.context.clearRect(0, 0, 800, 1600);
+      }
+      //游戏开始状态
+      else {
+        //初始化堆积方块
+        for (let i = 0; i < 40; i++) {
+          this.all[i] = new Array(0);
+          for (let j = 0; j < 20; j++) {
+            this.all[i][j] = 0;
+          }
+        }
+        this.allLength = this.all[0].length;
+        //开始绘制单方块；
+        this.radomShap();
+        this.gameState = 1;
+        $("#title").html("");
+        $("#title").html("游戏结束");
+      }
+    },
     //绘制
     pain() {
       var c = document.getElementById("stage");
@@ -32,23 +57,18 @@ var app = new Vue({
               this.shap[i][j][1],
               20,
               20
-            ); //绘制
-            // console.log("[" + i + "," + j + "]" + ":" + "[" + this.shap[i][j][0] + "," + this.shap[i][j][1] + "," + this.shap[i][j][2] + "]")
+            );
           }
         }
       }
-      // console.log("--------------")
     },
     //随机绘制单方块
     radomShap() {
-      // console.log("------------------");
       this.pain();
-      // this.radomID = parseInt(Math.random() * 7);
-      this.radomID = 0;
-
+      this.radomID = parseInt(Math.random() * 7);
       // this.deleteShap();
-      this.shap.splice(0, this.shap.length); //清空存放图形的数组
-      //开始存储不同形状的数组
+      this.shap.splice(0, this.shap.length); //清空存放单方块的数组
+      //shap数组开始存储不同单方块
       switch (this.radomID) {
         case 0:
           //长条
@@ -73,7 +93,6 @@ var app = new Vue({
             }
             defaultY += 20;
           }
-          this.shapName = "长条";
           break;
         case 1:
           //正方形
@@ -85,7 +104,6 @@ var app = new Vue({
             [220, 0, 1],
             [220, 20, 1]
           ]);
-          this.shapName = "正方形";
           break;
         case 2:
           //正7
@@ -104,7 +122,6 @@ var app = new Vue({
             [220, 40, 1],
             [240, 40, 0]
           ]);
-          this.shapName = "正7";
           break;
         case 3:
           //反7
@@ -123,7 +140,6 @@ var app = new Vue({
             [220, 40, 1],
             [240, 40, 0]
           ]);
-          this.shapName = "反7";
           break;
         case 4:
           //正2
@@ -142,7 +158,6 @@ var app = new Vue({
             [220, 40, 0],
             [240, 40, 0]
           ]);
-          this.shapName = "正2";
           break;
         case 5:
           //反2
@@ -161,7 +176,6 @@ var app = new Vue({
             [220, 40, 0],
             [240, 40, 0]
           ]);
-          this.shapName = "反2";
           break;
         case 6:
           //土
@@ -180,14 +194,11 @@ var app = new Vue({
             [220, 40, 0],
             [240, 40, 0]
           ]);
-          this.shapName = "土";
           break;
         default:
           break;
       }
-      // console.log("this ramdomID is" + this.shapName);
       this.painShap();
-      console.log(this.shap)
     },
     //清除单方块形状
     deleteShap() {
@@ -220,7 +231,6 @@ var app = new Vue({
         for (let j = 0; j < shap1[i].length; j++) {
           if (
             ((shap1[i][j][0] < 0 || shap1[i][j][0] > 780) && shap1[i][j][2] == 1) || (this.all[this.shap[i][j][1] / 20][this.shap[i][j][0] / 20] == 1)) {
-            // console.log("会碰到墙壁或者碰到已经堆积好的方块！！！");
             //两个同时成立退出；
             return;
           }
@@ -233,6 +243,7 @@ var app = new Vue({
     },
     //向下
     down() {
+ 
       //判断下降过程中是否会与下一层堆积好的方块重叠；是否会超过范围；如果会的话，就开始把shap加入this.all然后退出；
       for (let i = 0; i < this.shap.length; i++) {
         for (let j = 0; j < this.shap[i].length; j++) {
@@ -252,7 +263,6 @@ var app = new Vue({
               }
             }
             //放完以后退出
-            // console.log(this.all)
             this.radomShap();
             return;
           }
@@ -270,7 +280,6 @@ var app = new Vue({
           } else {
             num++;
             if (num == this.allLength) {
-              // console.log("满格了啊！！！！")
               for (let j = 0; j < this.all[i].length; j++) {
                 this.context.clearRect(
                   j * 20,
@@ -321,7 +330,6 @@ var app = new Vue({
             if (
               (this.shap[i][j][0] < 20 || this.all[y][x - 1] == 1) && this.shap[i][j][2] == 1
             ) {
-              console.log("左边有东西||或者靠墙了。不要向左了。")
               //左边有东西||或者靠墙了。不要向左了。
               return;
             }
@@ -341,7 +349,6 @@ var app = new Vue({
           } else {
             num++;
             if (num == this.allLength) {
-              // console.log("满格了啊！！！！")
               this.context.clearRect(0, i * 20, 800, 20);
               //清除以后all值为1的数，改成0；
               for (let j = 0; j < this.all[i].length; j++) {
@@ -388,11 +395,10 @@ var app = new Vue({
             if (
               (this.shap[i][j][0] > 360 || this.all[y][x + 1] == 1) && this.shap[i][j][2] == 1
             ) {
-              // console.log("右边有障碍")
               return;
             }
           } catch (error) {
-            // console.log("x太大l")
+            // console.log("x太大")
           }
 
         }
@@ -408,7 +414,6 @@ var app = new Vue({
           } else {
             num++;
             if (num == this.allLength) {
-              // console.log("满格了啊！！！！")
               this.context.clearRect(0, i * 20, 800, 20);
               //清除以后all值为1的数，改成0；
               for (let j = 0; j < this.all[i].length; j++) {
@@ -443,13 +448,13 @@ var app = new Vue({
       }
       this.painShap();
     },
-    deletAll(){
+    deletAll() {
       for (let i = 0; i < this.all.length; i++) {
         for (let j = 0; j < this.all[i].length; j++) {
-          if (this.all[i][j]== 1) {
+          if (this.all[i][j] == 1) {
             this.context.clearRect(
-              j*20,
-              i*20,
+              j * 20,
+              i * 20,
               20,
               20
             );
@@ -466,8 +471,6 @@ var app = new Vue({
         this.all[i + 1] = this.all[i];
       }
       this.all[0] = a5;
-      // console.log("交换位置拉");
-      // console.log(this.all);
     },
     //重绘堆积好的方块；
     painAll() {
@@ -486,14 +489,7 @@ var app = new Vue({
     }
   },
   mounted() {
-    //初始化堆积方块
-    for (let i = 0; i < 40; i++) {
-      this.all[i] = new Array(0);
-      for (let j = 0; j < 20; j++) {
-        this.all[i][j] = 0;
-      }
-    }
-    this.allLength = this.all[0].length;
+
   }
 });
 
@@ -559,16 +555,21 @@ document.addEventListener(
     endy = e.changedTouches[0].pageY;
     var direction = getDirection(startx, starty, endx, endy);
     clearInterval(timer);
+    if (direction == 0) {
+      clearInterval(timer);
+    }
     if (direction == 1) {
       app.rotate();
       timer = setInterval(() => {
         app.down();
       }, 400)
+ 
     }
     if (direction == 2) {
       timer = setInterval(() => {
         app.down();
-      }, 100)
+      }, 10)
+  
     }
     if (direction == 3) {
       app.left();
@@ -582,10 +583,6 @@ document.addEventListener(
         app.down();
       }, 400)
     }
-    if (direction == 0) {
-      clearInterval(timer);
-    }
-
   },
   false
 );
