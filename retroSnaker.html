@@ -88,17 +88,15 @@
   <div id="app">
     <div class="title">RETRO-SNAKER-贪吃蛇</div>
     <div class="stage">
-      <canvas id="tanchi" width=800 height=1600>
+      <canvas id="tanchi" width=400 height=800>
       </canvas>
       <div class="operation">
-        <p>分值</p>
-        <div class="inf">{{scope}}</div>
+        <p>SCOPE</p>
+        <div class="inf">分值：{{scope}}</div>
         <p>GAME</p>
         <div class="inf" id="title" @click="begin()">
           游戏开始
         </div>
-        <p>VELOCITY</p>
-        <div class="inf">{{v-2*scope}}</div>
         <p>AUTHOR</p>
         <div class="inf">YATING</div>
       </div>

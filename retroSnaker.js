@@ -14,12 +14,12 @@ var app = new Vue({
   methods: {
     //随机生成x坐标
     radomx() {
-      this.radomX = parseInt(Math.random() * 39);
+      this.radomX = parseInt(Math.random() * 20);
       return this.radomX;
     },
     //随机生成y坐标
     radomy() {
-      this.radomY = parseInt(Math.random() * 75);
+      this.radomY = parseInt(Math.random() * 40);
       return this.radomY;
     },
     //随机生成蛇头的坐标
@@ -56,8 +56,8 @@ var app = new Vue({
     ifOut() {
       if (
         0 > this.snaker[0][0] ||
-        this.snaker[0][0] > 780 ||
-        1580 < this.snaker[0][1] ||
+        this.snaker[0][0] > 380 ||
+        780 < this.snaker[0][1] ||
         this.snaker[0][1] < 0
       ) {
         alert("游戏结束,你撞到墙了");
@@ -78,7 +78,7 @@ var app = new Vue({
       this.gameState = 0;
       this.scope = 0;
       //清空整个画布
-      this.context.clearRect(0, 0, 800, 1600);
+      this.context.clearRect(0, 0, 400, 800);
       $("#title").html("");
       $("#title").html("游戏开始");
     },
@@ -91,7 +91,7 @@ var app = new Vue({
         this.gameState = 0;
         this.scope = 0;
         //清空整个画布
-        this.context.clearRect(0, 0, 800, 1600);
+        this.context.clearRect(0, 0, 400, 800);
       } else {
         //游戏开始状态
         this.food();

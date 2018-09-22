@@ -81,6 +81,7 @@
     p {
       padding: 1rem;
     }
+
   </style>
 </head>
 
@@ -91,20 +92,19 @@
       <canvas id="stage" width=400 height=800>
       </canvas>
       <div class="operation">
-          <p>分值</p>
-          <div class="inf">{{scope}}</div>
-          <p>GAME</p>
-          <div class="inf" id="title" @click="begin()">
-            游戏开始
-          </div>
-          <p>VELOCITY</p>
-          <div class="inf">{{downV}}</div>
-          <p>AUTHOR</p>
-          <div class="inf">YATING</div>
+        <p>SCOPE</p>
+        <div class="inf">分值：{{scope}}</div>
+        <p>GAME</p>
+        <div class="inf" id="title" @click="begin()">
+          游戏开始
+        </div>
+        <p>AUTHOR</p>
+        <div class="inf">YATING</div>
       </div>
     </div>
     <div class="explain">
-        Fingers slide around the screen and click on the screen to pause. Slide up and change the direction of the square.
+      Fingers slide around the screen and click on the screen to pause. Slide up and change the direction of the
+      square.
       <div class="chinese">手指在屏幕中左右滑动，点击屏幕暂停。向上滑动改变方块方向。</div>
     </div>
   </div>
