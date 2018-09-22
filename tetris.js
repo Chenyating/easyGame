@@ -1,8 +1,8 @@
 var app = new Vue({
   el: "#teris",
   data: {
-    scope: 10,
-    v: 10,
+    scope: 0,
+    v: 300,
     radomID: null, //图像编号
     shap: [], //存放图形
     all: new Array(), //存放所有已经内容
@@ -39,9 +39,9 @@ var app = new Vue({
       }
       // console.log("--------------")
     },
-    //随机绘制图形；
+    //随机绘制单方块
     radomShap() {
-      console.log("------------------");
+      // console.log("------------------");
       this.pain();
       // this.radomID = parseInt(Math.random() * 7);
       this.radomID = 0;
@@ -185,10 +185,10 @@ var app = new Vue({
         default:
           break;
       }
-      console.log("this ramdomID is" + this.shapName);
+      // console.log("this ramdomID is" + this.shapName);
       this.painShap();
     },
-    //清楚形状；
+    //清除单方块形状
     deleteShap() {
       for (let i = 0; i < this.shap.length; i++) {
         for (let j = 0; j < this.shap[i].length; j++) {
@@ -219,7 +219,7 @@ var app = new Vue({
         for (let j = 0; j < shap1[i].length; j++) {
           if (
             ((shap1[i][j][0] < 0 || shap1[i][j][0] > 780) && shap1[i][j][2] == 1) || (this.all[this.shap[i][j][1] / 20][this.shap[i][j][0] / 20] == 1)) {
-            console.log("会碰到墙壁或者碰到已经堆积好的方块！！！");
+            // console.log("会碰到墙壁或者碰到已经堆积好的方块！！！");
             //两个同时成立退出；
             return;
           }
@@ -230,7 +230,7 @@ var app = new Vue({
       this.shap = JSON.parse(JSON.stringify(shap1));
       this.painShap();
     },
-    //向下移动
+    //向下
     down() {
       //判断下降过程中是否会与下一层堆积好的方块重叠；是否会超过范围；如果会的话，就开始把shap加入this.all然后退出；
       for (let i = 0; i < this.shap.length; i++) {
@@ -238,7 +238,7 @@ var app = new Vue({
           var y = this.shap[i][j][1] / 20;
           var x = this.shap[i][j][0] / 20;
           if (
-            (this.shap[i][j][1] >= 180 || this.all[y + 1][x] == 1) && this.shap[i][j][2] == 1
+            (this.shap[i][j][1] >= 1480 || this.all[y + 1][x] == 1) && this.shap[i][j][2] == 1
           ) {
             //会的话，那就就开始把shap加入this。all；
             for (let i = 0; i < this.shap.length; i++) {
@@ -251,7 +251,7 @@ var app = new Vue({
               }
             }
             //放完以后退出
-            console.log(this.all)
+            // console.log(this.all)
             this.radomShap();
             return;
           }
@@ -269,19 +269,18 @@ var app = new Vue({
           } else {
             num++;
             if (num == this.allLength) {
-              console.log("满格了啊！！！！")
+              // console.log("满格了啊！！！！")
               for (let j = 0; j < this.all[i].length; j++) {
                 this.context.clearRect(
-                  j*20,
-                  i*20,
+                  j * 20,
+                  i * 20,
                   20,
                   20
                 );
                 this.all[i][j] = 0;
               }
-              //清空原来的堆积好的方块
-              this.deletAll();
               //然后全体往下移动；
+              this.deletAll();
               this.allDown();
               //重绘
               this.painAll();
@@ -326,7 +325,7 @@ var app = new Vue({
               return;
             }
           } catch (error) {
-            console.log("有bug")
+            // console.log("有bug")
           }
         }
       }
@@ -341,7 +340,7 @@ var app = new Vue({
           } else {
             num++;
             if (num == this.allLength) {
-              console.log("满格了啊！！！！")
+              // console.log("满格了啊！！！！")
               this.context.clearRect(0, i * 20, 800, 20);
               //清除以后all值为1的数，改成0；
               for (let j = 0; j < this.all[i].length; j++) {
@@ -388,11 +387,11 @@ var app = new Vue({
             if (
               (this.shap[i][j][0] > 760 || this.all[y][x + 1] == 1) && this.shap[i][j][2] == 1
             ) {
-              console.log("右边有障碍")
+              // console.log("右边有障碍")
               return;
             }
           } catch (error) {
-            console.log("x太大l")
+            // console.log("x太大l")
           }
 
         }
@@ -408,7 +407,7 @@ var app = new Vue({
           } else {
             num++;
             if (num == this.allLength) {
-              console.log("满格了啊！！！！")
+              // console.log("满格了啊！！！！")
               this.context.clearRect(0, i * 20, 800, 20);
               //清除以后all值为1的数，改成0；
               for (let j = 0; j < this.all[i].length; j++) {
@@ -443,6 +442,21 @@ var app = new Vue({
       }
       this.painShap();
     },
+    deletAll(){
+      for (let i = 0; i < this.all.length; i++) {
+        for (let j = 0; j < this.all[i].length; j++) {
+          if (this.all[i][j]== 1) {
+            this.context.clearRect(
+              j*20,
+              i*20,
+              20,
+              20
+            );
+          }
+        }
+      }
+    },
+    //整体堆积好的方块往下；
     allDown() {
       //整体往下移动
       this.allLength = this.all[0].length;
@@ -451,23 +465,10 @@ var app = new Vue({
         this.all[i + 1] = this.all[i];
       }
       this.all[0] = a5;
-      console.log("交换位置拉");
-      console.log(this.all);
+      // console.log("交换位置拉");
+      // console.log(this.all);
     },
-    deletAll() {
-      for (let i = 0; i < this.all.length; i++) {
-        for (let j = 0; j < this.all[i].length; j++) {
-          if (this.all[i][j] == 1) {
-            this.context.clearRect(
-              j * 20,
-              i * 20,
-              20,
-              20
-            );
-          }
-        }
-      }
-    },
+    //重绘堆积好的方块；
     painAll() {
       for (let i = 0; i < this.all.length; i++) {
         for (let j = 0; j < this.all[i].length; j++) {
@@ -484,7 +485,8 @@ var app = new Vue({
     }
   },
   mounted() {
-    for (let i = 0; i < 10; i++) {
+    //初始化堆积方块
+    for (let i = 0; i < 75; i++) {
       this.all[i] = new Array(0);
       for (let j = 0; j < 40; j++) {
         this.all[i][j] = 0;
@@ -493,3 +495,96 @@ var app = new Vue({
     this.allLength = this.all[0].length;
   }
 });
+
+
+var startx, starty;
+//获得角度
+function getAngle(angx, angy) {
+  return (Math.atan2(angy, angx) * 180) / Math.PI;
+}
+
+//根据起点终点返回方向 1向上 2向下 3向左 4向右 0未滑动
+function getDirection(startx, starty, endx, endy) {
+  var angx = endx - startx;
+  var angy = endy - starty;
+  var result = 0;
+
+  //如果滑动距离太短
+  if (Math.abs(angx) < 2 && Math.abs(angy) < 2) {
+    return result;
+  }
+
+  var angle = getAngle(angx, angy);
+  if (angle >= -135 && angle <= -45) {
+    result = 1;
+  } else if (angle > 45 && angle < 135) {
+    result = 2;
+  } else if (
+    (angle >= 135 && angle <= 180) ||
+    (angle >= -180 && angle < -135)
+  ) {
+    result = 3;
+  } else if (angle >= -45 && angle <= 45) {
+    result = 4;
+  } else {
+    result = 0;
+  }
+
+  return result;
+}
+//手指接触屏幕
+document.addEventListener(
+  "touchstart",
+  function (e) {
+    startx = e.touches[0].pageX;
+    starty = e.touches[0].pageY;
+  },
+  false
+);
+
+//手指离开屏幕
+let timer = null;
+//速度控制
+app.v = 300 - app.scope;
+
+document.addEventListener(
+  "touchend",
+  function (e) {
+    if (app.gameState == 0) {
+      return;
+    }
+    var endx, endy;
+    endx = e.changedTouches[0].pageX;
+    endy = e.changedTouches[0].pageY;
+    var direction = getDirection(startx, starty, endx, endy);
+    clearInterval(timer);
+    if (direction == 1) {
+      app.rotate();
+      timer = setInterval(() => {
+        app.down();
+      }, 400)
+    }
+    if (direction == 2) {
+      timer = setInterval(() => {
+        app.down();
+      }, 100)
+    }
+    if (direction == 3) {
+      app.left();
+      timer = setInterval(() => {
+        app.down();
+      }, 400)
+    }
+    if (direction == 4) {
+      app.right();
+      timer = setInterval(() => {
+        app.down();
+      }, 400)
+    }
+    if (direction == 0) {
+      clearInterval(timer);
+    }
+
+  },
+  false
+);
