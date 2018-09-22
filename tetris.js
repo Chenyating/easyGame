@@ -244,6 +244,13 @@ var app = new Vue({
     //向下
     down() {
  
+      for (let i = 0; i < this.all[0].length; i++) {
+        if (this.all[0][i] == 1) {
+          console.log("游戏结束11");
+          clearInterval(timer);
+          break;
+        }
+      }
       //判断下降过程中是否会与下一层堆积好的方块重叠；是否会超过范围；如果会的话，就开始把shap加入this.all然后退出；
       for (let i = 0; i < this.shap.length; i++) {
         for (let j = 0; j < this.shap[i].length; j++) {
@@ -295,6 +302,7 @@ var app = new Vue({
               //重绘
               this.painAll();
               this.radomShap();
+              this.scope+=10;
               return;
             }
           }
@@ -360,6 +368,7 @@ var app = new Vue({
               this.allDown();
               //重绘
               this.painAll();
+              this.scope+=10;
               return;
             }
           }
@@ -425,6 +434,7 @@ var app = new Vue({
               this.allDown();
               //重绘
               this.painAll();
+              this.scope+=10;
               return;
             }
           }
@@ -466,12 +476,10 @@ var app = new Vue({
     allDown() {
       //整体往下移动
       this.allLength = this.all[0].length;
-      var a5 = JSON.parse(JSON.stringify(this.all[this.all.length - 1]));
-      for (let i = this.all.length - 2; i >= 0; i--) {
+      for (let i = this.all.length - 1; i >= 0; i--) {
         this.all[i + 1] = this.all[i];
       }
-      this.all[0] = a5;
-    },
+        },
     //重绘堆积好的方块；
     painAll() {
       for (let i = 0; i < this.all.length; i++) {
@@ -542,7 +550,6 @@ document.addEventListener(
 //手指离开屏幕
 let timer = null;
 //速度控制
-app.v = 300 - app.scope;
 
 document.addEventListener(
   "touchend",
@@ -568,7 +575,7 @@ document.addEventListener(
     if (direction == 2) {
       timer = setInterval(() => {
         app.down();
-      }, 10)
+      }, 100)
   
     }
     if (direction == 3) {
