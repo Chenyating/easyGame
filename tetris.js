@@ -339,7 +339,7 @@ var app = new Vue({
           for (let j = 0; j < shap1[i].length; j++) {
             try {
               if (
-                ((shap1[i][j][0] < 0 || shap1[i][j][0] > 360) && shap1[i][j][2] == 1) || (this.all[this.shap[i][j][1] / 20][this.shap[i][j][0] / 20] == 1)) {
+                ((shap1[i][j][0] < 0 || shap1[i][j][0] > 360||shap1[i][j][1] > 780) && shap1[i][j][2] == 1) || (this.all[this.shap[i][j][1] / 20][this.shap[i][j][0] / 20] == 1)) {
                 //两个同时成立退出；
                 return;
               }
@@ -369,8 +369,8 @@ var app = new Vue({
           for (let j = 0; j < shap1[i].length; j++) {
             try {
               if (
-                ((shap1[i][j][0] < 0 || shap1[i][j][0] > 360) && shap1[i][j][2] == 1) || (this.all[this.shap[i][j][1] / 20][this.shap[i][j][0] / 20] == 1)) {
-                //两个同时成立退出；
+                ((shap1[i][j][0] < 0 || shap1[i][j][0] > 360||shap1[i][j][1] > 780) && shap1[i][j][2] == 1) || (this.all[this.shap[i][j][1] / 20][this.shap[i][j][0] / 20] == 1)) {
+                  //两个同时成立退出；
                 return;
               }
             } catch (error) {
