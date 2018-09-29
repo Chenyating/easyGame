@@ -8,9 +8,9 @@
   <title>贪吃蛇-YATING</title>
   <!-- <meta name="viewport" content="width=device-width, initial-scale=1"> -->
   <!-- <link rel="stylesheet" href="index.less" /> -->
-  <script src="vue.js"></script>
-  <script src="jquery.js"></script>
-  <style>
+  <script src="./js/vue.js"></script>
+<script src="./js/jquery.js"></script>
+<style>
     body,
     html {
       width: 100%;
@@ -85,7 +85,7 @@
 </head>
 
 <body>
-  <div id="app">
+  <div id="retroSnaker">
     <div class="title">RETRO-SNAKER-贪吃蛇</div>
     <div class="stage">
       <canvas id="tanchi" width=400 height=800>
@@ -107,7 +107,7 @@
       <div class="chinese">手指在屏幕中上下左右滑动，点击屏幕暂停。如果撞到自己或墙，游戏结束</div>
     </div>
   </div>
-  <script src="retroSnaker.js"></script>
+  <script src="./js/retroSnaker.js"></script>
   <script>
     document.body.addEventListener('touchmove', function (e) {
       e.preventDefault(); //阻止默认的处理方式(阻止下拉滑动的效果)

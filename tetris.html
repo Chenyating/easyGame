@@ -8,8 +8,8 @@
   <title>俄罗斯方块-YATING</title>
   <!-- <meta name="viewport" content="width=device-width, initial-scale=1"> -->
   <!-- <link rel="stylesheet" href="index.less" /> -->
-  <script src="vue.js"></script>
-  <script src="jquery.js"></script>
+  <script src="./js/vue.js"></script>
+  <script src="./js/jquery.js"></script>
   <style>
     body,
     html {
@@ -86,7 +86,7 @@
 </head>
 
 <body>
-  <div id="teris">
+  <div id="tetris">
     <div class="title">TETRIS-俄罗斯方块</div>
     <div class="stage">
       <canvas id="stage" width=400 height=800>
@@ -108,7 +108,7 @@
       <div class="chinese">手指在屏幕中左右滑动，点击屏幕暂停。向上滑动改变方块方向。</div>
     </div>
   </div>
-  <script src="tetris.js"></script>
+  <script src="./js/tetris.js"></script>
   <script>
     document.body.addEventListener('touchmove', function (e) {
       e.preventDefault(); //阻止默认的处理方式(阻止下拉滑动的效果)

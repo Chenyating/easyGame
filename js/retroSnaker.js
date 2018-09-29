@@ -1,5 +1,5 @@
-var app = new Vue({
-  el: "#app",
+var retroSnaker = new Vue({
+  el: "#retroSnaker",
   data: {
     scope: 0,
     radomX: null,
@@ -228,12 +228,12 @@ document.addEventListener(
 //手指离开屏幕
 let timer = null;
 //速度控制
-app.v = 300 - app.scope;
+retroSnaker.v = 300 - retroSnaker.scope;
 
 document.addEventListener(
   "touchend",
   function (e) {
-    if (app.gameState == 0) {
+    if (retroSnaker.gameState == 0) {
       return;
     }
     var endx, endy;
@@ -243,23 +243,23 @@ document.addEventListener(
     clearInterval(timer);
     if (direction == 1) {
       timer = setInterval(() => {
-        app.changgeY(20);
-      }, app.v)
+        retroSnaker.changgeY(20);
+      }, retroSnaker.v)
     }
     if (direction == 2) {
       timer = setInterval(() => {
-        app.changgeY(-20);
-      }, app.v)
+        retroSnaker.changgeY(-20);
+      }, retroSnaker.v)
     }
     if (direction == 3) {
       timer = setInterval(() => {
-        app.changgeX(-20);
-      }, app.v)
+        retroSnaker.changgeX(-20);
+      }, retroSnaker.v)
     }
     if (direction == 4) {
       timer = setInterval(() => {
-        app.changgeX(20);
-      }, app.v)
+        retroSnaker.changgeX(20);
+      }, retroSnaker.v)
     }
     if (direction == 0) {
       clearInterval(timer);

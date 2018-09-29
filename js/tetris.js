@@ -50,7 +50,7 @@ let timer = null;
 document.addEventListener(
   "touchend",
   function (e) {
-    if (app.gameState == 0) {
+    if (tetris.gameState == 0) {
       return;
     }
     var endx, endy;
@@ -62,37 +62,37 @@ document.addEventListener(
       clearInterval(timer);
     }
     if (direction == 1) {
-      app.change();
+      tetris.change();
       timer = setInterval(() => {
-        app.down();
-      }, app.v)
+        tetris.down();
+      }, tetris.v)
 
     }
-    app.downV = 100;
+    tetris.downV = 100;
     if (direction == 2) {
       timer = setInterval(() => {
-        app.down();
-      }, app.downV)
+        tetris.down();
+      }, tetris.downV)
 
     }
     if (direction == 3) {
-      app.left();
+      tetris.left();
       timer = setInterval(() => {
-        app.down();
-      }, app.v)
+        tetris.down();
+      }, tetris.v)
     }
     if (direction == 4) {
-      app.right();
+      tetris.right();
       timer = setInterval(() => {
-        app.down();
-      }, app.v)
+        tetris.down();
+      }, tetris.v)
     }
   },
   false
 );
 
-var app = new Vue({
-  el: "#teris",
+var tetris = new Vue({
+  el: "#tetris",
   data: {
     scope: 0,
     v: 300,
@@ -176,7 +176,7 @@ var app = new Vue({
           let defaultX = 180;
           let defaultY = -60;
           for (var i = 0; i < 5; i++) {
-            defaultX = 200;
+            defaultX = 180;
             if (i == 2) {
               this.$set(this.shap, i, [
                 [defaultX, defaultY, 1],
