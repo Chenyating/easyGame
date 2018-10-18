@@ -56,6 +56,14 @@
     .bepink {
       background: pink;
     }
+
+    .be {
+      background: green;
+    }
+
+    .oo {
+      background: white;
+    }
   </style>
 </head>
 
@@ -64,8 +72,10 @@
     <!-- 头部 -->
     <div style="display:flex;">
       <div class="btn" @click="random">随机障碍</div>
+      <div class="btn" @click="way(3)">特质</div>
       <div class="btn" @click="way(2)">路线</div>
       <div class="btn" @click="way(1)">障碍</div>
+      <div class="btn" @click="way(0)">清除</div>
       <div class="btn" @click="output">输出地图</div>
     </div>
 
@@ -78,7 +88,7 @@
       <!-- y值 -->
       <div class="x title">{{n-1}}</div>
       <!-- x值 -->
-      <div class="x titlex" v-for="m in x" v-if="all[n-1]" @click="made(n-1,m-1,color)" :class="{bered: all[n-1][m-1]==2,beblack: all[n-1][m-1]==1,bepink: all[n-1][m-1]==9}">{{m-1}}</div>
+      <div class="x titlex" v-for="m in x" v-if="all[n-1]" @click="made(n-1,m-1,color)" :class="{bered: all[n-1][m-1]==2,beblack: all[n-1][m-1]==1,bepink: all[n-1][m-1]==9,be:all[n-1][m-1]==3,oo:all[n-1][m-1]==0}">{{m-1}}</div>
     </div>
   </div>
   <script>
@@ -122,18 +132,17 @@
           var a, b;
           a = parseInt(Math.random() * 40);
           b = parseInt(Math.random() * 20);
-          if(this.times < 500){
+          if (this.times < 500) {
             if (this.all[a][b] > 1) {
               this.random();
-  
+
             } else {
               this.times = this.times + 1;
               this.$set(this.all, a, this.all[a])
               this.$set(this.all[a], b, 1);
               this.random();
             }
-          }
-          else{
+          } else {
             return;
           }
         }
