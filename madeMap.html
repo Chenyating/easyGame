@@ -3,28 +3,92 @@
 
 <head>
   <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <title>俄罗斯方块-YATING</title>
+  <title>madeMap</title>
   <!-- <meta name="viewport" content="width=device-width, initial-scale=1"> -->
-  <link rel="stylesheet" href="./css/maze.css" />
   <script src="./js/vue.js"></script>
   <script src="./js/jquery.js"></script>
+  <style>
+    .y {
+      border: solid 1px rebeccapurple;
+      height: 30px;
+      width: 100%;
+      display: flex;
+    }
+
+    .x {
+      border: solid .013333rem black;
+      height: 30px;
+      width: 20%;
+      text-align: center;
+    }
+
+    .title {
+      width: 10%;
+      height: 30px;
+      background: bisque;
+      text-align: center;
+    }
+
+    .titlex {
+      width: 10%;
+      height: 30px;
+      background: white;
+      text-align: center;
+    }
+
+    .bered {
+      background: red;
+    }
+  </style>
 </head>
 
 <body>
-  <div id="maze">
-      <div>
-          
-      </div>
+  <div id="madeMap">
+    <!-- 头部 -->
+    <div class="y">
+      <div class="x title">y/x</div>
+      <div class="x title" v-for="m in x">{{m-1}}</div>
+    </div>
+    <!-- 表格 -->
+    <div class="y" v-for="n in y" v-if="all.length">
+      <!-- y值 -->
+      <div class="x title">{{n-1}}</div>
+      <!-- x值 -->
+      <div class="x titlex" v-for="m in x" v-if="all[n-1]" @click="made(n-1,m-1)" :class="{bered: all[n-1][m-1]==1}">{{m-1}}</div>
+    </div>
   </div>
-  <script src="./js/maze.js"></script>
   <script>
-    document.body.addEventListener('touchmove', function (e) {
-      e.preventDefault(); //阻止默认的处理方式(阻止下拉滑动的效果)
-    }, {
-      passive: false
-    }); //passive 参数不能省略，用来兼容ios和android
+    var madeMap = new Vue({
+      el: "#madeMap",
+      data: {
+        x: 20,
+        y: 40,
+        all: [],
+      },
+      methods: {
+        made(x, y) {
+          console.log(x + ":" + y);
+          this.$set(this.all, x, this.all[x])
+          this.$set(this.all[x], y, 1);
+          console.log(this.all[x][y]);
+        }
+      },
+      beforeMount() {
+
+        for (let i = 0; i < 40; i++) {
+          this.all[i] = [];
+          for (let j = 0; j < 20; j++) {
+            if (i == 39 || i == 0 || j == 0 || j == 19) {
+              this.all[i][j] = 1;
+            } else {
+              this.all[i][j] = 0;
+            }
+          }
+        }
+        console.log(this.all)
+      },
+      mounted() {},
+    })
   </script>
 </body>
 
