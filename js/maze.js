@@ -76,13 +76,15 @@ document.addEventListener(
 var maze = new Vue({
   el: "#maze",
   data: {
-    meImg: new Image(),
-    meX: 380,
-    meY: 780,
-    youImg: new Image(),
-    youX: 0,
-    youY: 0,
-    treeImg: new Image(),
+    catImg: new Image(),
+    catX: 0,
+    catY: 0,
+    dogImg: new Image(),
+    dogX: 380,
+    dogY: 780,
+    obstacleImg: new Image(),
+    obstacleImg: new Image(),
+    specialImg: new Image(),
     context: null,
     list: [],
     all: [], //地图
@@ -93,51 +95,51 @@ var maze = new Vue({
     //  上
     up() {
       this.ifMeet();
-      if (this.youY - 20 < 0 || this.all[(this.youY - 20) / 20][this.youX / 20] == 1) {
+      if (this.dogY - 20 < 0 || this.all[(this.dogY - 20) / 20][this.dogX / 20] == 1) {
         return;
       } else {
-        this.context.clearRect(this.youX, this.youY, 20, 20);
-        this.youY -= 20;
-        this.context.drawImage(this.youImg, this.youX, this.youY, 20, 20);
+        this.context.clearRect(this.dogX, this.dogY, 20, 20);
+        this.dogY -= 20;
+        this.context.drawImage(this.dogImg, this.dogX, this.dogY, 20, 20);
       }
     },
     // 下
     down() {
       this.ifMeet();
-      if (this.youY + 20 >= 800 || this.all[(this.youY + 20) / 20][this.youX / 20] == 1) {
+      if (this.dogY + 20 >= 800 || this.all[(this.dogY + 20) / 20][this.dogX / 20] == 1) {
         return;
       } else {
-        this.context.clearRect(this.youX, this.youY, 20, 20);
-        this.youY += 20;
-        this.context.drawImage(this.youImg, this.youX, this.youY, 20, 20);
+        this.context.clearRect(this.dogX, this.dogY, 20, 20);
+        this.dogY += 20;
+        this.context.drawImage(this.dogImg, this.dogX, this.dogY, 20, 20);
       }
     },
     // 右
     right() {
       this.ifMeet();
-      if (this.youX + 20 >= 400 || this.all[this.youY / 20][(this.youX + 20) / 20] == 1) {
+      if (this.dogX + 20 >= 400 || this.all[this.dogY / 20][(this.dogX + 20) / 20] == 1) {
         return;
       } else {
-        this.context.clearRect(this.youX, this.youY, 20, 20);
-        this.youX += 20;
-        this.context.drawImage(this.youImg, this.youX, this.youY, 20, 20);
+        this.context.clearRect(this.dogX, this.dogY, 20, 20);
+        this.dogX += 20;
+        this.context.drawImage(this.dogImg, this.dogX, this.dogY, 20, 20);
       }
     },
     // 左
     left() {
       this.ifMeet();
-      if (this.youX - 20 < 0 || this.all[this.youY / 20][(this.youX - 20) / 20] == 1) {
+      if (this.dogX - 20 < 0 || this.all[this.dogY / 20][(this.dogX - 20) / 20] == 1) {
         return;
       } else {
-        this.context.clearRect(this.youX, this.youY, 20, 20);
-        this.youX -= 20;
-        this.context.drawImage(this.youImg, this.youX, this.youY, 20, 20);
+        this.context.clearRect(this.dogX, this.dogY, 20, 20);
+        this.dogX -= 20;
+        this.context.drawImage(this.dogImg, this.dogX, this.dogY, 20, 20);
       }
     },
     // 是否超出
     ifMeet() {
-      console.log(this.youX + ":" + this.youY + "dui" + this.meX + ":" + this.meY)
-      if (this.youX == this.meX && this.youY + 20 == this.meY) {
+      console.log(this.dogX + ":" + this.dogY + "dui" + this.catX + ":" + this.catY)
+      if (this.dogX == this.catX && this.dogY + 20 == this.catY) {
         alert("成功！")
         this.down();
       }
@@ -162,45 +164,81 @@ var maze = new Vue({
         return;
       }
     },
-    // 下载地图
-    downloadMap() {
-      this.context.clearRect(0, 0, 400, 800);
-      console.log("现在下载的是：" + this.checkPoint + "个地图")
-      this.all = this.list[this.checkPoint].map;
-      console.log(this.all);
-      // 准备画地图；
-      this.meImg.src = "../img/maze/me.png";
-      this.youImg.src = "../img/maze/you.png";
-      this.treeImg.src = "../img/maze/tree.png"
-      // 画黑心
-      this.meImg.onload = () => {
-        this.context.drawImage(this.meImg, this.meX, this.meY, 20, 20);
+    // 画猫
+    painCat() {
+      this.catX = 380;
+      this.catY = 780;
+      this.catImg.onload = () => {
+        this.context.drawImage(this.catImg, this.catX, this.catY, 20, 20);
       };
-      // 画红心
-      this.youImg.onload = () => {
-        this.context.drawImage(this.youImg, this.youX, this.youY, 20, 20);
+    },
+    // 画狗
+    painDog() {
+      this.dogX = 0;
+      this.dogY = 0;
+      this.dogImg.onload = () => {
+        this.context.drawImage(this.dogImg, this.dogX, this.dogY, 20, 20);
       }
-      // 画树
-      this.treeImg.onload = () => {
+    },
+    // 画障碍
+    painObstacle() {
+      this.obstacleImg.onload = () => {
         for (let i = 0; i < this.all.length; i++) {
           for (let j = 0; j < this.all[i].length; j++) {
             if (this.all[i][j] == 1) {
-              this.context.drawImage(this.treeImg, j * 20,
+              this.context.drawImage(this.obstacleImg, j * 20,
                 i * 20,
                 20,
                 20);
-
-            } else {
-              this.context.clearRect(
-                j * 20,
-                i * 20,
-                20,
-                20
-              );
             }
           }
         }
       }
+    },
+    // 画特制作
+    painSpecial() {
+      this.specialImg.onload = () => {
+        for (let i = 0; i < this.all.length; i++) {
+          for (let j = 0; j < this.all[i].length; j++) {
+            if (this.all[i][j] == 3) {
+              this.context.drawImage(this.specialImg, j * 20,
+                i * 20,
+                20,
+                20);
+
+            }
+          }
+        }
+      }
+    },
+    // 显示路线
+    showWay() {
+      for (let i = 0; i < vm.all.length; i++) {
+        for (let j = 0; j < vm.all[i].length; j++) {
+          if (vm.all[i][j] == 2) {
+            vm.context.drawImage(vm.specialImg, j * 20,
+              i * 20,
+              20,
+              20);
+
+          }
+        }
+      }
+    },
+    // 下载地图
+    downloadMap() {
+      this.catImg.src = "../img/maze/cat.png?d=" + +new Date();
+      this.dogImg.src = "../img/maze/dog.png?d=" + +new Date();
+      this.obstacleImg.src = "../img/maze/fllower8.png?d=" + +new Date();
+      this.specialImg.src = "../img/maze/apple.png?d=" + +new Date();
+      this.context.clearRect(0, 0, 400, 800);
+      console.log("现在下载的是：" + this.checkPoint + "个地图")
+      this.all = this.list[this.checkPoint].map;
+      // 准备画地图；
+      this.painCat();
+      this.painDog();
+      this.painObstacle();
+      this.painSpecial();
     }
   },
   mounted() {
@@ -210,7 +248,6 @@ var maze = new Vue({
         vm.list = res;
         if (localStorage.getItem('checkPointObj')) {
           vm.checkPoint = JSON.parse(localStorage.getItem('checkPointObj'));
-          console.log("初始化" + vm.checkPoint);
         }
         console.log("现在加载的是第" + vm.checkPoint + "个图")
         vm.all = vm.list[vm.checkPoint].map;
@@ -219,55 +256,48 @@ var maze = new Vue({
         var c = document.getElementById("stage");
         vm.context = c.getContext("2d");
         // 准备图片
-        vm.youImg.src = "../img/maze/you.png?d=" + +new Date();
-        vm.treeImg.src = "../img/maze/tree.png?d=" + +new Date();
-        vm.meImg.src = "../img/maze/me.png?d=" + +new Date();
+        vm.dogImg.src = "../img/maze/cat.png?d=" + +new Date();
+        vm.obstacleImg.src = "../img/maze/fllower8.png?d=" + +new Date();
+        vm.catImg.src = "../img/maze/dog.png?d=" + +new Date();
 
 
-        if (vm.meImg.complete) {
-          vm.context.drawImage(vm.meImg, vm.meX, vm.meY, 20, 20);
+        if (vm.catImg.complete) {
+          vm.context.drawImage(vm.catImg, vm.catX, vm.catY, 20, 20);
         } else {
-          vm.meImg.onload = function () {
-            vm.context.drawImage(vm.meImg, vm.meX, vm.meY, 20, 20);
-            // vm.meImg.onload = null;
+          vm.catImg.onload = function () {
+            vm.context.drawImage(vm.catImg, vm.catX, vm.catY, 20, 20);
+            // vm.catImg.onload = null;
           };
         };
-        if (vm.youImg.complete) {
-          vm.context.drawImage(vm.youImg, vm.youX, vm.youY, 20, 20);
+        if (vm.dogImg.complete) {
+          vm.context.drawImage(vm.dogImg, vm.dogX, vm.dogY, 20, 20);
         } else {
-          vm.youImg.onload = function () {
-            vm.context.drawImage(vm.youImg, vm.youX, vm.youY, 20, 20);
-            // vm.meImg.onload = null;
+          vm.dogImg.onload = function () {
+            vm.context.drawImage(vm.dogImg, vm.dogX, vm.dogY, 20, 20);
+            // vm.catImg.onload = null;
           };
         };
 
-        // 画红心
-        // vm.meImg.onload = () => {
-        //   vm.context.drawImage(vm.meImg, vm.meX, vm.meY, 20, 20);
+        // 画猫
+        // vm.catImg.onload = () => {
+        //   vm.context.drawImage(vm.catImg, vm.catX, vm.catY, 20, 20);
         // };
 
-        // 画黑心
-        vm.youImg.onload = () => {
-          vm.context.drawImage(vm.youImg, vm.youX, vm.youY, 20, 20);
-        }
+        // 画狗
+        // vm.dogImg.onload = () => {
+        //   vm.context.drawImage(vm.dogImg, vm.dogX, vm.dogY, 20, 20);
+        // }
 
-        // 画树
-        vm.treeImg.onload = () => {
+        // 画障碍
+        vm.obstacleImg.onload = () => {
           for (let i = 0; i < vm.all.length; i++) {
             for (let j = 0; j < vm.all[i].length; j++) {
               if (vm.all[i][j] == 1) {
-                vm.context.drawImage(vm.treeImg, j * 20,
+                vm.context.drawImage(vm.obstacleImg, j * 20,
                   i * 20,
                   20,
                   20);
 
-              } else {
-                vm.context.clearRect(
-                  j * 20,
-                  i * 20,
-                  20,
-                  20
-                );
               }
             }
           }
@@ -275,6 +305,6 @@ var maze = new Vue({
       });
     });
 
-    // console.log(this.all[(this.youY - 20) / 20][this.youX / 20]);
+    // console.log(this.all[(this.dogY - 20) / 20][this.dogX / 20]);
   }
 });
