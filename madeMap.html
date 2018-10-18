@@ -36,8 +36,25 @@
       text-align: center;
     }
 
+    .btn {
+      width: 100px;
+      height: 50px;
+      line-height: 50px;
+      background: aquamarine;
+      text-align: center;
+      margin: 20px;
+    }
+
     .bered {
       background: red;
+    }
+
+    .beblack {
+      background: black;
+    }
+
+    .bepink {
+      background: pink;
     }
   </style>
 </head>
@@ -45,6 +62,13 @@
 <body>
   <div id="madeMap">
     <!-- 头部 -->
+    <div style="display:flex;">
+      <div class="btn" @click="random">随机障碍</div>
+      <div class="btn" @click="way(2)">路线</div>
+      <div class="btn" @click="way(1)">障碍</div>
+      <div class="btn" @click="output">输出地图</div>
+    </div>
+
     <div class="y">
       <div class="x title">y/x</div>
       <div class="x title" v-for="m in x">{{m-1}}</div>
@@ -54,7 +78,7 @@
       <!-- y值 -->
       <div class="x title">{{n-1}}</div>
       <!-- x值 -->
-      <div class="x titlex" v-for="m in x" v-if="all[n-1]" @click="made(n-1,m-1)" :class="{bered: all[n-1][m-1]==1}">{{m-1}}</div>
+      <div class="x titlex" v-for="m in x" v-if="all[n-1]" @click="made(n-1,m-1,color)" :class="{bered: all[n-1][m-1]==2,beblack: all[n-1][m-1]==1,bepink: all[n-1][m-1]==9}">{{m-1}}</div>
     </div>
   </div>
   <script>
@@ -64,30 +88,70 @@
         x: 20,
         y: 40,
         all: [],
+        color: 1,
+        times: 0,
       },
       methods: {
-        made(x, y) {
+        made(x, y, color) {
           console.log(x + ":" + y);
           this.$set(this.all, x, this.all[x])
-          this.$set(this.all[x], y, 1);
+          this.$set(this.all[x], y, color);
           console.log(this.all[x][y]);
+        },
+        way(n) {
+          this.color = n;
+        },
+        output() {
+          var str = "";
+          for (let i = 0; i < this.all.length; i++) {
+            str += "[";
+            for (let j = 0; j < this.all[i].length; j++) {
+              if (j == 19) {
+                str += this.all[i][j]
+              } else {
+                str += this.all[i][j] + ","
+              }
+            }
+            str += "],\n";
+          }
+          console.log(str);
+          // alert(str);
+        },
+        // 随便上色
+        random() {
+          var a, b;
+          a = parseInt(Math.random() * 40);
+          b = parseInt(Math.random() * 20);
+          if(this.times < 500){
+            if (this.all[a][b] > 1) {
+              this.random();
+  
+            } else {
+              this.times = this.times + 1;
+              this.$set(this.all, a, this.all[a])
+              this.$set(this.all[a], b, 1);
+              this.random();
+            }
+          }
+          else{
+            return;
+          }
         }
       },
       beforeMount() {
-
         for (let i = 0; i < 40; i++) {
           this.all[i] = [];
           for (let j = 0; j < 20; j++) {
-            if (i == 39 || i == 0 || j == 0 || j == 19) {
-              this.all[i][j] = 1;
-            } else {
-              this.all[i][j] = 0;
-            }
+            this.all[i][j] = 0;
           }
         }
+        this.all[0][0] = 9;
+        this.all[39][19] = 9;
         console.log(this.all)
       },
-      mounted() {},
+      mounted() {
+
+      },
     })
   </script>
 </body>

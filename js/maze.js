@@ -1,13 +1,87 @@
+var startx, starty;
+//获得角度
+function getAngle(angx, angy) {
+  return (Math.atan2(angy, angx) * 180) / Math.PI;
+}
+
+//根据起点终点返回方向 1向上 2向下 3向左 4向右 0未滑动
+function getDirection(startx, starty, endx, endy) {
+  var angx = endx - startx;
+  var angy = endy - starty;
+  var result = 0;
+
+  //如果滑动距离太短
+  if (Math.abs(angx) < 2 && Math.abs(angy) < 2) {
+    return result;
+  }
+
+  var angle = getAngle(angx, angy);
+  if (angle >= -135 && angle <= -45) {
+    result = 1;
+  } else if (angle > 45 && angle < 135) {
+    result = 2;
+  } else if (
+    (angle >= 135 && angle <= 180) ||
+    (angle >= -180 && angle < -135)
+  ) {
+    result = 3;
+  } else if (angle >= -45 && angle <= 45) {
+    result = 4;
+  } else {
+    result = 0;
+  }
+
+  return result;
+}
+//手指接触屏幕
+document.addEventListener(
+  "touchstart",
+  function (e) {
+    startx = e.touches[0].pageX;
+    starty = e.touches[0].pageY;
+  },
+  false
+);
+
+//手指离开屏幕
+let timer = null;
+//速度控制
+
+// **********************在if里修改的方向的代码********************************这行以上，复制就可以了。不用管它***************************************
+document.addEventListener(
+  "touchend",
+  function (e) {
+    var endx, endy;
+    endx = e.changedTouches[0].pageX;
+    endy = e.changedTouches[0].pageY;
+    var direction = getDirection(startx, starty, endx, endy);
+    if (direction == 1) {
+      maze.up();
+    }
+    if (direction == 2) {
+      maze.down();
+
+    }
+    if (direction == 3) {
+      maze.left();
+    }
+    if (direction == 4) {
+      maze.right();
+    }
+  },
+  false
+);
+// *********************************************************************************************************************************
+
 var maze = new Vue({
   el: "#maze",
   data: {
-    scope: 0,
     meImg: new Image(),
-    meX: 360,
-    meY: 760,
+    meX: 380,
+    meY: 780,
     youImg: new Image(),
-    youX: 20,
-    youY: 20,
+    youX: 0,
+    youY: 0,
     treeImg: new Image(),
     context: null,
     list: [],
@@ -62,23 +136,36 @@ var maze = new Vue({
     },
     // 是否超出
     ifMeet() {
-      if (this.youX == this.meX && this.youY == this.meY) {
+      console.log(this.youX + ":" + this.youY + "dui" + this.meX + ":" + this.meY)
+      if (this.youX == this.meX && this.youY + 20 == this.meY) {
         alert("成功！")
+        this.down();
+      }
+    },
+    // 上一关
+    subPoint() {
+      if (this.checkPoint > 0) {
+        this.checkPoint = this.checkPoint - 1;
+        this.downloadMap();
+        localStorage.setItem('checkPointObj', this.checkPoint);
+      } else {
+        return;
       }
     },
     // 下一关
-    Point() {
-      console.log("刚才是"+this.checkPoint+"关");
-      if (this.checkPoint + 1 < this.list.length) {
-        this.checkPoint += 1;
+    addPoint() {
+      if (this.checkPoint < this.list.length - 1) {
+        this.checkPoint = this.checkPoint + 1;
         this.downloadMap();
+        localStorage.setItem('checkPointObj', this.checkPoint);
       } else {
-        alert("请期待下一关吧")
+        return;
       }
     },
     // 下载地图
     downloadMap() {
       this.context.clearRect(0, 0, 400, 800);
+      console.log("现在下载的是：" + this.checkPoint + "个地图")
       this.all = this.list[this.checkPoint].map;
       console.log(this.all);
       // 准备画地图；
@@ -121,7 +208,12 @@ var maze = new Vue({
     $(document).ready(function () {
       $.getJSON(`../data/maze/map.json` + "?tempstamp=" + (+new Date()), function (res) {
         vm.list = res;
-        vm.all = vm.list[0].map;
+        if (localStorage.getItem('checkPointObj')) {
+          vm.checkPoint = JSON.parse(localStorage.getItem('checkPointObj'));
+          console.log("初始化" + vm.checkPoint);
+        }
+        console.log("现在加载的是第" + vm.checkPoint + "个图")
+        vm.all = vm.list[vm.checkPoint].map;
         console.log(vm.all);
         // 准备画地图；
         var c = document.getElementById("stage");
@@ -133,21 +225,17 @@ var maze = new Vue({
 
 
         if (vm.meImg.complete) {
-          console.log("断点1")
           vm.context.drawImage(vm.meImg, vm.meX, vm.meY, 20, 20);
         } else {
           vm.meImg.onload = function () {
-            console.log("断点2")
             vm.context.drawImage(vm.meImg, vm.meX, vm.meY, 20, 20);
             // vm.meImg.onload = null;
           };
         };
         if (vm.youImg.complete) {
-          console.log("断点1")
           vm.context.drawImage(vm.youImg, vm.youX, vm.youY, 20, 20);
         } else {
           vm.youImg.onload = function () {
-            console.log("断点2")
             vm.context.drawImage(vm.youImg, vm.youX, vm.youY, 20, 20);
             // vm.meImg.onload = null;
           };

@@ -13,31 +13,23 @@
 </head>
 
 <body>
-  <div id="maze" >
+  <div id="maze">
     <div class="title">maze-迷宫</div>
     <div class="stage">
       <canvas id="stage" width=400 height=800>
       </canvas>
       <div class="operation">
-          <p>GAME</p>
-          <div class="inf" @click="Point()">
-            下一关
-          </div>
-        <p>GAME</p>
-        <div class="inf" @click="up()">
-          上
+        <p>NOW</p>
+        <div class="inf">
+          第{{checkPoint}}关
         </div>
         <p>GAME</p>
-        <div class="inf" @click="down()">
-          下
+        <div class="inf" @click="subPoint()">
+          上一关
         </div>
         <p>GAME</p>
-        <div class="inf" @click="left()">
-          左
-        </div>
-        <p>GAME</p>
-        <div class="inf" @click="right()">
-          右
+        <div class="inf" @click="addPoint()">
+          下一关
         </div>
       </div>
     </div>
