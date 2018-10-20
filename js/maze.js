@@ -1,3 +1,4 @@
+
 var startx, starty;
 //获得角度
 function getAngle(angx, angy) {
@@ -77,11 +78,11 @@ var maze = new Vue({
   el: "#maze",
   data: {
     catImg: new Image(),
-    catX: 0,
-    catY: 0,
+    catX: 380,
+    catY: 780,
     dogImg: new Image(),
-    dogX: 380,
-    dogY: 780,
+    dogX: 0,
+    dogY: 0,
     obstacleImg: new Image(),
     obstacleImg: new Image(),
     specialImg: new Image(),
@@ -94,7 +95,6 @@ var maze = new Vue({
   methods: {
     //  上
     up() {
-      this.ifMeet();
       if (this.dogY - 20 < 0 || this.all[(this.dogY - 20) / 20][this.dogX / 20] == 1) {
         return;
       } else {
@@ -102,10 +102,10 @@ var maze = new Vue({
         this.dogY -= 20;
         this.context.drawImage(this.dogImg, this.dogX, this.dogY, 20, 20);
       }
+      this.ifMeet();
     },
     // 下
     down() {
-      this.ifMeet();
       if (this.dogY + 20 >= 800 || this.all[(this.dogY + 20) / 20][this.dogX / 20] == 1) {
         return;
       } else {
@@ -113,6 +113,7 @@ var maze = new Vue({
         this.dogY += 20;
         this.context.drawImage(this.dogImg, this.dogX, this.dogY, 20, 20);
       }
+      this.ifMeet();
     },
     // 右
     right() {
@@ -139,9 +140,8 @@ var maze = new Vue({
     // 是否超出
     ifMeet() {
       console.log(this.dogX + ":" + this.dogY + "dui" + this.catX + ":" + this.catY)
-      if (this.dogX == this.catX && this.dogY + 20 == this.catY) {
-        alert("成功！")
-        this.down();
+      if (this.dogX== this.catX && this.dogY== this.catY) {
+        this.addPoint();
       }
     },
     // 上一关
@@ -161,6 +161,7 @@ var maze = new Vue({
         this.downloadMap();
         localStorage.setItem('checkPointObj', this.checkPoint);
       } else {
+        alert("敬请期待下一关！或者你可以点击这个地址绘制迷宫：http://106.14.185.143/game/madeMap.html，在把地图发送给我就可以了")
         return;
       }
     },
@@ -235,8 +236,8 @@ var maze = new Vue({
       console.log("现在下载的是：" + this.checkPoint + "个地图")
       this.all = this.list[this.checkPoint].map;
       // 准备画地图；
-      this.painCat();
       this.painDog();
+      this.painCat();
       this.painObstacle();
       this.painSpecial();
     }
@@ -256,9 +257,9 @@ var maze = new Vue({
         var c = document.getElementById("stage");
         vm.context = c.getContext("2d");
         // 准备图片
-        vm.dogImg.src = "../img/maze/cat.png?d=" + +new Date();
-        vm.obstacleImg.src = "../img/maze/fllower8.png?d=" + +new Date();
-        vm.catImg.src = "../img/maze/dog.png?d=" + +new Date();
+        vm.catImg.src = "../img/maze/cat.png?d=" + +new Date();
+        vm.obstacleImg.src = "../img/maze/fllower7.png?d=" + +new Date();
+        vm.dogImg.src = "../img/maze/dog.png?d=" + +new Date();
 
 
         if (vm.catImg.complete) {

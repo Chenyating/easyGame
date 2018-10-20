@@ -116,6 +116,7 @@ var tetris = new Vue({
         this.all.splice(0, this.all.length); //清空存放单方块的数组
         //清空整个画布
         this.context.clearRect(0, 0, 400, 800);
+        clearInterval(timer);
       }
       //游戏开始状态
       else {
