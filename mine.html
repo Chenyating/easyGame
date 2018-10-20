@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>扫雷-YATING</title>
+    <!-- <meta name="viewport" content="width=device-width, initial-scale=1"> -->
+    <link rel="stylesheet" href="css/mine.css" />
+    <script src="js/vue.js"></script>
+    <script src="js/jquery.js"></script>
+</head>
+
+<body>
+    <div id="mine">
+        <div class="title">maze-迷宫</div>
+        <div class="stage">
+            <div class="playStage">
+                <div class="coverY" v-for="n in height-2" v-if="all.length">
+                    <!-- x值 -->
+                    <div class="coverX titlex" v-for="m in width-2" v-if="all[n-1]" @click="click(n,m)" :class="{safe: all[n][m][1]>=0,whiteText: all[n][m][1]==0,bered: all[n][m][0]==2}">
+                        {{all[n][m][1]}}
+                    </div>
+                </div>
+            </div>
+            <div class="operation">
+                <p>随机隐藏20个</p>
+                <div class="inf" @click="randomBegin(20)">
+                    20个炸弹
+                </div>
+                <p>随机隐藏30个</p>
+                <div class="inf" @click="randomBegin(30)">
+                    30个炸弹
+                </div>
+                <p>随机隐藏40个</p>
+                <div class="inf" @click="randomBegin(40)">
+                    40个炸弹
+                </div>
+            </div>
+        </div>
+        <div class="explain">
+                Fingers click on diamonds, red as bombs
+            <div class="chinese">手指点击方块，红色为炸弹</div>
+        </div>
+    </div>
+    <script src="js/mine.js"></script>
+    <script>
+        document.body.addEventListener('touchmove', function (e) {
+            e.preventDefault(); //阻止默认的处理方式(阻止下拉滑动的效果)
+        }, {
+            passive: false
+        }); //passive 参数不能省略，用来兼容ios和android
+    </script>
+</body>
+
+</html>
