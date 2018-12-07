@@ -1,0 +1,177 @@
+[{
+        "type": "big",
+        "num": "3",
+        "fruit": [{
+                "name": "西瓜",
+                "price": 5,
+                "weight": 15
+            },
+            {
+                "name": "白柚",
+                "price": 2.5,
+                "weight": 3
+            },
+            {
+                "name": "木瓜",
+                "price": 10,
+                "weight": 2
+            },
+            {
+                "name": "哈密瓜",
+                "price": 7,
+                "weight": 5
+            },
+            {
+                "name": "红心柚",
+                "price": 5,
+                "weight": 3
+            },
+            {
+                "name": "沙田柚",
+                "price": 5.5,
+                "weight": 3
+            }
+
+        ]
+    },
+    {
+        "type": "midel",
+        "num": "2",
+        "fruit": [{
+                "name": "江西橙",
+                "price": 5,
+                "weight": "按照2个1斤算"
+            },
+            {
+                "name": "雪梨",
+                "price": 4,
+                "weight": "按照2个1斤算"
+            },
+            {
+                "name": "皇冠蜜梨",
+                "price": 5.5,
+                "weight": "按照2个1斤算"
+            },
+            {
+                "name": "特贡梨",
+                "price": 5.5,
+                "weight": "按照2个1斤算"
+            },
+            {
+                "name": "汤山梨",
+                "price": 3.5,
+                "weight": "按照2个1斤算"
+            },
+            {
+                "name": "库尔勒香梨",
+                "price": 3.8,
+                "weight": "按照2个1斤算"
+            },
+            {
+                "name": "阿克苏苹果",
+                "price": 10,
+                "weight": "按照2个1斤算"
+            },
+            {
+                "name": "香蕉",
+                "price": 3.8,
+                "weight": "按照2个1斤算"
+            },
+            {
+                "name": "花牛果",
+                "price": 9,
+                "weight": "按照2个1斤算"
+            },
+            {
+                "name": "酸甜芒果",
+                "price": 8,
+                "weight": "按照2个1斤算"
+            },
+            {
+                "name": "奶蕉",
+                "price": 5,
+                "weight": "按照2个1斤算"
+            },
+            {
+                "name": "甜石榴",
+                "price": 7,
+                "weight": "按照2个1斤算"
+            },
+            {
+                "name": "陕西苹果",
+                "price": 7,
+                "weight": "按照2个1斤算"
+            },
+            {
+                "name": "杨桃",
+                "price": 5,
+                "weight": "按照2个1斤算"
+            },
+            {
+                "name": "奇异果",
+                "price": 9,
+                "weight": "按照2个1斤算"
+            }
+        ]
+    },
+    {
+        "type": "small",
+        "num": "2",
+        "fruit": [{
+                "name": "水煮花生",
+                "price": 6,
+                "weight": 1
+            },
+            {
+                "name": "砂糖桔",
+                "price": 7,
+                "weight": 1
+            },
+            {
+                "name": "皇帝柑",
+                "price": 4.5,
+                "weight": 1
+            },
+            {
+                "name": "金桔",
+                "price": 8,
+                "weight": 1
+            },
+            {
+                "name": "南丰蜜桔",
+                "price": 3,
+                "weight": 1
+            },
+            {
+                "name": "无籽黑提",
+                "price": 12.5,
+                "weight": 1
+            },
+            {
+                "name": "巨峰葡萄",
+                "price": 10,
+                "weight": 1
+            },
+            {
+                "name": "无籽红提",
+                "price": 15,
+                "weight": 1
+            },
+            {
+                "name": "红提",
+                "price": 8,
+                "weight": 1
+            },
+            {
+                "name": "泰国龙眼",
+                "price": 12,
+                "weight": 1
+            },
+            {
+                "name": "紫圣女果",
+                "price": 8,
+                "weight": 1
+            }
+        ]
+    }
+]
