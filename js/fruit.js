@@ -42,6 +42,7 @@ var fruit = new Vue({
             this.totalMoney();
         },
         bigFruit() {
+            this.bg=0;
             if(this.bnum==0){
                 this.btext="0元";
                 this.bprice=0;
@@ -53,8 +54,10 @@ var fruit = new Vue({
             this.bprice = this.blist[id].weight * this.blist[id].price * this.bnum;
             this.btext = this.blist[id].name + ",价格为:" + this.blist[id].price + "元/斤,总计约:" + this.bprice + "元";
             this.bg = this.blist[id].weight * this.bnum;
+            console.log(this.bg+"da")
         },
         middleFruit() {
+            this.mg=0;
             if(this.mnum==0){
                 this.mtext="0元";
                 this.mprice=0;
@@ -66,8 +69,10 @@ var fruit = new Vue({
             this.mprice = (this.mnum / 2) * this.mlist[id].price;
             this.mtext = this.mlist[id].name + ",价格为:" + this.mlist[id].price + "元/斤,总计约:" + this.mprice + "元";
             this.mg = this.mnum / 2;
+            console.log(this.mg+"zhong")
         },
         smallFruit() {
+            this.sg=0;
             if(this.snum==0){
                 this.stext="0元";
                 this.sprice=0;
@@ -79,6 +84,7 @@ var fruit = new Vue({
             this.sprice = this.slist[id].price * this.snum;
             this.stext = this.slist[id].name + ",价格为:" + this.slist[id].price + "元/斤,总计约:" + this.sprice + "元";
             this.sg = this.snum;
+            console.log(this.sg+"xiao")
         },
         otherSmall() {
             if( this.ttext == "超出预算了"){
@@ -105,16 +111,20 @@ var fruit = new Vue({
             }
         },
         totalMoney() {
-            this.tprice = this.bprice + this.mprice + this.sprice;
             try {
+                this.tg=0;
+                this.tprice = this.bprice + this.mprice + this.sprice;
                 if (this.tprice >= this.budget) {
                     this.ttext = "超出预算了";
+                    this.tg=0;
                     this.tprice=null;
                     this.beginFruit();
                     return;
                 } else {
-                    this.tg = this.bg + this.mg + this.snum;
-                    this.ttext = this.tprice + "元,约:" + this.tg + "斤";
+                    this.tg=0;
+                    this.tg = this.bg + this.mg + this.sg;
+                    console.log(this.tg)
+                    this.ttext = this.tprice + "元";
                     this.otherSmall();
                 }
             } catch (error) {

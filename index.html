@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title>YATING的首页</title>
+    <script src="js/vue.js"></script>
+    <script src="js/jquery.js"></script>
+    <script src="js/flexible.js"></script>
+</head>
+<style>
+    .big-box {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .text {
+        font-size: .933333rem;
+    }
+</style>
+
+<body>
+    <div id="index" class="big-box" v-for="n">
+        {{n}}
+        <h1 class="text">
+            YATING:HELLO！
+        </h1>
+        <h1 class="text">
+            YATING:HELLO！
+        </h1>
+        <h1 class="text">
+            YATING:HELLO！
+        </h1>
+        <h1 class="text">
+            YATING:HELLO！
+        </h1>
+        <h1 class="text">
+            YATING:HELLO！
+        </h1>
+    </div>
+</body>
+<script>
+var index=new Vue({
+    el:"#index",
+    data:{
+        n:10
+    }
+})
+</script>
+
+</html>
