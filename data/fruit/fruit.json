@@ -1,5 +1,5 @@
 [{
-        "type": "big",
+        "type": "大型",
         "num": "3",
         "fruit": [{
                 "name": "西瓜",
@@ -28,15 +28,14 @@
             },
             {
                 "name": "沙田柚",
-                "price": 5.5,
+                "price": 5,
                 "weight": 3
             }
 
         ]
     },
     {
-        "type": "midel",
-        "num": "2",
+        "type": "中型",
         "fruit": [{
                 "name": "江西橙",
                 "price": 5,
@@ -115,8 +114,7 @@
         ]
     },
     {
-        "type": "small",
-        "num": "2",
+        "type": "小型",
         "fruit": [{
                 "name": "水煮花生",
                 "price": 6,

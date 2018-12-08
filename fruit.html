@@ -14,193 +14,240 @@
     <script src="js/vue.js"></script>
     <script src="js/jquery.js"></script>
     <script src="js/flexible.js"></script>
+    <!-- 新 Bootstrap 核心 CSS 文件 -->
+    <link
+      href="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+
+    <!-- jQuery文件。务必在bootstrap.min.js 之前引入 -->
+    <script src="https://cdn.staticfile.org/jquery/2.1.1/jquery.min.js"></script>
+
+    <!-- 最新的 Bootstrap 核心 JavaScript 文件 -->
+    <script src="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
   </head>
   <style>
     .body,
     html {
       font-size: 0.32rem;
       background: #ffffff;
-    }
-
-    .title {
-      font-size: 0.48rem;
-      margin-left: .4rem;
-      font-weight: bold;
-      margin: 0.4rem;
-    }
-
-    .fruit-title {
-      margin-left: 0.4rem;
-      margin-bottom: 0.2rem;
-    }
-
-    .fruit-list {
-      display: flex;
-      height: 0.533333rem;
-    }
-
-    .fruit-box {
-      margin-bottom: 0.4rem;
-    }
-
-    .fruit-item {
-      width: 3.066667rem;
-      text-align: center;
-      border: #ec001a solid 0.013333rem;
-    }
-
-    .menu {
-      margin: 0 0.4rem;
-    }
-    .fruit-result {
-      display: flex;
-      margin: 0.4rem;
-      align-items: center;
-      font-size: .373333rem;
-    }
-
-    .fruit-detail {
-      margin-left: 0.4rem;
-      text-align: center;
-      color: #ec001a;
       font-size: 0.32rem;
     }
-
-    .input-info {
-      display: flex;
-      margin-bottom: 0.4rem;
-      align-items: center;
+    caption {
+      text-align: center;
     }
-    .input-number {
-      width: 1.333333rem;
-      margin: 0 0.1rem;
+    table {
+      text-align: center;
     }
-    .input-box {
-        width: 9.2rem;
-      margin: 0 0.4rem;
-      display: flex;
-      justify-content: space-between;
-    }
-    .btn {
-      display: inline-block;
-      padding: 0.2rem;
-      border-radius: 0.266667rem;
-      color: #ec001a;
-      border: #ec001a solid 0.013333rem;
-      font-weight: bold;
-      font-size: 0.48rem;
+    table th {
+      text-align: center;
     }
     .box {
-      margin: 0 0.4rem;
-    }
-    .box p {
-      margin: 0.133333rem 0;
+      display: flex;
+      justify-content: space-between;
+      margin: 0.2rem 0.4rem;
+      align-items: center;
       font-size: 0.32rem;
+      width: 9.2rem;
+    }
+    .input-group {
+      font-size: 0.373333rem;
+      width: 4.6rem;
+    }
+    .alert {
+      margin: 0.2rem 0.4rem;
+    }
+    #fruit {
+      margin: 0 auto;
+      width: 10rem;
+    }
+    .big-img {
+      width: 1.333333rem;
+      height: 1.333333rem;
+    }
+    .small-img {
+      width: 0.35rem;
+      height: 0.35rem;
+      margin-right: 0.1rem;
+    }
+    p {
+      margin-left: 0.4rem;
+      margin-top: 0.2rem;
+    }
+    .alert-danger {
+      align-items: center;
     }
     .big-text {
       font-size: 0.373333rem;
       font-weight: bold;
-      margin-left: 0.2rem;
+      color: #ec001a;
     }
-    .text-blue {
-      color: blue;
-      font-size: 0.3rem;
-      margin: 0 0.4rem;
+    .small-text{
+      color: #a94442;
+      margin: .2rem .4rem;
+      background: #ffffff;
+    }
+    .title-img {
+      width: 6.666667rem;
+      height: 1.333333rem;
     }
   </style>
 
   <body>
     <div id="fruit">
-      <div class="title">随机搭配下午茶水果!请注意！是随机！随机！随！机！</div>
-      <div class="input-box">
-        <div class="input-info">
-          <div>大型水果个数:</div>
-          <input
-            type="text"
-            class="input-number"
-            v-model="bnum"
-            placeholder="个数"
-          />个,
-        </div>
-        <div class="input-info">
-          <div>中型水果个数:</div>
-          <input
-            type="text"
-            class="input-number"
-            v-model="mnum"
-            placeholder="个数"
-          />个
-        </div>
-      </div>
-      <div class="input-box">
-        <div class="input-info">
-          <div>小型水果斤数:</div>
-          <input
-            type="text"
-            class="input-number"
-            v-model="snum"
-            placeholder="个数"
-          />斤,
-        </div>
-        <div class="input-info">
-          <div>你的最大预算:</div>
-          <input
-            type="text"
-            class="input-number"
-            v-model="budget"
-            placeholder="预算"
-          />元
-        </div>
-      </div>
-      <div class="fruit-result">
-        <div @click="beginFruit()" class="btn">开始</div>
-        <div class="fruit-result">
-          <div @click="totalMoney()">结果：</div>
-          <div class="big-text">{{ ttext }}</div>
-        </div>
-      </div>
-      <div class="text-blue">没有得出结果，就循环随机，点太多下，没反应是因为条件不符合，还在循环</div>
-      <div>
-        <div class="fruit-result">
-          <div>大型水果:</div>
-          <div class="fruit-detail">{{ btext }}</div>
-        </div>
-        <div class="fruit-result">
-          <div>中型水果:</div>
-          <div class="fruit-detail">{{ mtext }}</div>
-        </div>
-        <div class="fruit-result">
-          <div>小型水果:</div>
-          <div class="fruit-detail">{{ stext }}</div>
-        </div>
-        <div class="text-blue">{{ otext }}</div>
-      </div>
-      <div class="title">说明</div>
+      <!-- 标题 -->
       <div class="box">
-        <p>1、大型水果价格约为：一个大型水果约重*价格*个数。</p>
-        <p>2、大型水果是指一个就有2斤以上的水果。</p>
-        <p>3、中型水果价格约为：（中型水果个数/2）*价格。</p>
-        <p>4、中型水果类似香蕉、苹果，按照2个约1斤的规则计算。</p>
-        <p>5、小型水果价格约为：小型水果斤数*价格。</p>
-        <p>6、小型水果是指个头比较小的。类似花生、葡萄、小桔子。</p>
-        <p>7、平均每个人0.7-1斤，总的斤数就是（0.7~1）*人数</p>
+        <img
+          class="big-img"
+          src="http://www.icontuku.com/png/fruits-and-vegetables/orange.png"
+        />
+        <img class="title-img" src="http://www.diyiziti.com/Res/Images//Temp/340/4dbf79eada724b9cb07eaa927f682672.PNG">
+        <img
+          class="big-img"
+          src="http://www.icontuku.com/png/fruits-and-vegetables/lemon.png"
+        />
       </div>
-      <div class="title">水果目录</div>
-      <div v-for="fruittype in list" class="fruit-box">
-        <div class="fruit-title">
-          水果类型：{{ fruittype.type }},水果的种类：{{ fruittype.num }}
+      <!-- 输入框 -->
+      <div class="box">
+        <div class="input-group">
+          <input
+            type="text"
+            onkeyup="value=value.replace(/[^0-9]/g,'')"
+            onpaste="value=value.replace(/[^0-9]/g,'')"
+            oncontextmenu="value=value.replace(/[^0-9]/g,'')"
+            class="form-control"
+            placeholder="只能输入数字"
+            v-model="bnum"
+          />
+          <span class="input-group-addon"
+            ><img
+              class="small-img"
+              src="http://www.icontuku.com/png/fruits-inx/watermelon.png"
+            />个大型水果</span
+          >
         </div>
-        <div class="menu">
-          <div class="fruit-list">
-            <div class="fruit-item">名称</div>
-            <div class="fruit-item">元/斤</div>
-            <div class="fruit-item">一个约重</div>
+        <div class="input-group">
+          <input
+            type="text"
+            onkeyup="value=value.replace(/[^0-9]/g,'')"
+            onpaste="value=value.replace(/[^0-9]/g,'')"
+            oncontextmenu="value=value.replace(/[^0-9]/g,'')"
+            class="form-control"
+            placeholder="只能输入数字"
+            v-model="mnum"
+          />
+          <span class="input-group-addon"
+            ><img
+              class="small-img"
+              src="http://www.icontuku.com/png/paradise_fruit/banana512.png"
+            />个中型水果</span
+          >
+        </div>
+      </div>
+      <div class="box">
+        <div class="input-group">
+          <input
+            type="text"
+            onkeyup="value=value.replace(/[^0-9]/g,'')"
+            onpaste="value=value.replace(/[^0-9]/g,'')"
+            oncontextmenu="value=value.replace(/[^0-9]/g,'')"
+            class="form-control"
+            placeholder="只能输入数字"
+            v-model="snum"
+          />
+          <span class="input-group-addon"
+            ><img
+              class="small-img"
+              src="http://www.icontuku.com/png/fruits-inx/grape.png"
+            />斤小型水果</span
+          >
+        </div>
+
+        <div class="input-group">
+          <input
+            type="text"
+            onkeyup="value=value.replace(/[^0-9]/g,'')"
+            onpaste="value=value.replace(/[^0-9]/g,'')"
+            oncontextmenu="value=value.replace(/[^0-9]/g,'')"
+            class="form-control"
+            placeholder="只能输入数字"
+            v-model="budget"
+          />
+          <span class="input-group-addon"
+            ><img
+              class="small-img"
+              src="http://www.icontuku.com/png/developpers-icons/donate.png"
+            />元最大预算</span
+          >
+        </div>
+      </div>
+      <div class="alert-danger small-text">
+        只能输入正数字，不输数字，报错。请按照正常逻辑输入。不然就是bug、bug、bug~~<img
+        class="small-img"
+        src="http://www.icontuku.com/png/computer-and-media-1/debug4.png"
+      />
+      </div>
+      <div class="box">
+        输入设置好后，按"开始随机",直到你满意
+        <button type="button" class="btn btn-danger" @click="beginFruit()">
+          开始随机
+        </button>
+      </div>
+      <!-- 结果 -->
+  
+      <div class="alert alert-success">
+        总价格约:<span class="big-text">{{ ttext }}</span>
+      </div>
+      <div class="alert alert-info">大型水果:{{ btext }}</div>
+      <div class="alert alert-info">中型水果:{{ mtext }}</div>
+      <div class="alert alert-info">小型水果:{{ stext }}</div>
+      <div class="alert alert-warning">
+        <span class="glyphicon glyphicon-bell"></span>{{ otext }}
+      </div>
+      <!-- 说明 -->
+      <ul class=" box nav nav-tabs" id="myTab">
+        <li class="active"><a href="#ios" data-toggle="tab">水果价目表</a></li>
+        <li><a href="#home" data-toggle="tab"> 计算说明，购买说明 </a></li>
+      </ul>
+      <div id="myTabContent" class="tab-content">
+        <div class="tab-pane fade " id="home">
+          <p>0、数据仅供参考.</p>
+          <p>1、大型水果价格约为：一个大型水果约重*价格*个数。</p>
+          <p>2、大型水果是指一个就有2斤以上的水果。</p>
+          <p>3、中型水果价格约为：（中型水果个数/2）*价格。</p>
+          <p>4、中型水果类似香蕉、苹果，按照2个约1斤的规则计算。</p>
+          <p>5、小型水果价格约为：小型水果斤数*价格。</p>
+          <p>6、小型水果是指个头比较小的。类似花生、葡萄、小桔子。</p>
+          <p>7、平均每个人0.7-1斤，总的斤数就是（0.7~1）*人数</p>
+        </div>
+        <div class="tab-pane fade in active" id="ios">
+          <div class="alert alert-info">
+            <span class="glyphicon glyphicon-eye-open"></span> 该水果信息我是抄
+            A 美味鲜果汇 在群里发的图,按个卖的水果没加上去,零食之类的也没有加上去；
           </div>
-          <div v-for="fruit in fruittype.fruit" class="fruit-list">
-            <div class="fruit-item">{{ fruit.name }}</div>
-            <div class="fruit-item">{{ fruit.price }}</div>
-            <div class="fruit-item">{{ fruit.weight }}</div>
-          </div>
+          <table class="table table-hover" v-for="fruittype in list">
+            <caption>
+              水果类型：{{
+                fruittype.type
+              }},水果的种类：{{
+                fruittype.fruit.length
+              }}
+            </caption>
+            <thead>
+              <tr>
+                <th>名称</th>
+                <th>元/斤</th>
+                <th>一个约重</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr v-for="fruit in fruittype.fruit">
+                <td>{{ fruit.name }}</td>
+                <td>{{ fruit.price }}</td>
+                <td>{{ fruit.weight }}</td>
+              </tr>
+            </tbody>
+          </table>
         </div>
       </div>
     </div>
