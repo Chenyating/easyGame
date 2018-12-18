@@ -30,18 +30,22 @@
                 "name": "沙田柚",
                 "price": 5,
                 "weight": 3
-            },
-            {
-                "name": "红龙果",
-                "price": 5,
-                "weight": 1
             }
-
         ]
     },
     {
         "type": "中型",
-        "fruit": [{
+        "fruit": [
+            {
+                "name": "银红龙果",
+                "price": 5,
+                "weight": 1
+            },
+            {
+                "name": "特红龙果",
+                "price": 9,
+                "weight": 1
+            }, {
                 "name": "江西橙",
                 "price": 5,
                 "weight": "按照2个1斤算"
@@ -120,6 +124,16 @@
                 "name": "红心石榴",
                 "price": 6.5,
                 "weight": "按照2个1斤算"
+            },
+            {
+                "name": "番石榴",
+                "price": 4,
+                "weight": "按照2个1斤算"
+            },
+            {
+                "name": "南海小台芒",
+                "price": 9,
+                "weight": "按照2个1斤算"
             }
         ]
     },
@@ -132,12 +146,17 @@
             },
             {
                 "name": "砂糖桔",
-                "price": 7,
+                "price": 6.5,
                 "weight": 1
             },
             {
                 "name": "皇帝柑",
                 "price": 4.5,
+                "weight": 1
+            }, 
+            {
+                "name": "贡柑",
+                "price": 10,
                 "weight": 1
             },
             {
@@ -153,6 +172,11 @@
             {
                 "name": "无籽黑提",
                 "price": 12.5,
+                "weight": 1
+            },
+            {
+                "name": "进口青提",
+                "price": 20,
                 "weight": 1
             },
             {

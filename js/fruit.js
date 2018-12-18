@@ -163,10 +163,11 @@ var fruit = new Vue({
     },
     mounted() {
         var vm = this;
+        console.log("断点")
         $(document).ready(function () {
             $.getJSON(
-                `../data/fruit/fruit.json` + "?tempstamp=" + +new Date(),
-                function (res) {
+                `../data/fruit/fruit.json` + "?tempstamp=" + (+new Date()),
+                (res) => {
                     vm.list = res;
                     vm.blist = vm.list[0].fruit;
                     vm.mlist = vm.list[1].fruit;
