@@ -1,11 +1,14 @@
 <!DOCTYPE html>
 <html>
 
-<head>
+
+<head>    
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  
   <title>水果随意购</title>
+  <link rel="shortcut icon" href="img/fruit/fruit.png">
   <!--
       <meta name="viewport" content="width=device-width, initial-scale=1">
     -->
@@ -20,6 +23,8 @@
 
   <!-- 最新的 Bootstrap 核心 JavaScript 文件 -->
   <script src="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
+  <script src="https://hm.baidu.com/hm.jsd69321757dcfbfbe09dbddd4dca87b28"></script>
+
 </head>
 <style>
   .body,
@@ -141,9 +146,12 @@
     <div class="alert alert-success">
       总价格约:<span class="big-text">{{ ttext }}</span>
     </div>
-    <div class="alert alert-info"><img src="img/fruit/unget.png" class="radio-img" v-if="bget==0" @click=" wantIt(1,1)"/><img src="img/fruit/get.png" class="radio-img" v-else @click=" wantIt(1,0)"/>大型:{{ btext }}</div>
-    <div class="alert alert-info"><img src="img/fruit/unget.png" class="radio-img" v-if="mget==0" @click=" wantIt(2,1)"/><img src="img/fruit/get.png" class="radio-img" v-else @click=" wantIt(2,0)"/>中型:{{ mtext }}</div>
-    <div class="alert alert-info"><img src="img/fruit/unget.png" class="radio-img" v-if="sget==0" @click=" wantIt(3,1)"/><img src="img/fruit/get.png" class="radio-img" v-else @click=" wantIt(3,0)"/>小型:{{ stext }}</div>
+    <div class="alert alert-info"><img src="img/fruit/unget.png" class="radio-img" v-if="bget==0" @click=" wantIt(1,1)" /><img
+        src="img/fruit/get.png" class="radio-img" v-else @click=" wantIt(1,0)" />大型:{{ btext }}</div>
+    <div class="alert alert-info"><img src="img/fruit/unget.png" class="radio-img" v-if="mget==0" @click=" wantIt(2,1)" /><img
+        src="img/fruit/get.png" class="radio-img" v-else @click=" wantIt(2,0)" />中型:{{ mtext }}</div>
+    <div class="alert alert-info"><img src="img/fruit/unget.png" class="radio-img" v-if="sget==0" @click=" wantIt(3,1)" /><img
+        src="img/fruit/get.png" class="radio-img" v-else @click=" wantIt(3,0)" />小型:{{ stext }}</div>
     <div class="alert alert-warning">
       <span class="glyphicon glyphicon-bell"></span>{{ otext }}
     </div>
