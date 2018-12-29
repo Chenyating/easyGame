@@ -9,7 +9,7 @@
   <!--
       <meta name="viewport" content="width=device-width, initial-scale=1">
     -->
-  <script src="js/vue.js"></script>
+  <script src="./js/vue.js"></script>
   <script src="js/jquery.js"></script>
   <script src="js/flexible.js"></script>
   <!-- 新 Bootstrap 核心 CSS 文件 -->
@@ -86,6 +86,11 @@
       width: 6.666667rem;
       height: 1.333333rem;
     }
+    .radio-img{
+      width: .533333rem;
+      height: .533333rem;
+      margin-right: .066667rem;
+    }
   </style>
 
 <body>
@@ -126,7 +131,7 @@
       只能输入正数字，不输数字，报错。请按照正常逻辑输入。不然就是bug、bug、bug~~<img class="small-img" src="http://www.icontuku.com/png/computer-and-media-1/debug4.png" />
     </div>
     <div class="box">
-      输入设置好后，按"开始随机",直到你满意
+      输入设置好后，按"开始随机",遇到喜欢的可选中，其他类型水果再次随机；
       <button type="button" class="btn btn-danger" @click="beginFruit()">
         开始随机
       </button>
@@ -136,9 +141,9 @@
     <div class="alert alert-success">
       总价格约:<span class="big-text">{{ ttext }}</span>
     </div>
-    <div class="alert alert-info">大型水果:{{ btext }}</div>
-    <div class="alert alert-info">中型水果:{{ mtext }}</div>
-    <div class="alert alert-info">小型水果:{{ stext }}</div>
+    <div class="alert alert-info"><img src="img/fruit/unget.png" class="radio-img" v-if="bget==0" @click=" wantIt(1,1)"/><img src="img/fruit/get.png" class="radio-img" v-else @click=" wantIt(1,0)"/>大型:{{ btext }}</div>
+    <div class="alert alert-info"><img src="img/fruit/unget.png" class="radio-img" v-if="mget==0" @click=" wantIt(2,1)"/><img src="img/fruit/get.png" class="radio-img" v-else @click=" wantIt(2,0)"/>中型:{{ mtext }}</div>
+    <div class="alert alert-info"><img src="img/fruit/unget.png" class="radio-img" v-if="sget==0" @click=" wantIt(3,1)"/><img src="img/fruit/get.png" class="radio-img" v-else @click=" wantIt(3,0)"/>小型:{{ stext }}</div>
     <div class="alert alert-warning">
       <span class="glyphicon glyphicon-bell"></span>{{ otext }}
     </div>

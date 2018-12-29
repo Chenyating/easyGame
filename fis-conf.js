@@ -28,7 +28,8 @@ fis.media('dev')
     .match('*.{js,css}', {
         optimizer: null
     })
-    .match('*', {
+    .match('**', {
+        relative: true,
         useHash: false,
         deploy: [fis.plugin('local-deliver', {
             to: './output/'

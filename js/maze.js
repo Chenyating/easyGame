@@ -214,10 +214,10 @@ var maze = new Vue({
     },
     // 显示路线
     showWay() {
-      for (let i = 0; i < vm.all.length; i++) {
-        for (let j = 0; j < vm.all[i].length; j++) {
-          if (vm.all[i][j] == 2) {
-            vm.context.drawImage(vm.specialImg, j * 20,
+      for (let i = 0; i < this.all.length; i++) {
+        for (let j = 0; j < this.all[i].length; j++) {
+          if (this.all[i][j] == 2) {
+            this.context.drawImage(this.specialImg, j * 20,
               i * 20,
               20,
               20);
@@ -228,10 +228,14 @@ var maze = new Vue({
     },
     // 下载地图
     downloadMap() {
-      this.catImg.src = "../img/maze/cat.png?d=" + +new Date();
-      this.dogImg.src = "../img/maze/dog.png?d=" + +new Date();
-      this.obstacleImg.src = "../img/maze/fllower8.png?d=" + +new Date();
-      this.specialImg.src = "../img/maze/apple.png?d=" + +new Date();
+      var imgUrl1 = __uri("img/maze/cat.png");
+      var imgUrl2 = __uri("img/maze/cat.png");
+      var imgUrl3 = __uri("img/maze/cat.png");
+      var imgUrl4 = __uri("img/maze/cat.png");
+      this.catImg.src = imgUrl1+"?d=" + +new Date();
+      this.dogImg.src = imgUrl2+"?d=" + +new Date();
+      this.obstacleImg.src = imgUrl3+"?d=" + +new Date();
+      this.specialImg.src = imgUrl4+"?d=" + +new Date();
       this.context.clearRect(0, 0, 400, 800);
       console.log("现在下载的是：" + this.checkPoint + "个地图")
       this.all = this.list[this.checkPoint].map;
@@ -245,7 +249,8 @@ var maze = new Vue({
   mounted() {
     let vm = this;
     $(document).ready(function () {
-      $.getJSON(`../data/maze/map.json` + "?tempstamp=" + (+new Date()), function (res) {
+      var dataUrl = "data/fruit/fruit.json";
+      $.getJSON( dataUrl + "?tempstamp=" + +new Date(), function (res) {
         vm.list = res;
         if (localStorage.getItem('checkPointObj')) {
           vm.checkPoint = JSON.parse(localStorage.getItem('checkPointObj'));
@@ -257,9 +262,12 @@ var maze = new Vue({
         var c = document.getElementById("stage");
         vm.context = c.getContext("2d");
         // 准备图片
-        vm.catImg.src = "../img/maze/cat.png?d=" + +new Date();
-        vm.obstacleImg.src = "../img/maze/fllower7.png?d=" + +new Date();
-        vm.dogImg.src = "../img/maze/dog.png?d=" + +new Date();
+        var imgUrl5 = __uri("img/maze/cat.png");
+        var imgUrl6 = __uri("img/maze/cat.png");
+        var imgUrl7 = __uri("img/maze/cat.png");
+        vm.catImg.src = imgUrl5+"?d=" + +new Date();
+        vm.obstacleImg.src = imgUrl6+"?d=" + +new Date();
+        vm.dogImg.src = imgUrl7+"?d=" + +new Date();
 
 
         if (vm.catImg.complete) {
