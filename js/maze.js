@@ -229,9 +229,9 @@ var maze = new Vue({
     // 下载地图
     downloadMap() {
       var imgUrl1 = __uri("img/maze/cat.png");
-      var imgUrl2 = __uri("img/maze/cat.png");
-      var imgUrl3 = __uri("img/maze/cat.png");
-      var imgUrl4 = __uri("img/maze/cat.png");
+      var imgUrl2 = __uri("img/maze/dog.png");
+      var imgUrl3 = __uri("img/maze/fllower1.png");
+      var imgUrl4 = __uri("img/maze/fllower2.png");
       this.catImg.src = imgUrl1+"?d=" + +new Date();
       this.dogImg.src = imgUrl2+"?d=" + +new Date();
       this.obstacleImg.src = imgUrl3+"?d=" + +new Date();
@@ -249,8 +249,9 @@ var maze = new Vue({
   mounted() {
     let vm = this;
     $(document).ready(function () {
-      var dataUrl = "data/fruit/fruit.json";
-      $.getJSON( dataUrl + "?tempstamp=" + +new Date(), function (res) {
+      var jsonUrl = __uri("data/maze/map.json");
+      // $.getJSON( '../data/maze/map.json' + "?tempstamp=" + +new Date(), function (res) {
+      $.getJSON( jsonUrl + "?tempstamp=" + +new Date(), function (res) {
         vm.list = res;
         if (localStorage.getItem('checkPointObj')) {
           vm.checkPoint = JSON.parse(localStorage.getItem('checkPointObj'));
@@ -263,8 +264,8 @@ var maze = new Vue({
         vm.context = c.getContext("2d");
         // 准备图片
         var imgUrl5 = __uri("img/maze/cat.png");
-        var imgUrl6 = __uri("img/maze/cat.png");
-        var imgUrl7 = __uri("img/maze/cat.png");
+        var imgUrl6 = __uri("img/maze/fllower1.png");
+        var imgUrl7 = __uri("img/maze/dog.png");
         vm.catImg.src = imgUrl5+"?d=" + +new Date();
         vm.obstacleImg.src = imgUrl6+"?d=" + +new Date();
         vm.dogImg.src = imgUrl7+"?d=" + +new Date();

@@ -10,23 +10,25 @@ var retroSnaker = new Vue({
     gameState: 0,
     snaker: [],
     v: 300,
+    canvasWidth: 400,
+    canvasHeight: 800
   },
   methods: {
     //随机生成x坐标
-    radomx() {
-      this.radomX = parseInt(Math.random() * 20);
+    radomx(width) {
+      this.radomX = parseInt((Math.random() * width) / 20);
       return this.radomX;
     },
     //随机生成y坐标
-    radomy() {
-      this.radomY = parseInt(Math.random() * 40);
+    radomy(height) {
+      this.radomY = parseInt((Math.random() * height) / 20);
       return this.radomY;
     },
     //随机生成蛇头的坐标
     snakerHead() {
       //清空蛇身
       this.snaker.splice(0, this.snaker.length);
-      this.snaker.push([this.radomx() * 20, this.radomy() * 20]);
+      this.snaker.push([this.radomx(this.canvasWidth)  * 20, this.radomy(this.canvasHeight) * 20]);
       //蛇头也不能和食物重复；
       if (this.foodX == this.snaker[0][0] && this.foodY == this.snaker[0][1]) {
         return this.snakerHead();
@@ -34,8 +36,8 @@ var retroSnaker = new Vue({
     },
     //随机生成食物的坐标，且不能和蛇身，蛇头重合
     food() {
-      this.foodX = this.radomx() * 20;
-      this.foodY = this.radomy() * 20;
+      this.foodX = this.radomx(this.canvasWidth)  * 20;
+      this.foodY = this.radomy(this.canvasHeight) * 20;
       //判断食物不能和蛇重复了。
       for (var i = 0; i < this.snaker.length; i++) {
         //只要出现重复，则重新调用food（）；
@@ -56,8 +58,8 @@ var retroSnaker = new Vue({
     ifOut() {
       if (
         0 > this.snaker[0][0] ||
-        this.snaker[0][0] > 380 ||
-        780 < this.snaker[0][1] ||
+        this.snaker[0][0] > this.canvasWidth - 20 ||
+        this.canvasHeight - 20 < this.snaker[0][1] ||
         this.snaker[0][1] < 0
       ) {
         alert("游戏结束,你撞到墙了");
@@ -78,7 +80,7 @@ var retroSnaker = new Vue({
       this.gameState = 0;
       this.scope = 0;
       //清空整个画布
-      this.context.clearRect(0, 0, 400, 800);
+      this.context.clearRect(0, 0, this.canvasWidth, this.canvasHeight);
       $("#title").html("");
       $("#title").html("游戏开始");
     },
@@ -91,7 +93,7 @@ var retroSnaker = new Vue({
         this.gameState = 0;
         this.scope = 0;
         //清空整个画布
-        this.context.clearRect(0, 0, 400, 800);
+        this.context.clearRect(0, 0, this.canvasWidth, this.canvasHeight);
       } else {
         //游戏开始状态
         this.food();

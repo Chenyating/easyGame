@@ -103,7 +103,9 @@ var tetris = new Vue({
     context: null, //画布
     rotateID: 0, //旋转的状态,
     allLength: null,
-    gameState: 0
+    gameState: 0,
+    canvasWidth: 400,
+    canvasHeight: 800
   },
   methods: {
     begin() {
@@ -115,22 +117,22 @@ var tetris = new Vue({
         this.scope = 0;
         this.all.splice(0, this.all.length); //清空存放单方块的数组
         //清空整个画布
-        this.context.clearRect(0, 0, 400, 800);
+        this.context.clearRect(0, 0, this.canvasWidth, this.canvasHeight);
         clearInterval(timer);
       }
       //游戏开始状态
       else {
         //初始化堆积方块
-        for (let i = 0; i < 40; i++) {
+        for (let i = 0; i < this.canvasHeight/20; i++) {
           this.all[i] = new Array(0);
-          for (let j = 0; j < 20; j++) {
+          for (let j = 0; j < this.canvasWidth/20; j++) {
             this.all[i][j] = 0;
           }
         }
         this.allLength = this.all[0].length;
         //开始绘制单方块；
         //清空整个画布
-        this.context.clearRect(0, 0, 400, 800);
+        this.context.clearRect(0, 0, this.canvasWidth, this.canvasHeight);
         this.radomShap();
         this.gameState = 1;
         //游戏开始，默认自己往下移动；
@@ -174,7 +176,7 @@ var tetris = new Vue({
       switch (this.radomID) {
         case 0:
           //长条
-          let defaultX = 180;
+          let defaultX = this.canvasWidth/20-20;
           let defaultY = -60;
           for (var i = 0; i < 5; i++) {
             defaultX = 180;
@@ -325,7 +327,7 @@ var tetris = new Vue({
     rotate() {
       var changge = parseInt(Math.random() * 4);
       console.log("变" + changge + "次")
-      for (i = 0; i <= changge; i++) {
+      for (var i = 0; i <= changge; i++) {
         let shap1 = [];
         // 深拷贝
         shap1 = JSON.parse(JSON.stringify(this.shap));
@@ -340,7 +342,7 @@ var tetris = new Vue({
           for (let j = 0; j < shap1[i].length; j++) {
             try {
               if (
-                ((shap1[i][j][0] < 0 || shap1[i][j][0] > 380||shap1[i][j][1] > 780) && shap1[i][j][2] == 1) || (this.all[this.shap[i][j][1] / 20][this.shap[i][j][0] / 20] == 1)) {
+                ((shap1[i][j][0] < 0 || shap1[i][j][0] > this.canvasWidth-20||shap1[i][j][1] > this.canvasHeight-20) && shap1[i][j][2] == 1) || (this.all[this.shap[i][j][1] / 20][this.shap[i][j][0] / 20] == 1)) {
                 //两个同时成立退出；
                 return;
               }
@@ -397,7 +399,7 @@ var tetris = new Vue({
         this.scope = 0;
         this.all.splice(0, this.all.length); //清空存放单方块的数组
         //清空整个画布
-        this.context.clearRect(0, 0, 400, 800);
+        this.context.clearRect(0, 0, this.canvasWidth, this.canvasHeight);
           return;
         }
       }
