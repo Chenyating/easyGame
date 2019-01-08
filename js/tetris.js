@@ -176,10 +176,10 @@ var tetris = new Vue({
       switch (this.radomID) {
         case 0:
           //长条
-          let defaultX = this.canvasWidth/20-20;
+          let defaultX = this.canvasWidth/2-20;
           let defaultY = -60;
           for (var i = 0; i < 5; i++) {
-            defaultX = 180;
+            defaultX = this.canvasWidth/2-20;
             if (i == 2) {
               this.$set(this.shap, i, [
                 [defaultX, defaultY, 1],
@@ -204,102 +204,102 @@ var tetris = new Vue({
         case 1:
           //正方形
           this.$set(this.shap, 0, [
-            [180, -40, 1],
-            [200, -40, 1]
+            [this.canvasWidth/2-20, -40, 1],
+            [this.canvasWidth/2, -40, 1]
           ]);
           this.$set(this.shap, 1, [
-            [180, -20, 1],
-            [200, -20, 1]
+            [this.canvasWidth/2-20, -20, 1],
+            [this.canvasWidth/2, -20, 1]
           ]);
           break;
         case 2:
           //正7
           this.$set(this.shap, 0, [
-            [180, -60, 1],
-            [200, -60, 1],
-            [220, -60, 0]
+            [this.canvasWidth/2-20, -60, 1],
+            [this.canvasWidth/2, -60, 1],
+            [this.canvasWidth/2+20, -60, 0]
           ]);
           this.$set(this.shap, 1, [
-            [180, -40, 0],
-            [200, -40, 1],
-            [220, -40, 0]
+            [this.canvasWidth/2-20, -40, 0],
+            [this.canvasWidth/2, -40, 1],
+            [this.canvasWidth/2+20, -40, 0]
           ]);
           this.$set(this.shap, 2, [
-            [180, -20, 0],
-            [200, -20, 1],
-            [220, -20, 0]
+            [this.canvasWidth/2-20, -20, 0],
+            [this.canvasWidth/2, -20, 1],
+            [this.canvasWidth/2+20, -20, 0]
           ]);
           break;
         case 3:
           //反7
           this.$set(this.shap, 0, [
-            [180, -60, 0],
-            [200, -60, 1],
-            [220, -60, 1]
+            [this.canvasWidth/2-20, -60, 0],
+            [this.canvasWidth/2, -60, 1],
+            [this.canvasWidth/2+20, -60, 1]
           ]);
           this.$set(this.shap, 1, [
-            [180, -40, 0],
-            [200, -40, 1],
-            [220, -40, 0]
+            [this.canvasWidth/2-20, -40, 0],
+            [this.canvasWidth/2, -40, 1],
+            [this.canvasWidth/2+20, -40, 0]
           ]);
           this.$set(this.shap, 2, [
-            [180, -20, 0],
-            [200, -20, 1],
-            [220, -20, 0]
+            [this.canvasWidth/2-20, -20, 0],
+            [this.canvasWidth/2, -20, 1],
+            [this.canvasWidth/2+20, -20, 0]
           ]);
           break;
         case 4:
           //正2
           this.$set(this.shap, 0, [
-            [180, -60, 1],
-            [200, -60, 1],
-            [220, -60, 0]
+            [this.canvasWidth/2-20, -60, 1],
+            [this.canvasWidth/2, -60, 1],
+            [this.canvasWidth/2+20, -60, 0]
           ]);
           this.$set(this.shap, 1, [
-            [180, -40, 0],
-            [200, -40, 1],
-            [220, -40, 1]
+            [this.canvasWidth/2-20, -40, 0],
+            [this.canvasWidth/2, -40, 1],
+            [this.canvasWidth/2+20, -40, 1]
           ]);
           this.$set(this.shap, 2, [
-            [180, -20, 0],
-            [200, -20, 0],
-            [220, -20, 0]
+            [this.canvasWidth/2-20, -20, 0],
+            [this.canvasWidth/2, -20, 0],
+            [this.canvasWidth/2+20, -20, 0]
           ]);
           break;
         case 5:
           //反2
           this.$set(this.shap, 0, [
-            [180, -60, 0],
-            [200, -60, 1],
-            [220, -60, 1]
+            [this.canvasWidth/2-20, -60, 0],
+            [this.canvasWidth/2, -60, 1],
+            [this.canvasWidth/2+20, -60, 1]
           ]);
           this.$set(this.shap, 1, [
-            [180, -40, 1],
-            [200, -40, 1],
-            [220, -40, 0]
+            [this.canvasWidth/2-20, -40, 1],
+            [this.canvasWidth/2, -40, 1],
+            [this.canvasWidth/2+20, -40, 0]
           ]);
           this.$set(this.shap, 2, [
-            [180, -20, 0],
-            [200, -20, 0],
-            [220, -20, 0]
+            [this.canvasWidth/2-20, -20, 0],
+            [this.canvasWidth/2, -20, 0],
+            [this.canvasWidth/2+20, -20, 0]
           ]);
           break;
         case 6:
           //土
           this.$set(this.shap, 0, [
-            [180, -60, 0],
-            [200, -60, 1],
-            [220, -60, 0]
+            [this.canvasWidth/2-20, -60, 0],
+            [this.canvasWidth/2, -60, 1],
+            [this.canvasWidth/2+20, -60, 0]
           ]);
           this.$set(this.shap, 1, [
-            [180, -40, 1],
-            [200, -40, 1],
-            [220, -40, 1]
+            [this.canvasWidth/2-20, -40, 1],
+            [this.canvasWidth/2, -40, 1],
+            [this.canvasWidth/2+20, -40, 1]
           ]);
           this.$set(this.shap, 2, [
-            [180, -20, 0],
-            [200, -20, 0],
-            [220, -20, 0]
+            [this.canvasWidth/2-20, -20, 0],
+            [this.canvasWidth/2, -20, 0],
+            [this.canvasWidth/2+20, -20, 0]
           ]);
           break;
         default:
@@ -372,7 +372,7 @@ var tetris = new Vue({
           for (let j = 0; j < shap1[i].length; j++) {
             try {
               if (
-                ((shap1[i][j][0] < 0 || shap1[i][j][0] > 380||shap1[i][j][1] > 780) && shap1[i][j][2] == 1) || (this.all[this.shap[i][j][1] / 20][this.shap[i][j][0] / 20] == 1)) {
+                ((shap1[i][j][0] < 0 || shap1[i][j][0] > this.canvasWidth-20||shap1[i][j][1] > this.canvasHeight-20) && shap1[i][j][2] == 1) || (this.all[this.shap[i][j][1] / 20][this.shap[i][j][0] / 20] == 1)) {
                   //两个同时成立退出；
                 return;
               }
@@ -410,7 +410,7 @@ var tetris = new Vue({
           var x = this.shap[i][j][0] / 20;
           try {
             if (
-              (this.shap[i][j][1] >= 780 || this.all[y + 1][x] == 1) && this.shap[i][j][2] == 1
+              (this.shap[i][j][1] >= this.canvasHeight-20 || this.all[y + 1][x] == 1) && this.shap[i][j][2] == 1
             ) {
               //会的话，那就就开始把shap加入this。all；
               for (let i = 0; i < this.shap.length; i++) {
