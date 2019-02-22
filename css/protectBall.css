@@ -30,13 +30,17 @@ body,
       flex-wrap: nowrap;
       padding: 0.5rem;
     }
-
-    #stage {
-      background: white;
+    
+    #bgStage {
+      float: right;
       border: solid 0.1rem #000000;
       width: 65%;
       height: 100%;
-      ;
+    }
+    #ballStage {
+      border: solid 0.1rem #000000;
+      width: 65%;
+      height: 100%;
     }
 
 

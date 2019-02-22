@@ -1,7 +1,8 @@
 var protectBall = new Vue({
     el: "#protectBall",
     data: {
-        context: null,
+        bgStage: null,//背景旋转的圈圈
+        ballStage:null,//这是小球球
         circleDeg: 1.5 * Math.PI,
         circleX: 200,
         circleY: 400,
@@ -17,37 +18,33 @@ var protectBall = new Vue({
         },
         // 绘制外部大框框
         drawCircle(x, y, r, deg) {
-            this.context.beginPath();
-            this.context.arc(x, y, r, 0, deg);
-            this.context.stroke();
+            this.bgStage.beginPath();
+            this.bgStage.arc(x, y, r, 0, deg);
+            this.bgStage.stroke();
         },
         // 绘制内部小球球
         drawCenterCircle(x, y, r, deg) {
-            this.context.beginPath();
-            this.context.arc(x, y, r, 0, deg);
-            this.context.fill();
+            this.bgStage.beginPath();
+            this.bgStage.arc(x, y, r, 0, deg);
+            this.bgStage.fill();
         },
         // 开始旋转
         leftRotate() {
-            this.context.clearRect(this.circleX - 40, this.circleY - 40, 80, 80)
+            this.bgStage.clearRect(this.circleX - 40, this.circleY - 40, 80, 80)
             this.drawCenterCircle(this.circleX, this.circleY, this.centerCircleR, this.smallBallDeg);
-            this.context.translate(this.circleX, this.circleY);
-            this.context.rotate(this.getRandom() * Math.PI / 180);
-            this.context.beginPath();
-            this.context.arc(0, 0, this.circleR, 0, 1.5 * Math.PI);
-            this.context.stroke();
-            this.context.rotate(-this.rotation * Math.PI / 180);
-            this.context.translate(-this.circleX, -this.circleY); //坐标转换必须为旋转回去之后
-        },
-        // 获取鼠标在canvas的坐标
-        getMousePosition(e) {
-            console.log(e.offsetX, e.offsetY)
+            this.bgStage.translate(this.circleX, this.circleY);
+            this.bgStage.rotate(this.getRandom() * Math.PI / 180);
+            this.bgStage.beginPath();
+            this.bgStage.arc(0, 0, this.circleR, 0, 1.5 * Math.PI);
+            this.bgStage.stroke();
+            this.bgStage.rotate(-this.rotation * Math.PI / 180);
+            this.bgStage.translate(-this.circleX, -this.circleY); //坐标转换必须为旋转回去之后
         },
         // 绘制小球球
         drawSmallBall() {
-            this.context.beginPath();
-            this.context.arc(20, 20, this.smallBallR, 0, this.smallBallDeg);
-            this.context.fill();
+            this.bgStage.beginPath();
+            this.bgStage.arc(20, 20, this.smallBallR, 0, this.smallBallDeg);
+            this.bgStage.fill();
             this.getLineFunction(20,20);
         },
         getLineFunction(x1, y1) {
@@ -61,10 +58,10 @@ var protectBall = new Vue({
             this.reDrawSmallBall(x1,y1,x2, y2);
         },
         reDrawSmallBall(x1,y1,x2,y2) {
-            this.context.clearRect(x1-this.smallBallR, y1-this.smallBallR, 2*this.smallBallR, 2*this.smallBallR)
-            this.context.beginPath();
-            this.context.arc(x2, y2, this.smallBallR, 0, this.smallBallDeg);
-            this.context.fill();
+            this.bgStage.clearRect(x1-this.smallBallR, y1-this.smallBallR, 2*this.smallBallR, 2*this.smallBallR)
+            this.bgStage.beginPath();
+            this.bgStage.arc(x2, y2, this.smallBallR, 0, this.smallBallDeg);
+            this.bgStage.fill();
         },
         //移动小球球
         moveBall(){
@@ -72,8 +69,8 @@ var protectBall = new Vue({
         } 
     },
     mounted() {
-        var c = document.getElementById("stage");
-        this.context = c.getContext("2d");
+        var c = document.getElementById("bgStage");
+        this.bgStage = c.getContext("2d");
         // 画圈圈
         this.drawCenterCircle(this.circleX, this.circleY, this.centerCircleR, this.smallBallDeg);
         this.drawCircle(this.circleX, this.circleY, this.circleR, this.circleDeg);
