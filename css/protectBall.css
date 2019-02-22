@@ -1,74 +1,74 @@
 body,
-    html {
-      width: 100%;
-      height: 100%;
-      position: fixed;
-      overflow-y: hidden;
-    }
+html {
+  width: 100%;
+  height: 100%;
+  position: fixed;
+  overflow-y: hidden;
+}
 
-    * {
-      padding: 0;
-      margin: 0;
-    }
+* {
+  padding: 0;
+  margin: 0;
+}
 
-    #app {
-      position: fixed;
-      width: 100%;
-      height: 100%;
-      background: white;
-    }
+#app {
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  background: white;
+}
 
-    .title {
-      font-size: 1.5rem;
-      text-align: center;
-      margin: 0.5rem;
-      font-weight: bold;
-    }
+.title {
+  font-size: 1.5rem;
+  text-align: center;
+  margin: 0.5rem;
+  font-weight: bold;
+}
 
-    .stage {
-      display: flex;
-      flex-wrap: nowrap;
-      padding: 0.5rem;
-    }
-    
-    #bgStage {
-      float: right;
-      border: solid 0.1rem #000000;
-      width: 65%;
-      height: 100%;
-    }
-    #ballStage {
-      border: solid 0.1rem #000000;
-      width: 65%;
-      height: 100%;
-    }
+.stage {
+  display: flex;
+  flex-wrap: nowrap;
+  padding: 0.5rem;
+}
 
+.bg-stage {
+  position: relative;
+}
+.ball-stage {
+  position: absolute;
+}
+#bgStage {
+  border: solid 0.1rem #000000;
+}
+#ballStage {
+  border: solid 0.1rem #000000;
+}
 
-    .operation {
-      width: 100%;
-      text-align: center;
-      margin-left: 0.5rem;
-      border: solid 0.1rem black;
-    }
+.operation {
+  width: 100%;
+  text-align: center;
+  margin-left: 0.5rem;
+  border: solid 0.1rem black;
+}
 
-    .inf {
-      font-size: 1rem;
-      padding: 0.5rem 0;
-      background: black;
-      color: white;
-      font-weight: bold;
-      width: 100%;
-    }
+.inf {
+  font-size: 1rem;
+  padding: 0.5rem 0;
+  background: black;
+  color: white;
+  font-weight: bold;
+  width: 100%;
+}
 
-    .explain {
-      padding: 0.1rem 0.6rem;
-      text-align: center;
-    }
+.explain {
+  padding: 0.1rem 0.6rem;
+  text-align: center;
+}
 
-    .chinese {
-      font-size: 0.5rem;
-    }
+.chinese {
+  font-size: 0.5rem;
+}
 
-    p {
-      padding: 1rem;
-    }
+p {
+  padding: 1rem;
+}

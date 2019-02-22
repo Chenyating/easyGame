@@ -16,14 +16,18 @@
     <div id="protectBall">
         <!-- <div class="title">protectBall-保护球球大作战</div> -->
         <div class="stage">
-            <canvas id="bgStage" width=400 height=800>
-            </canvas>
-            <canvas id="ballStage" width=400 height=800>
-            </canvas>
+            <div class="bg-stage">
+                <canvas id="bgStage" width=400 height=800>
+                </canvas>
+            </div>
+            <div class="ball-stage">
+                <canvas id="ballStage" width=400 height=800>
+                </canvas>
+            </div>
             <div class="operation">
                 <div class="inf" @click="leftRotate()">左旋转</div>
-                <div class="inf" @click="drawSmallBall()">绘制小球球</div>
-                <!-- <div class="inf" @click="drawSmallBall()">移动小球球</div> -->
+                <!-- <div class="inf" @click="drawSmallBall()">绘制小球球</div> -->
+                <div class="inf" @click=" randomSmallBall()">移动小球球</div>
                 <!-- <div class="inf">分值：{{scope}}</div> -->
                 <!-- <p>GAME</p>
         <div class="inf" id="title" @click="begin()">
