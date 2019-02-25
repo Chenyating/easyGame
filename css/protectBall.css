@@ -32,10 +32,10 @@ html {
 }
 
 .bg-stage {
-  position: relative;
+  position: absolute;
 }
 .ball-stage {
-  position: absolute;
+  position: relative;
 }
 #bgStage {
   border: solid 0.1rem #000000;

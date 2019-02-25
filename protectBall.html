@@ -25,7 +25,7 @@
                 </canvas>
             </div>
             <div class="operation">
-                <div class="inf" @click="leftRotate()">左旋转</div>
+                <div class="inf" @click="ballRotate()">左旋转</div>
                 <!-- <div class="inf" @click="drawSmallBall()">绘制小球球</div> -->
                 <div class="inf" @click=" randomSmallBall()">移动小球球</div>
                 <!-- <div class="inf">分值：{{scope}}</div> -->
@@ -50,9 +50,9 @@
         // }, {
         //     passive: false
         // }); //passive 参数不能省略，用来兼容ios和android
-        //  document.getElementById("stage").onmousemove=function(e){
-        //      protectBall.getMousePosition(e);
-        //  }
+         document.getElementById("ballStage").addEventListener('mousemove',function (e) { 
+             protectBall.getMousePosition(e);
+          })
     </script>
 </body>
 
