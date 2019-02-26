@@ -1,59 +1,59 @@
 <!DOCTYPE html>
 <html>
-
-<head>
+  <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes"
+    />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <title>保护球球大作战-YATING</title>
     <!-- <meta name="viewport" content="width=device-width, initial-scale=1"> -->
     <link rel="stylesheet" href="css/protectBall.css" />
     <script src="js/vue.js"></script>
     <script src="js/jquery.js"></script>
-</head>
+  </head>
 
-<body>
+  <body>
     <div id="protectBall">
-        <!-- <div class="title">protectBall-保护球球大作战</div> -->
-        <div class="stage">
-            <div class="bg-stage">
-                <canvas id="bgStage" width=400 height=800>
-                </canvas>
-            </div>
-            <div class="ball-stage">
-                <canvas id="ballStage" width=400 height=800>
-                </canvas>
-            </div>
-            <div class="operation">
-                <div class="inf" @click="ballRotate()">左旋转</div>
-                <!-- <div class="inf" @click="drawSmallBall()">绘制小球球</div> -->
-                <div class="inf" @click=" randomSmallBall()">移动小球球</div>
-                <!-- <div class="inf">分值：{{scope}}</div> -->
-                <!-- <p>GAME</p>
-        <div class="inf" id="title" @click="begin()">
-          游戏开始
+      <div class="title">protectBall-保护球球大作战</div>
+      <div class="stage">
+        <div class="bg-stage">
+          <canvas id="bgStage" width="400" height="800"> </canvas>
         </div>
-        <p>AUTHOR</p>
-        <div class="inf">YATING</div> -->
-            </div>
+        <div class="ball-stage">
+          <canvas id="ballStage" width="400" height="800"> </canvas>
         </div>
-        <!-- <div class="explain">
-      Fingers slide around the screen and click on the screen to pause. Slide up and change the direction of the
-      square.
-      <div class="chinese">手指在屏幕中左右滑动，点击屏幕暂停。向上滑动改变方块方向。</div>
-    </div> -->
+        <div class="operation">
+          <div class="inf" @click=" randomSmallBall()">移动小球球</div>
+          <p>GAME</p>
+          <!-- <div class="inf" id="title" @click="begin()">
+            游戏开始
+          </div> -->
+          <p>AUTHOR</p>
+          <div class="inf">YATING</div>
+        </div>
+      </div>
+      <div class="explain">
+        Fingers slide around the screen and click on the screen to pause. Slide
+        up and change the direction of the square.
+        <div class="chinese">
+          手指在屏幕中左右滑动，点击屏幕暂停。向上滑动改变方块方向。
+        </div>
+      </div>
     </div>
     <script src="js/protectBall.js"></script>
     <script>
-        // document.body.addEventListener('touchmove', function (e) {
-        //     e.preventDefault(); //阻止默认的处理方式(阻止下拉滑动的效果)
-        // }, {
-        //     passive: false
-        // }); //passive 参数不能省略，用来兼容ios和android
-         document.getElementById("ballStage").addEventListener('mousemove',function (e) { 
-             protectBall.getMousePosition(e);
-          })
+      // document.body.addEventListener('touchmove', function (e) {
+      //     e.preventDefault(); //阻止默认的处理方式(阻止下拉滑动的效果)
+      // }, {
+      //     passive: false
+      // }); //passive 参数不能省略，用来兼容ios和android
+      document
+        .getElementById("ballStage")
+        .addEventListener("mousemove", function(e) {
+          protectBall.getMousePosition(e);
+        });
     </script>
-</body>
-
+  </body>
 </html>
