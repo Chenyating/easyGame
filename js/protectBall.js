@@ -14,8 +14,6 @@ var protectBall = new Vue({
     centerCircleR: 10,
     smallBallDeg: 2 * Math.PI,
     smallBallR: 5,
-    x1: 0,
-    y1: 0,
     oldDeg: 0,
     angle: null
   },
@@ -39,12 +37,14 @@ var protectBall = new Vue({
     // 绘制内部小球球：没毛病；
     drawCenterCircle(x, y, r, deg) {
       this.bgStage.beginPath();
+      this.bgStage.fillStyle = "green";
       this.bgStage.arc(x, y, r, 0, deg);
       this.bgStage.fill();
     },
     // 绘制外部大框框：没毛病；
     drawCircle(x, y, r, deg) {
       this.bgStage.beginPath();
+      this.bgStage.strokeStyle = "#2ab2a9";
       this.bgStage.arc(x, y, r, 0, deg);
       this.bgStage.stroke();
     },
@@ -63,6 +63,27 @@ var protectBall = new Vue({
       this.bgStage.arc(0, 0, this.circleR, 0, 1.5 * Math.PI);
       this.bgStage.stroke();
       this.bgStage.translate(-this.circleX, -this.circleY); //坐标转换必须为旋转回去之后
+    },
+    // 判断小球的角度
+    whichQuadrant(k, x1, y1) {
+      if (k <= 0) {
+        k = -k;
+      }
+      // 现在鼠标的角度；
+      var angleK = Math.atan(k);
+      // 第一象限
+      if (x1 > this.circleX && y1 < this.circleY) {
+        return (angleK = Math.PI - angleK);
+        // 第二象限
+      } else if (x1 < this.circleX && y1 < this.circleY) {
+        return (angleK = angleK);
+        // 第三象限
+      } else if (x1 < this.circleX && y1 > this.circleY) {
+        return (angleK = 2 * Math.PI - angleK);
+        // 第四象限
+      } else if (x1 > this.circleX && y1 > this.circleY) {
+        return (angleK = Math.PI + angleK);
+      }
     },
     // 获取鼠标在界面上的位置：旋转：没毛病；
     getMousePosition(event) {
@@ -112,17 +133,17 @@ var protectBall = new Vue({
       this.getLineFunction(this.randomX(), 0);
       this.getLineFunction(this.randomX(), this.canvasHeight);
     },
-
     // 小球直线路径公式：得到，K,B,X1,Y1:没毛病；
     getLineFunction(x1, y1) {
       // 求随机小球到中心点的直线公式；y=kx+b；
       var k = (y1 - this.circleY) / (x1 - this.circleX);
       var b = y1 - k * x1;
+      console.log(Math.atan(k));
       // 求完以后开始绘画移动的小球球
       this.moveSmallBall(k, b, x1, y1);
     },
-    // 求下一步的值
-    getNextXY(k, b, x1, y1) {
+    // 求下一步的值,重绘，然后再判断是否到达边界:没毛病
+    getNextXYR(k, b, x1, y1) {
       // 求下一步的值
       // 先判断一下X,Y的值，要朝哪个方向向中心去；
       if (y1 < this.circleY) {
@@ -134,13 +155,46 @@ var protectBall = new Vue({
         var y2 = y1 - 1;
       }
       // 求完下一步的值后，还是重新绘制小球；
-      this.drawSmallBall(x1, y1, x2, y2);
+      this.drawSmallBall(x1, y1, x2, y2,"red");
       myVar = setTimeout(() => {
         this.moveSmallBall(k, b, x2, y2);
       }, 10);
     },
-    // 绘制小球球:1为初始，2为现状；
-    drawSmallBall(x1, y1, x2, y2) {
+    // 求下一步的值,重绘：没毛病
+    getNextXYK(k, b, x1, y1) {
+      // 求下一步的值
+      // 先判断一下X,Y的值，要朝哪个方向向中心去；
+      if (y1 < this.circleY) {
+        var x2 = (y1 - b) / k;
+        var y2 = y1 + 1;
+      }
+      if (y1 > this.circleY) {
+        var x2 = (y1 - b) / k;
+        var y2 = y1 - 1;
+      }
+      // 求完下一步的值后，还是重新绘制小球；
+      this.drawSmallBall(x1, y1, x2, y2,"red");
+    },
+    // 求下一步的值,重绘，然后再判断是否到中心点：没毛病
+    getNextXYC(k, b, x1, y1) {
+      // 求下一步的值
+      // 先判断一下X,Y的值，要朝哪个方向向中心去；
+      if (y1 < this.circleY) {
+        var x2 = (y1 - b) / k;
+        var y2 = y1 + 1;
+      }
+      if (y1 > this.circleY) {
+        var x2 = (y1 - b) / k;
+        var y2 = y1 - 1;
+      }
+      // 求完下一步的值后，还是重新绘制小球；
+      this.drawSmallBall(x1, y1, x2, y2,"green");
+      myVar = setTimeout(() => {
+        this.ifCenter(k, b, x2, y2);
+      }, 10);
+    },
+    // 绘制小球球:1为初始，2为现状：没毛病
+    drawSmallBall(x1, y1, x2, y2,color) {
       // 清空原来的小球球；
       this.ballStage.clearRect(
         x1 - this.smallBallR,
@@ -149,11 +203,24 @@ var protectBall = new Vue({
         2 * this.smallBallR
       );
       // 重新绘制移动的小球球
+
       this.ballStage.beginPath();
-      this.ballStage.arc(x2, y2, this.smallBallR, 0, this.smallBallDeg);
+      this.ballStage.fillStyle = color;
+      this.ballStage.arc(x2, y2, this.smallBallR - 1, 0, this.smallBallDeg);
       this.ballStage.fill();
     },
-    // 小球向下一格的重绘：重点部分；
+    // 判断是否到中心了：没毛病
+    ifCenter(k, b, x1, y1) {
+      if (x1 == this.circleX && y1 == this.circleY) {
+        clearTimeout(myVar);
+
+        console.log("到达中心了");
+        return;
+      } else {
+        this.getNextXYC(k, b, x1, y1);
+      }
+    },
+    // 小球向下一格的重绘：重点部分：没毛病
     moveSmallBall(k, b, x1, y1) {
       var myVar = null;
       clearTimeout(myVar);
@@ -162,37 +229,36 @@ var protectBall = new Vue({
         (y1 - this.circleY) * (y1 - this.circleY);
       var r2 = this.circleR * this.circleR;
       // 没有到达边界，则继续前进；
-      if (r1 != r2) {
+      if (r1 > r2) {
         // 那么(x,y),x+1判断；
-        this.getNextXY(k, b, x1, y1);
+        this.getNextXYR(k, b, x1, y1);
+        return;
       }
       // 到达边界，判断一下，此时K值是否在缺口的范围之内；
-      if(r1==r2) {
-        console.log("相等")
-        // k值在缺口范围内；
-        if (
-          k < Math.tan(this.angle) ||
-          k > Math.tan(Math.PI / 2 + this.angle)
-        ) {
-          console.log(Math.tan(this.angle))
+      if (r1 <= r2) {
+        // 判断一下小球所在的象限
+        var angleK = this.whichQuadrant(k, x1, y1);
+        // 判断一下小球所在的象限
+        if (angleK > this.angle && angleK <= this.angle + Math.PI / 2) {
+          this.getNextXYK();
           // 判断是否到达中心
           this.ifCenter(k, b, x1, y1);
+          return;
         }
         // k值不在缺口范围之内，结束；
         else {
           clearTimeout(myVar);
+          // 这里要写一个炸裂的动画效果；
+
+          // // 清空原来的小球球；
+          // this.ballStage.clearRect(
+          //   x1 - this.smallBallR,
+          //   y1 - this.smallBallR,
+          //   2 * this.smallBallR,
+          //   2 * this.smallBallR
+          // );
           return;
         }
-      }
-    },
-    // 判断是否到中心了
-    ifCenter(k, b, x1, y1) {
-      if (x1 == this.circleX && y1 == this.circleY) {
-        clearTimeout(myVar);
-        console.log("到达中心了")
-        return;
-      } else {
-        this.getNextXY(k, b, x1, y1);
       }
     }
   },
