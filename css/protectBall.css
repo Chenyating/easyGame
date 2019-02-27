@@ -15,7 +15,7 @@ html {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
-  align-content: center;
+  align-items: center;
 }
 
 .text {
@@ -29,13 +29,13 @@ html {
 #bgStage {
   position: absolute;
   margin: 0 auto;
-  background: radial-gradient(#004141, #000000)
-    /* border: solid 0.3rem #333333; */
+  background: radial-gradient(#004141, #000000);
+  border: solid 0.3rem #333333;
 
 
 }
 
 #ballStage {
   position: relative;
-  /* border: solid 0.3rem #333333; */
+  border: solid 0.3rem #333333;
 }
