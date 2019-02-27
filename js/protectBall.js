@@ -15,9 +15,15 @@ var protectBall = new Vue({
     smallBallDeg: 2 * Math.PI,
     smallBallR: 5,
     oldDeg: 0,
-    angle: null
+    angle: null,
+    dotR: 1, //像素大小
   },
   methods: {
+    // 随机取任意值:没毛病；
+    randomN(num) {
+      var x = parseInt(Math.random() * num);
+      return x;
+    },
     // 随机取x值，x不能在x轴上:没毛病；
     randomX() {
       var x = parseInt(Math.random() * this.canvasWidth);
@@ -155,7 +161,7 @@ var protectBall = new Vue({
         var y2 = y1 - 1;
       }
       // 求完下一步的值后，还是重新绘制小球；
-      this.drawSmallBall(x1, y1, x2, y2,"red");
+      this.drawSmallBall(x1, y1, x2, y2, "red");
       myVar = setTimeout(() => {
         this.moveSmallBall(k, b, x2, y2);
       }, 10);
@@ -173,7 +179,7 @@ var protectBall = new Vue({
         var y2 = y1 - 1;
       }
       // 求完下一步的值后，还是重新绘制小球；
-      this.drawSmallBall(x1, y1, x2, y2,"red");
+      this.drawSmallBall(x1, y1, x2, y2, "red");
     },
     // 求下一步的值,重绘，然后再判断是否到中心点：没毛病
     getNextXYC(k, b, x1, y1) {
@@ -188,13 +194,13 @@ var protectBall = new Vue({
         var y2 = y1 - 1;
       }
       // 求完下一步的值后，还是重新绘制小球；
-      this.drawSmallBall(x1, y1, x2, y2,"green");
+      this.drawSmallBall(x1, y1, x2, y2, "green");
       myVar = setTimeout(() => {
         this.ifCenter(k, b, x2, y2);
       }, 10);
     },
     // 绘制小球球:1为初始，2为现状：没毛病
-    drawSmallBall(x1, y1, x2, y2,color) {
+    drawSmallBall(x1, y1, x2, y2, color) {
       // 清空原来的小球球；
       this.ballStage.clearRect(
         x1 - this.smallBallR,
@@ -248,23 +254,90 @@ var protectBall = new Vue({
         // k值不在缺口范围之内，结束；
         else {
           clearTimeout(myVar);
+          // 清空原来的小球球；
+          this.ballStage.clearRect(
+            x1 - this.smallBallR,
+            y1 - this.smallBallR,
+            2 * this.smallBallR,
+            2 * this.smallBallR
+          );
           // 这里要写一个炸裂的动画效果；
-
-          // // 清空原来的小球球；
-          // this.ballStage.clearRect(
-          //   x1 - this.smallBallR,
-          //   y1 - this.smallBallR,
-          //   2 * this.smallBallR,
-          //   2 * this.smallBallR
-          // );
+          this.specialEffects(x1, y1, this.smallBallR);
           return;
         }
       }
-    }
+    },
+
+    // 以下是小球到达边界时的动画效果；
+    // 获取小球到达边界的像素点：没毛病
+    specialEffects(x, y, r) {
+      // 绘制新的；
+      this.ballStage.beginPath();
+      this.ballStage.fillStyle = "red";
+      this.ballStage.arc(x, y, r, 0, Math.PI * 2);
+      this.ballStage.fill();
+      var imgData = this.ballStage.getImageData(x, y, 2 * this.smallBallR, 2 * this.smallBallR);
+      console.log(imgData)
+      // 把原来的图像去掉；
+      this.ballStage.clearRect(x - this.smallBallR, y - this.smallBallR, 2 * this.smallBallR, 2 * this.smallBallR);
+
+      for (var i = 0; i < imgData.width; i += this.dotR) {
+        for (var j = 0; j < imgData.height; j += this.dotR) {
+          if (imgData.data[i + 3] >= 128) {
+            this.painDot(i + x, y + j, this.dotR)
+          }
+        }
+      }
+    },
+    // 绘制：像素点：没毛病
+    painDot(x, y, r) {
+      this.ballStage.beginPath();
+      this.ballStage.fillStyle = "red";
+      this.ballStage.arc(x, y, r, 0, Math.PI * 2);
+      this.ballStage.fill();
+      this.readyMove(x, y)
+    },
+    // 像素点各自开始移动：没毛病
+    readyMove(x, y) {
+      // 
+      if(this.randomN(2)==0){
+
+      }
+      else{
+
+        if (this.randomN(2) == 0) {
+          var k = this.randomN(2)
+          var b = this.randomN(10)
+        } else {
+          var k = -this.randomN(2)
+          var b = this.randomN(10)
+        }
+        console.log(k,b,x,y)
+        this.moveDot(k, b, x, y);
+      }
+    },
+    // 小球向下一格的重绘：重点部分：没毛病
+    moveDot(k, b, x1, y1) {
+      var myVar = null;
+      clearTimeout(myVar);
+      // 先判断一下X,Y的值，要朝哪个方向向中心去；
+      // if (y1 < this.circleY) {
+      //   var x2 = (y1 - b) / k;
+      //   var y2 = y1 + 1;
+      // }
+      // if (y1 > this.circleY) {
+      //   var x2 = (y1 - b) / k;
+      //   var y2 = y1 - 1;
+      // }
+      // this.getNextXYK(k,b,x1,y1)
+
+    },
   },
   mounted() {
+    // 选择外框
     var c1 = document.getElementById("bgStage");
     this.bgStage = c1.getContext("2d");
+    // 移动小球
     var c2 = document.getElementById("ballStage");
     this.ballStage = c2.getContext("2d");
     // 画圈圈
@@ -276,5 +349,7 @@ var protectBall = new Vue({
     );
     this.drawCircle(this.circleX, this.circleY, this.circleR, this.circleDeg);
     this.ballRotate(-Math.PI / 2);
+
+    this.specialEffects(300, 500, this.smallBallR);
   }
 });
