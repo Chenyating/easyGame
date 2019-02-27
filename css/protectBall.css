@@ -2,7 +2,6 @@ body,
 html {
   width: 100%;
   height: 100%;
-  position: fixed;
   overflow-y: hidden;
   background: #000000;
 }
@@ -12,66 +11,31 @@ html {
   margin: 0;
 }
 
-#app {
-  position: fixed;
-  width: 100%;
-  height: 100%;
-  background: white;
-}
-
-.title {
-  font-size: 1.5rem;
-  text-align: center;
-  margin: 0.5rem;
-  font-weight: bold;
-}
-
-.stage {
+#protectBall {
   display: flex;
-  flex-wrap: nowrap;
-  padding: 0.5rem;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-content: center;
 }
-.interface-bg{
-  background: radial-gradient(#004141,#000000)
+
+.text {
+  color: aliceblue;
 }
-.bg-stage {
-  position: absolute;
+
+.interface-bg {
+  margin: 0 auto;
 }
-.ball-stage {
-  position: relative;
-}
+
 #bgStage {
-  border: solid 0.3rem #333333;
+  position: absolute;
+  margin: 0 auto;
+  background: radial-gradient(#004141, #000000)
+    /* border: solid 0.3rem #333333; */
+
+
 }
+
 #ballStage {
-  border: solid 0.3rem #333333;
-}
-
-.operation {
-  width: 100%;
-  text-align: center;
-  margin-left: 0.5rem;
-  border: solid 0.1rem black;
-}
-
-.inf {
-  font-size: 1rem;
-  padding: 0.5rem 0;
-  background: black;
-  color: white;
-  font-weight: bold;
-  width: 100%;
-}
-
-.explain {
-  padding: 0.1rem 0.6rem;
-  text-align: center;
-}
-
-.chinese {
-  font-size: 0.5rem;
-}
-
-p {
-  padding: 1rem;
+  position: relative;
+  /* border: solid 0.3rem #333333; */
 }

@@ -3,19 +3,22 @@ var protectBall = new Vue({
   data: {
     bgStage: null, //背景旋转的圈圈
     ballStage: null, //这是小球球
+    // 画布长宽
     canvasWidth: 400,
     canvasHeight: 800,
+    // 大圆圈
     circleDeg: 1.5 * Math.PI,
     circleX: 200,
     circleY: 400,
     circleR: 40,
-    circleDeg1: 0,
     circleDeg1: Math.PI / 2,
+    // 中心小球
     centerCircleR: 10,
     smallBallDeg: 2 * Math.PI,
     smallBallR: 5,
     oldDeg: 0,
     angle: null,
+    // 炸开特性例子半径；
     dotR: 1, //像素大小
   },
   methods: {
@@ -94,30 +97,30 @@ var protectBall = new Vue({
     // 获取鼠标在界面上的位置：旋转：没毛病；
     getMousePosition(event) {
       // 全部都化成绝对值；
-      if (event.clientX > this.circleX) {
-        var x = event.clientX - this.circleX;
+      if (event.layerX > this.circleX) {
+        var x = event.layerX - this.circleX;
       } else {
-        var x = this.circleX - event.clientX;
+        var x = this.circleX - event.layerX;
       }
-      if (event.clientY > this.circleY) {
-        var y = event.clientY - this.circleY;
+      if (event.layerY > this.circleY) {
+        var y = event.layerY - this.circleY;
       } else {
-        var y = this.circleY - event.clientY;
+        var y = this.circleY - event.layerY;
       }
       // 现在鼠标的角度；
       this.angle = Math.atan(y / x);
 
       // 第一象限
-      if (event.clientX > this.circleX && event.clientY < this.circleY) {
+      if (event.layerX > this.circleX && event.layerY < this.circleY) {
         this.angle = Math.PI - this.angle;
         // 第二象限
-      } else if (event.clientX < this.circleX && event.clientY < this.circleY) {
+      } else if (event.layerX < this.circleX && event.layerY < this.circleY) {
         this.angle = this.angle;
         // 第三象限
-      } else if (event.clientX < this.circleX && event.clientY > this.circleY) {
+      } else if (event.layerX < this.circleX && event.layerY > this.circleY) {
         this.angle = 2 * Math.PI - this.angle;
         // 第四象限
-      } else if (event.clientX > this.circleX && event.clientY > this.circleY) {
+      } else if (event.layerX > this.circleX && event.layerY > this.circleY) {
         this.angle = Math.PI + this.angle;
       }
 
@@ -213,6 +216,7 @@ var protectBall = new Vue({
       this.ballStage.beginPath();
       this.ballStage.fillStyle = color;
       this.ballStage.arc(x2, y2, this.smallBallR - 1, 0, this.smallBallDeg);
+      this.ballStage.globalAlpha = 1;
       this.ballStage.fill();
     },
     // 判断是否到中心了：没毛病
@@ -273,11 +277,10 @@ var protectBall = new Vue({
     specialEffects(x, y, r) {
       // 绘制新的；
       this.ballStage.beginPath();
-      this.ballStage.fillStyle = "red";
+      this.ballStage.fillStyle = "yellow";
       this.ballStage.arc(x, y, r, 0, Math.PI * 2);
       this.ballStage.fill();
       var imgData = this.ballStage.getImageData(x, y, 2 * this.smallBallR, 2 * this.smallBallR);
-      console.log(imgData)
       // 把原来的图像去掉；
       this.ballStage.clearRect(x - this.smallBallR, y - this.smallBallR, 2 * this.smallBallR, 2 * this.smallBallR);
 
@@ -292,44 +295,52 @@ var protectBall = new Vue({
     // 绘制：像素点：没毛病
     painDot(x, y, r) {
       this.ballStage.beginPath();
-      this.ballStage.fillStyle = "red";
+      this.ballStage.fillStyle = "yellow";
       this.ballStage.arc(x, y, r, 0, Math.PI * 2);
       this.ballStage.fill();
       this.readyMove(x, y)
     },
     // 像素点各自开始移动：没毛病
     readyMove(x, y) {
-      // 
-      if(this.randomN(2)==0){
-
+      var k = this.randomN(4);
+      if (this.randomN(2) == 1) {
+        k = -k;
+      } else {
+        k = k;
       }
-      else{
-
-        if (this.randomN(2) == 0) {
-          var k = this.randomN(2)
-          var b = this.randomN(10)
-        } else {
-          var k = -this.randomN(2)
-          var b = this.randomN(10)
-        }
-        console.log(k,b,x,y)
-        this.moveDot(k, b, x, y);
-      }
+      var b = y - k * x;
+      this.moveDot(k, b, x, y, 100)
     },
-    // 小球向下一格的重绘：重点部分：没毛病
-    moveDot(k, b, x1, y1) {
+    // 像素点移动
+    moveDot(k, b, x, y, t) {
       var myVar = null;
       clearTimeout(myVar);
-      // 先判断一下X,Y的值，要朝哪个方向向中心去；
-      // if (y1 < this.circleY) {
-      //   var x2 = (y1 - b) / k;
-      //   var y2 = y1 + 1;
-      // }
-      // if (y1 > this.circleY) {
-      //   var x2 = (y1 - b) / k;
-      //   var y2 = y1 - 1;
-      // }
-      // this.getNextXYK(k,b,x1,y1)
+      //   // 判断以下，一会像素点要朝哪个方向移动
+      if (this.randomN(2) == 1) {
+        var x2 = x + 10;
+      }
+      if (this.randomN(2) == 0) {
+        var x2 = x - 10
+      }
+      var y2 = k * x2 + b;
+      //   // 求完下一步的值后，还是重新绘制小球；
+      this.ballStage.clearRect(x - this.dotR, y - this.dotR, 2 * this.dotR, 2 * this.dotR);
+      this.ballStage.beginPath();
+      this.ballStage.fillStyle = "yellow";
+      this.ballStage.arc(x2, y2, this.dotR, 0, Math.PI * 2);
+      this.ballStage.fill();
+      //   // 让像素点透明
+      t -= 1;
+      if (t >= 0) {
+        this.ballStage.globalAlpha -= 0.3;
+        myVar = setTimeout(() => {
+          this.moveDot(k, b, x2, y2, t);
+        }, 100);
+      } else {
+        clearTimeout(myVar);
+        this.ballStage.globalAlpha = 0;
+        return;
+      }
 
     },
   },
@@ -349,7 +360,5 @@ var protectBall = new Vue({
     );
     this.drawCircle(this.circleX, this.circleY, this.circleR, this.circleDeg);
     this.ballRotate(-Math.PI / 2);
-
-    this.specialEffects(300, 500, this.smallBallR);
   }
 });
