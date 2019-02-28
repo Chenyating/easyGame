@@ -22,11 +22,26 @@ var protectBall = new Vue({
     dotR: 1, //像素大小
 
     scope: 0, //分数
-    subDeg: Math.PI / 6, //每次减少的度数
+    subDeg: Math.PI / 12, //每次减少的度数
     changgeNum: 1, //变化的条件
-
+    gameState:0//游戏状态
   },
   methods: {
+    begin() {
+      if (this.gameState != 0) {
+        //游戏结束状态
+        $("#title").html("");
+        $("#title").html("游戏开始");
+        this.beZero();
+      } else {
+        
+        this.gameState = 1;
+        $("#title").html("");
+        $("#title").html("游戏结束");
+        this.randomSmallBall();
+        clearInterval(randomBall);
+      }
+    },
     // 随机取任意值:没毛病；
     randomN(num) {
       var x = parseInt(Math.random() * num);
@@ -142,10 +157,21 @@ var protectBall = new Vue({
     },
     // 开始出现众多小球球们：没毛病；
     randomSmallBall() {
+      var randomBall = null;
+      clearTimeout(randomBall);
       this.getLineFunction(0, this.randomY());
       this.getLineFunction(this.canvasWidth, this.randomY());
       this.getLineFunction(this.randomX(), 0);
       this.getLineFunction(this.randomX(), this.canvasHeight);
+      if (this.circleR <= this.smallBallR||this.circleDeg==0) {
+        this.beZero();
+        clearTimeout(randomBall);
+        return;
+      } else {
+        randomBall = setTimeout(() => {
+          this.randomSmallBall();
+        }, 3000);
+      }
     },
     // 小球直线路径公式：得到，K,B,X1,Y1:没毛病；
     getLineFunction(x1, y1) {
@@ -261,7 +287,6 @@ var protectBall = new Vue({
         }
       }
     },
-
     // 以下是小球到达边界时的动画效果；
     // 获取小球到达边界的像素点：没毛病
     specialEffects(x, y, r) {
@@ -335,42 +360,8 @@ var protectBall = new Vue({
     },
     // 恢复初始状态；
     beZero() {
-      clearTimeout(myVar);
-      // 清空小球画布
-      this.ballStage.clearRect(
-        0,
-        0,
-        this.canvasWidth,
-        this.canvasHeight
-      );
-      this.bgStage.clearRect(
-        0,
-        0,
-        this.canvasWidth,
-        this.canvasHeight
-      );
-     
-      // 大圆圈
-      this.circleDeg = 1.5 * Math.PI;
-      this.circleX = 200;
-      this.circleY = 400;
-      this.circleR = 100;
-      // 中心小球
-      this.centerCircleR = 10;
-      this.smallBallDeg = 2 * Math.PI;
-      this.smallBallR = 5;
-      // 框框旋转的角度
-      this.oldDeg = 0;
-      this.angle = null;
-      // 炸开特性例子半径；
-      this.dotR = 1; //像素大小
-
-      this.scope = 0; //分数
-      this.subDeg = Math.PI / 6; //每次减少的度数
-      this.changgeNum = 1; //变化的条件
-
-      this.drawCircle(this.circleX, this.circleY, this.circleR, this.circleDeg);
-      this.ballRotate(-Math.PI / 2);
+      // 刷新当前页面；
+      window.location.reload();
     }
   },
   mounted() {
@@ -388,9 +379,10 @@ var protectBall = new Vue({
       this.smallBallDeg
     );
     this.drawCircle(this.circleX, this.circleY, this.circleR, this.circleDeg);
-    // this.ballRotate(-Math.PI / 2);
+    this.ballRotate(-Math.PI / 2);
   },
   watch: {
+    // 中心小球半径增大，重绘中心小球
     centerCircleR: function (R) {
       this.drawCenterCircle(this.circleX, this.circleY, R, this.smallBallDeg)
       if (R >= this.circleR) {
@@ -399,10 +391,12 @@ var protectBall = new Vue({
         return alert("游戏结束")
       }
     },
+    // 分值增大，角度减少，框的半径减少；
     scope: function (val) {
       if (val % this.changgeNum == 0) {
         this.circleDeg -= this.subDeg;
-        this.bgStage.clearRect(this.circleX - this.circleR, this.circleX - this.circleR, 2 * this.circleR, 2 * this.circleR);
+        this.drawCenterCircle(this.circleX, this.circleY, R, this.smallBallDeg)
+        this.bgStage.clearRect(0, 0, this.canvasWidth,this.canvasHeight);
         this.circleR -= 1;
         if (this.circleR <= this.centerCircleR) {
           this.bgStage.clearRect(this.circleX - this.circleR, this.circleX - this.circleR, 2 * this.circleR, 2 * this.circleR);

@@ -5,7 +5,7 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>保护球球大作战-YATING</title>
+  <title>逼死强迫症小游戏-YATING</title>
   <!-- <meta name="viewport" content="width=device-width, initial-scale=1"> -->
   <link rel="stylesheet" href="css/protectBall.css" />
   <script src="js/vue.js"></script>
@@ -14,18 +14,21 @@
 
 <body>
   <div id="protectBall">
-    <div class=interface-bg>
-        <div class="text" @click=" randomSmallBall()">游戏开始{{scope}}</div>
-          <canvas id="bgStage" width="400" height="800"> </canvas>
-          <canvas id="ballStage" width="400" height="800"> </canvas>
+    <div class="interface-bg">
+      <div class="info">
+        <div id="title" class="text" @click=" begin()">游戏开始</div>
+        <div>已防御：{{scope}} 个侵略球球</div>
       </div>
+      <canvas id="bgStage" width="400" height="800"> </canvas>
+      <canvas id="ballStage" width="400" height="800"> </canvas>
+    </div>
   </div>
   <script src="js/protectBall.js"></script>
   <script>
     document.body.addEventListener('touchmove', function (e) {
-        e.preventDefault(); //阻止默认的处理方式(阻止下拉滑动的效果)
+      e.preventDefault(); //阻止默认的处理方式(阻止下拉滑动的效果)
     }, {
-        passive: false
+      passive: false
     }); //passive 参数不能省略，用来兼容ios和android
     document
       .getElementById("ballStage")

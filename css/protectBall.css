@@ -26,13 +26,19 @@ html {
   margin: 0 auto;
 }
 
+.info{
+  padding: 1rem;
+  display: flex;
+  flex-wrap: wrap;
+  color: #ffffff;
+  justify-content: space-around;
+}
+
 #bgStage {
   position: absolute;
   margin: 0 auto;
   background: radial-gradient(#004141, #000000);
   border: solid 0.3rem #333333;
-
-
 }
 
 #ballStage {
