@@ -200,7 +200,7 @@ var protectBall = new Vue({
       this.getLineFunction(this.randomX(), 0, this.nomalColor);
       this.getLineFunction(this.randomX(), this.canvasHeight, this.nomalColor);
       // 随机出现一个安全的小球球
-      if(this.randomN(3)==1){
+      if(this.randomN(2)==1){
         this.safeBall();
       }
       // 当框半径小于等于中心球半径，或者角度为0；游戏结束；
@@ -324,7 +324,6 @@ var protectBall = new Vue({
     },
     // 判断是否到中心了：没毛病
     ifCenter(k, b, x1, y1, color) {
-      console.log(color)
       if (x1 == undefined && y1 == undefined) {
         this.bgStage.clearRect(this.circleX - this.centerCircleR, this.circleX - this.centerCircleR, 2 * this.centerCircleR, 2 * this.centerCircleR);
         if(color==this.safeColor){
