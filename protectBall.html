@@ -24,16 +24,13 @@
       <canvas id="ballStage" width="400" height="800"> </canvas>
     </div>
   </div>
-  <div class="info">
-    随着时间的增长，缺口即将越来越大，被攻击的小月亮，即将突破防御系统爆炸了！
-  </div>
   <script src="js/protectBall.js"></script>
   <script>
-    document.body.addEventListener('touchmove', function (e) {
-      e.preventDefault(); //阻止默认的处理方式(阻止下拉滑动的效果)
-    }, {
-      passive: false
-    }); //passive 参数不能省略，用来兼容ios和android
+    // document.body.addEventListener('touchmove', function (e) {
+    //   e.preventDefault(); //阻止默认的处理方式(阻止下拉滑动的效果)
+    // }, {
+    //   passive: false
+    // }); //passive 参数不能省略，用来兼容ios和android
     document
       .getElementById("ballStage")
       .addEventListener("mousemove", function (e) {

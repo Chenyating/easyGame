@@ -33,6 +33,11 @@ html {
   color: #ffffff;
   justify-content: space-around;
 }
+.explain{
+  text-align: center;
+  padding: 1rem;
+  color: #ffffff;
+}
 
 #bgStage {
   position: absolute;
