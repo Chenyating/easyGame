@@ -17,11 +17,15 @@
     <div class="interface-bg">
       <div class="info">
         <div id="title" class="text" @click=" begin()">游戏开始</div>
-        <div>已防御：{{scope}} 个侵略球球</div>
+        <div>分数：{{scope}}</div>
+        <div>时间：{{gameTime}}秒</div>
       </div>
       <canvas id="bgStage" width="400" height="800"> </canvas>
       <canvas id="ballStage" width="400" height="800"> </canvas>
     </div>
+  </div>
+  <div class="info">
+    随着时间的增长，缺口即将越来越大，被攻击的小月亮，即将突破防御系统爆炸了！
   </div>
   <script src="js/protectBall.js"></script>
   <script>

@@ -10,7 +10,7 @@ var protectBall = new Vue({
     circleDeg: 1.5 * Math.PI,
     circleX: 200,
     circleY: 400,
-    circleR: 100,
+    circleR: 50,
     // 中心小球
     centerCircleR: 10,
     smallBallDeg: 2 * Math.PI,
@@ -23,8 +23,14 @@ var protectBall = new Vue({
 
     scope: 0, //分数
     subDeg: Math.PI / 12, //每次减少的度数
-    changgeNum: 1, //变化的条件
-    gameState:0//游戏状态
+    changgeNum: 20, //变化的条件，分数每增加n分就，角度减少
+    gameState: 0, //游戏状态
+
+    gameTime: 0,
+    // 颜色设置：
+    safeColor: "#00FFFF", //安全颜色
+    dangerColor: "#DC143C", //危险颜色
+    nomalColor: "yellow" //正常颜色
   },
   methods: {
     begin() {
@@ -32,14 +38,28 @@ var protectBall = new Vue({
         //游戏未开始时候
         $("#title").html("");
         $("#title").html("游戏开始");
-        this.beZero();
+        this.gameOver();
       } else {
-        
+
         this.gameState = 1;
         $("#title").html("");
         $("#title").html("游戏结束");
         this.randomSmallBall();
-        clearInterval(randomBall);
+        this.getTime();
+      }
+    },
+    // 计算时间
+    getTime(){
+      var timeVar=null;
+      clearTimeout(timeVar);
+      this.gameTime+=1;
+      if(this.gameState==0){
+        clearTimeout(timeVar);
+      }
+      else{
+         timeVar = setTimeout(() => {
+           this.getTime();
+        }, 1000);
       }
     },
     // 随机取任意值:没毛病；
@@ -66,14 +86,14 @@ var protectBall = new Vue({
     // 绘制内部小球球：没毛病；
     drawCenterCircle(x, y, r, deg) {
       this.bgStage.beginPath();
-      this.bgStage.fillStyle = "yellow";
+      this.bgStage.fillStyle = "#FFFF00";
       this.bgStage.arc(x, y, r, 0, deg);
       this.bgStage.fill();
     },
     // 绘制外部大框框：没毛病；
     drawCircle(x, y, r, deg) {
       this.bgStage.beginPath();
-      this.bgStage.strokeStyle = "#2ab2a9";
+      this.bgStage.strokeStyle = "#00FF80";
       this.bgStage.arc(x, y, r, 0, deg);
       this.bgStage.stroke();
     },
@@ -155,34 +175,97 @@ var protectBall = new Vue({
         this.ballRotate(newDeg);
       }
     },
+    // 随机出现一个安全小球球
+    safeBall() {
+      var randomColor = this.randomN(5);
+      if (randomColor == 1) {
+        this.getLineFunction(0, this.randomY(), this.safeColor);
+      }
+      if (randomColor == 2) {
+        this.getLineFunction(this.canvasWidth, this.randomY(), this.safeColor);
+      }
+      if (randomColor == 3) {
+        this.getLineFunction(this.randomX(), 0, this.safeColor);
+      }
+      if (randomColor == 4) {
+        this.getLineFunction(this.randomX(), this.canvasHeight, this.safeColor);
+      }
+    },
     // 开始出现众多小球球们：没毛病；
     randomSmallBall() {
       var randomBall = null;
       clearTimeout(randomBall);
-      this.getLineFunction(0, this.randomY());
-      this.getLineFunction(this.canvasWidth, this.randomY());
-      this.getLineFunction(this.randomX(), 0);
-      this.getLineFunction(this.randomX(), this.canvasHeight);
-      if (this.circleR <= this.smallBallR||this.circleDeg==0) {
-        this.beZero();
+      this.getLineFunction(0, this.randomY(), this.nomalColor);
+      this.getLineFunction(this.canvasWidth, this.randomY(), this.nomalColor);
+      this.getLineFunction(this.randomX(), 0, this.nomalColor);
+      this.getLineFunction(this.randomX(), this.canvasHeight, this.nomalColor);
+      // 随机出现一个安全的小球球
+      if(this.randomN(3)==1){
+        this.safeBall();
+      }
+      // 当框半径小于等于中心球半径，或者角度为0；游戏结束；
+      if (this.circleR <= this.smallBallR || this.circleDeg == 0) {
+        this.gameOver();
         clearTimeout(randomBall);
         return;
       } else {
         randomBall = setTimeout(() => {
           this.randomSmallBall();
-        }, 3000);
+        }, 4000);
       }
     },
     // 小球直线路径公式：得到，K,B,X1,Y1:没毛病；
-    getLineFunction(x1, y1) {
+    getLineFunction(x1, y1, color) {
       // 求随机小球到中心点的直线公式；y=kx+b；
       var k = (y1 - this.circleY) / (x1 - this.circleX);
       var b = y1 - k * x1;
       // 求完以后开始绘画移动的小球球
-      this.moveSmallBall(k, b, x1, y1);
+      this.moveSmallBall(k, b, x1, y1, color);
+    },
+    // 小球向下一格的重绘：重点部分：没毛病
+    moveSmallBall(k, b, x1, y1, color) {
+      var myVar = null;
+      clearTimeout(myVar);
+      var r1 =
+        (x1 - this.circleX) * (x1 - this.circleX) +
+        (y1 - this.circleY) * (y1 - this.circleY);
+      var r2 = this.circleR * this.circleR;
+      // 没有到达边界，则继续前进；
+      if (r1 > r2) {
+        // 那么(x,y),x+1判断；
+        this.getNextXY(k, b, x1, y1, 1, color);
+        return;
+      }
+      // 到达边界，判断一下，此时K值是否在缺口的范围之内；
+      if (r1 <= r2) {
+        // 判断一下小球所在的象限
+        var angleK = this.whichQuadrant(k, x1, y1);
+        // 判断一下小球所在的象限
+        if (angleK > this.angle - parseInt(this.scope / this.changgeNum) * this.subDeg && angleK <= this.angle + (2 * Math.PI - this.circleDeg)) {
+          this.getNextXY(k, b, x1, y1, 0, color);
+          // 判断是否到达中心
+          this.ifCenter(k, b, x1, y1, color);
+          return;
+        }
+        // k值不在缺口范围之内，结束；
+        else {
+          clearTimeout(myVar);
+          // 清空原来的小球球；
+          this.ballStage.clearRect(
+            x1 - this.smallBallR,
+            y1 - this.smallBallR,
+            2 * this.smallBallR,
+            2 * this.smallBallR
+          );
+          // 这里要写一个炸裂的动画效果；
+          this.scope+=1;
+          this.specialEffects(x1, y1, this.smallBallR);
+          return;
+        }
+      }
     },
     // 求下一步的值,重绘，然后再判断是否到达边界:没毛病
-    getNextXY(k, b, x1, y1, judge) {
+    getNextXY(k, b, x1, y1, judge, color) {
       // 求下一步的值
       // 先判断一下X,Y的值，要朝哪个方向向中心去；
       if (y1 < this.circleY) {
@@ -197,22 +280,27 @@ var protectBall = new Vue({
 
       // 继续前进
       if (judge == 0) {
-        this.drawSmallBall(x1, y1, x2, y2, "red");
+        this.drawSmallBall(x1, y1, x2, y2, color);
         return;
       }
       // 判断是否到达边界
       if (judge == 1) {
-        this.drawSmallBall(x1, y1, x2, y2, "red");
+        this.drawSmallBall(x1, y1, x2, y2, color);
         myVar = setTimeout(() => {
-          this.moveSmallBall(k, b, x2, y2);
+          this.moveSmallBall(k, b, x2, y2, color);
         }, 10);
         return;
       }
       // 判断是否到中心点
       if (judge == 2) {
-        this.drawSmallBall(x1, y1, x2, y2, "yellow");
+        // 判断一下，进入圈内的是否是安全小球
+        if (color == this.safeColor) {
+          this.drawSmallBall(x1, y1, x2, y2, this.safeColor);
+        } else {
+          this.drawSmallBall(x1, y1, x2, y2, this.dangerColor);
+        }
         myVar = setTimeout(() => {
-          this.ifCenter(k, b, x2, y2);
+          this.ifCenter(k, b, x2, y2, color);
         }, 10);
         return;
       }
@@ -235,58 +323,26 @@ var protectBall = new Vue({
       this.ballStage.fill();
     },
     // 判断是否到中心了：没毛病
-    ifCenter(k, b, x1, y1) {
+    ifCenter(k, b, x1, y1, color) {
+      console.log(color)
       if (x1 == undefined && y1 == undefined) {
         this.bgStage.clearRect(this.circleX - this.centerCircleR, this.circleX - this.centerCircleR, 2 * this.centerCircleR, 2 * this.centerCircleR);
-        this.centerCircleR += 1;
-        // this.drawCenterCircle(this.circleX,this.circleY,this.centerCircleR,this.smallBallDeg)
+        if(color==this.safeColor){
+          // 若为蓝色小球，小球半径减小，外框半径增大，分数加5
+          this.centerCircleR -= 1;
+          this.circleR+=5;
+          this.scope+=5;
+        }
+        else{
+          // 红色小球进入，小球半径增大
+          this.centerCircleR+=2;
+        }
         return;
       } else {
-        this.getNextXY(k, b, x1, y1, 2);
+        this.getNextXY(k, b, x1, y1, 2, color);
       }
     },
-    // 小球向下一格的重绘：重点部分：没毛病
-    moveSmallBall(k, b, x1, y1) {
-      var myVar = null;
-      clearTimeout(myVar);
-      var r1 =
-        (x1 - this.circleX) * (x1 - this.circleX) +
-        (y1 - this.circleY) * (y1 - this.circleY);
-      var r2 = this.circleR * this.circleR;
-      // 没有到达边界，则继续前进；
-      if (r1 > r2) {
-        // 那么(x,y),x+1判断；
-        this.getNextXY(k, b, x1, y1, 1);
-        return;
-      }
-      // 到达边界，判断一下，此时K值是否在缺口的范围之内；
-      if (r1 <= r2) {
-        // 判断一下小球所在的象限
-        var angleK = this.whichQuadrant(k, x1, y1);
-        // 判断一下小球所在的象限
-        if (angleK > this.angle - parseInt(this.scope / this.changgeNum) * this.subDeg && angleK <= this.angle + (2 * Math.PI - this.circleDeg)) {
-          this.getNextXY(k, b, x1, y1, 0);
-          // 判断是否到达中心
-          this.ifCenter(k, b, x1, y1);
-          return;
-        }
-        // k值不在缺口范围之内，结束；
-        else {
-          this.scope += 1;
-          clearTimeout(myVar);
-          // 清空原来的小球球；
-          this.ballStage.clearRect(
-            x1 - this.smallBallR,
-            y1 - this.smallBallR,
-            2 * this.smallBallR,
-            2 * this.smallBallR
-          );
-          // 这里要写一个炸裂的动画效果；
-          this.specialEffects(x1, y1, this.smallBallR);
-          return;
-        }
-      }
-    },
+
     // 以下是小球到达边界时的动画效果；
     // 获取小球到达边界的像素点：没毛病
     specialEffects(x, y, r) {
@@ -359,7 +415,7 @@ var protectBall = new Vue({
 
     },
     // 恢复初始状态；
-    beZero() {
+    gameOver() {
       // 刷新当前页面；
       window.location.reload();
     }
@@ -387,21 +443,21 @@ var protectBall = new Vue({
       this.drawCenterCircle(this.circleX, this.circleY, R, this.smallBallDeg)
       if (R >= this.circleR) {
         this.bgStage.clearRect(this.circleX - this.circleR, this.circleX - this.circleR, 2 * this.circleR, 2 * this.circleR);
-        this.beZero();
-        return alert("游戏结束")
+        this.gameOver();
+        return alert("游戏结束,你的得分是：" + this.scope)
       }
     },
     // 分值增大，角度减少，框的半径减少；
     scope: function (val) {
       if (val % this.changgeNum == 0) {
         this.circleDeg -= this.subDeg;
-        this.drawCenterCircle(this.circleX, this.circleY, R, this.smallBallDeg)
-        this.bgStage.clearRect(0, 0, this.canvasWidth,this.canvasHeight);
-        this.circleR -= 1;
+        this.bgStage.clearRect(0, 0, this.canvasWidth, this.canvasHeight);
+        this.circleR -= 5;
+        this.drawCenterCircle(this.circleX, this.circleY, this.centerCircleR, this.smallBallDeg)
         if (this.circleR <= this.centerCircleR) {
           this.bgStage.clearRect(this.circleX - this.circleR, this.circleX - this.circleR, 2 * this.circleR, 2 * this.circleR);
-          this.beZero();
-          return alert("游戏结束")
+          this.gameOver();
+          return alert("游戏结束,你的得分是：" + this.scope)
         }
 
         this.drawCircle(this.circleX, this.circleY, this.circleR, this.circleDeg);
@@ -409,10 +465,9 @@ var protectBall = new Vue({
     },
     circleDeg: function (val) {
       if (val <= 0) {
-        this.beZero();
-        return alert("游戏结束")
+        this.gameOver();
+        return alert("游戏结束,你的得分是：" + this.scope)
       }
-
     }
   },
 });
