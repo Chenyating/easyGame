@@ -20,6 +20,11 @@ var protectBall = new Vue({
     angle: null,
     // 炸开特性例子半径；
     dotR: 1, //像素大小
+
+    scope: 0, //分数
+    subDeg: Math.PI / 6, //每次减少的度数
+    changgeNum: 1, //变化的条件
+
   },
   methods: {
     // 随机取任意值:没毛病；
@@ -147,7 +152,6 @@ var protectBall = new Vue({
       // 求随机小球到中心点的直线公式；y=kx+b；
       var k = (y1 - this.circleY) / (x1 - this.circleX);
       var b = y1 - k * x1;
-      console.log(Math.atan(k));
       // 求完以后开始绘画移动的小球球
       this.moveSmallBall(k, b, x1, y1);
     },
@@ -206,8 +210,10 @@ var protectBall = new Vue({
     },
     // 判断是否到中心了：没毛病
     ifCenter(k, b, x1, y1) {
-      if (x1 == this.circleX && y1 == this.circleY) {
-        clearTimeout(myVar);
+      if (x1 == undefined && y1 == undefined) {
+        this.bgStage.clearRect(this.circleX - this.centerCircleR, this.circleX - this.centerCircleR, 2 * this.centerCircleR, 2 * this.centerCircleR);
+        this.centerCircleR += 1;
+        // this.drawCenterCircle(this.circleX,this.circleY,this.centerCircleR,this.smallBallDeg)
         return;
       } else {
         this.getNextXY(k, b, x1, y1, 2);
@@ -232,7 +238,7 @@ var protectBall = new Vue({
         // 判断一下小球所在的象限
         var angleK = this.whichQuadrant(k, x1, y1);
         // 判断一下小球所在的象限
-        if (angleK > this.angle && angleK <= this.angle + (2 * Math.PI - this.circleDeg)) {
+        if (angleK > this.angle - parseInt(this.scope / this.changgeNum) * this.subDeg && angleK <= this.angle + (2 * Math.PI - this.circleDeg)) {
           this.getNextXY(k, b, x1, y1, 0);
           // 判断是否到达中心
           this.ifCenter(k, b, x1, y1);
@@ -240,6 +246,7 @@ var protectBall = new Vue({
         }
         // k值不在缺口范围之内，结束；
         else {
+          this.scope += 1;
           clearTimeout(myVar);
           // 清空原来的小球球；
           this.ballStage.clearRect(
@@ -296,8 +303,8 @@ var protectBall = new Vue({
     },
     // 像素点移动
     moveDot(k, b, x, y, t) {
-      var myVar = null;
-      clearTimeout(myVar);
+      var dotVar = null;
+      clearTimeout(dotVar);
       //   // 判断以下，一会像素点要朝哪个方向移动
       if (this.randomN(2) == 1) {
         var x2 = x + 10;
@@ -316,16 +323,55 @@ var protectBall = new Vue({
       t -= 1;
       if (t >= 0) {
         this.ballStage.globalAlpha -= 0.3;
-        myVar = setTimeout(() => {
+        dotVar = setTimeout(() => {
           this.moveDot(k, b, x2, y2, t);
         }, 100);
       } else {
-        clearTimeout(myVar);
+        clearTimeout(dotVar);
         this.ballStage.globalAlpha = 0;
         return;
       }
 
     },
+    // 恢复初始状态；
+    beZero() {
+      clearTimeout(myVar);
+      // 清空小球画布
+      this.ballStage.clearRect(
+        0,
+        0,
+        this.canvasWidth,
+        this.canvasHeight
+      );
+      this.bgStage.clearRect(
+        0,
+        0,
+        this.canvasWidth,
+        this.canvasHeight
+      );
+     
+      // 大圆圈
+      this.circleDeg = 1.5 * Math.PI;
+      this.circleX = 200;
+      this.circleY = 400;
+      this.circleR = 100;
+      // 中心小球
+      this.centerCircleR = 10;
+      this.smallBallDeg = 2 * Math.PI;
+      this.smallBallR = 5;
+      // 框框旋转的角度
+      this.oldDeg = 0;
+      this.angle = null;
+      // 炸开特性例子半径；
+      this.dotR = 1; //像素大小
+
+      this.scope = 0; //分数
+      this.subDeg = Math.PI / 6; //每次减少的度数
+      this.changgeNum = 1; //变化的条件
+
+      this.drawCircle(this.circleX, this.circleY, this.circleR, this.circleDeg);
+      this.ballRotate(-Math.PI / 2);
+    }
   },
   mounted() {
     // 选择外框
@@ -342,6 +388,37 @@ var protectBall = new Vue({
       this.smallBallDeg
     );
     this.drawCircle(this.circleX, this.circleY, this.circleR, this.circleDeg);
-    this.ballRotate(-Math.PI / 2);
-  }
+    // this.ballRotate(-Math.PI / 2);
+  },
+  watch: {
+    centerCircleR: function (R) {
+      this.drawCenterCircle(this.circleX, this.circleY, R, this.smallBallDeg)
+      if (R >= this.circleR) {
+        this.bgStage.clearRect(this.circleX - this.circleR, this.circleX - this.circleR, 2 * this.circleR, 2 * this.circleR);
+        this.beZero();
+        return alert("游戏结束")
+      }
+    },
+    scope: function (val) {
+      if (val % this.changgeNum == 0) {
+        this.circleDeg -= this.subDeg;
+        this.bgStage.clearRect(this.circleX - this.circleR, this.circleX - this.circleR, 2 * this.circleR, 2 * this.circleR);
+        this.circleR -= 1;
+        if (this.circleR <= this.centerCircleR) {
+          this.bgStage.clearRect(this.circleX - this.circleR, this.circleX - this.circleR, 2 * this.circleR, 2 * this.circleR);
+          this.beZero();
+          return alert("游戏结束")
+        }
+
+        this.drawCircle(this.circleX, this.circleY, this.circleR, this.circleDeg);
+      }
+    },
+    circleDeg: function (val) {
+      if (val <= 0) {
+        this.beZero();
+        return alert("游戏结束")
+      }
+
+    }
+  },
 });
