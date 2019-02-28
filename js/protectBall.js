@@ -29,7 +29,7 @@ var protectBall = new Vue({
   methods: {
     begin() {
       if (this.gameState != 0) {
-        //游戏结束状态
+        //游戏未开始时候
         $("#title").html("");
         $("#title").html("游戏开始");
         this.beZero();
