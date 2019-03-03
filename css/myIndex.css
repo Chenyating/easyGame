@@ -1,0 +1,45 @@
+html {
+  width: 100%;
+  height: 100%;
+  position: fixed;
+  overflow-y: hidden;
+}
+
+* {
+  padding: 0;
+  margin: 0;
+}
+
+#index {
+  background: red;
+}
+.top-tab{
+  text-align: center;
+}
+.logo{
+  margin: 0 auto;
+  width: 4rem;
+}
+/* 搜索框 */
+.search-box{
+  border: solid 1px #000000;
+  height: 1rem;
+  margin: 0 0.5rem;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  padding: 0 0.1rem;
+  font-size: 0.4rem;
+}
+.small-log{
+  width: 0.8rem;
+  height: 0.8rem;
+}
+.name{
+  width:6rem;
+  text-align: left;
+}
+.connect{
+  color: #38f;
+  font-weight: bold;
+}

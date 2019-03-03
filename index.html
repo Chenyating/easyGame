@@ -3,52 +3,37 @@
 
 <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <title>YATING的首页</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>首页-YATING</title>
+    <!-- <meta name="viewport" content="width=device-width, initial-scale=1"> -->
+    <link rel="stylesheet" href="css/myIndex.css" />
+    <script src="js/flexible.js"></script>
     <script src="js/vue.js"></script>
     <script src="js/jquery.js"></script>
-    <script src="js/flexible.js"></script>
 </head>
-<style>
-    .big-box {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-    }
-
-    .text {
-        font-size: .933333rem;
-    }
-</style>
 
 <body>
-    <div id="index" class="big-box" v-for="n">
-        {{n}}
-        <h1 class="text">
-            YATING:HELLO！
-        </h1>
-        <h1 class="text">
-            YATING:HELLO！
-        </h1>
-        <h1 class="text">
-            YATING:HELLO！
-        </h1>
-        <h1 class="text">
-            YATING:HELLO！
-        </h1>
-        <h1 class="text">
-            YATING:HELLO！
-        </h1>
+    <div id="myIndex">
+        <div class="top-tab">
+            <img src="https://www.baidu.com/img/bd_logo1.png" class="logo"></img>
+            <!-- 搜索框 -->
+            <div class="search-box">
+                <img src="./img/baidu.png" class="small-log"></img>
+                <div class="name">陈雅婷</div>
+                <div class="connect">联系一下</div>
+            </div>
+            <!-- 列表 -->
+        </div>
     </div>
+    <script src="js/myIndex.js"></script>
+    <script>
+        document.body.addEventListener('touchmove', function (e) {
+            e.preventDefault(); //阻止默认的处理方式(阻止下拉滑动的效果)
+        }, {
+            passive: false
+        }); //passive 参数不能省略，用来兼容ios和android
+    </script>
 </body>
-<script>
-var index=new Vue({
-    el:"#index",
-    data:{
-        n:10
-    }
-})
-</script>
 
 </html>
