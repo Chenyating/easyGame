@@ -5,7 +5,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>首页-YATING</title>
+    <title>陈雅婷-YATING</title>
     <!-- <meta name="viewport" content="width=device-width, initial-scale=1"> -->
     <script src="js/flexible.js"></script>
     <script src="js/vue.js"></script>
@@ -46,7 +46,7 @@
             </ul>
             <div id="myTabContent" class="tab-content">
                 <!-- 基本资料 -->
-                <div class="tab-pane fade in active" id="all">
+                <div class="tab-pane fade " id="all">
                     <div class="main-info">
                         <h2>{{name}}</h2>
                         <h5>WEB前端开发工程师</h5>
@@ -66,18 +66,21 @@
                     </div>
                     <!-- csdn -->
                     <div class="inf-box">
-                        <div class="title"><em>CSDN:</em>YaTing 的 Soil solution</div>
-                        <div class="main-introduction">
+                        <div class="title" @click="goLink(1)"><em>CSDN:</em>YaTing 的 Soil solution</div>
+                        <div class="main-introduction" @click="goLink(1)">
                             <img src="./img/index/csdn.jpg" class="my-photo" />
                             <div class="inf-inf">
                                 在<em>CSDN</em>中,写博客已经快<em>2</em>年了,原创<em>54</em>篇,总浏览量<em>1万</em>。每天记录自己在技术方面的成长，由一只小小菜鸟演变成一只<em>菜鸟</em>，只为通往大神的方向……
                             </div>
                         </div>
                         <div>
-                            <div class="link"><a href="https://blog.csdn.net/lemisi/article/details/88051630">详解球球保卫大作战：html+js+canvas实现原理</a></div>
-                            <div class="link"><a href="https://blog.csdn.net/lemisi/article/details/83242543">详解前端扫雷代码：HTML+JS+DIV实现原理</a></div>
-                            <div class="link"><a href="https://blog.csdn.net/lemisi/article/details/82824676">详解前端俄罗斯方块代码：HTML+JS+CANVAS实现原理</a></div>
-                            <div class="link"><a href="https://blog.csdn.net/lemisi/article/details/82219322">贪吃蛇前端代码</a></div>
+                            <div class="link"><a href="https://blog.csdn.net/lemisi/article/details/88051630">详解球球保卫大作战：html+js+canvas实现原理<span></span></a>
+                            </div>
+                            <div class="link"><a href="https://blog.csdn.net/lemisi/article/details/83242543">详解前端扫雷代码：HTML+JS+DIV实现原理<span></span></a>
+                            </div>
+                            <div class="link"><a href="https://blog.csdn.net/lemisi/article/details/82824676">详解前端俄罗斯方块代码：HTML+JS+CANVAS实现原理<span></span></a>
+                            </div>
+                            <div class="link"><a href="https://blog.csdn.net/lemisi/article/details/82219322">贪吃蛇前端代码<span></span></a></div>
                         </div>
                         <div class="time">
                             2017年7月25日：https://blog.csdn.net/lemisi
@@ -85,14 +88,16 @@
                     </div>
                     <!-- github -->
                     <div class="inf-box">
-                        <div class="main-introduction">
+                        <div class="title" @click="goLink(2)"><em>github</em> Chenyating</div>
+                        <div class="main-introduction" @click="goLink(2)">
                             <img src="./img/index/github.jpg" class="my-photo" />
                             <div class="inf-inf">My interest is to write <em>interesting small games</em>, through
                                 thinking about the logic of the game, to achieve it, beautify it.Because I'm a
                                 <em>ofront-end development engineer!</em></div>
                         </div>
                         <div>
-                            <div class="link">小游戏集合：https://github.com/Chenyating/easyGame</div>
+                            <div class="link"><a href="https://github.com/Chenyating/easyGame">小游戏集合：https://github.com/Chenyating/easyGame<span></span></a>
+                            </div>
                         </div>
                         <div class="time">
                             https://github.com/Chenyating
@@ -100,7 +105,8 @@
                     </div>
                     <!-- 站酷 -->
                     <div class="inf-box">
-                        <div class="main-introduction">
+                        <div class="title" @click="goLink(3)"><em>站酷(ZCOOL)</em>-chen雅婷的主页</div>
+                        <div class="main-introduction" @click="goLink(3)">
                             <img src="./img/index/zhanku.jpg" class="my-photo" />
                             <div class="inf-inf">
                                 拥有<em>11</em>年ps使用经验,<em>4年</em>平面设计经验，非科班出身，累计成交<em>60</em>多单交易，好评率<em>99%</em>。累计<em>100</em>多个原创设计作品，把兴趣当成一种爱好，修出美丽的世界……
@@ -113,8 +119,45 @@
                 </div>
 
                 <!-- 项目介绍 -->
-                <div class="tab-pane fade" id="ios">
-                    <p>1</p>
+                <div class="tab-pane fade in active" id="ios">
+                    <div class="project-name">微信H5页面 同步课程：2018.7月-10月</div>
+                    <div class="project">
+                        <div class="project-box">
+                            <img class="project-img" src="http://file.eebbk.net/server-socialadmin/cloudIDN/social_admin/2018/07/20/105614921_3be49705bf8588db.png"></img>
+                            <div class="project-int">998元小学名师课程免费看</div>
+                        </div>
+                        <div class="project-box">
+                            <img class="project-img" src="http://file.eebbk.net/server-socialadmin/cloudIDN/social_admin/2018/09/17/094134896_f57db02c68c1195c.png"></img>
+                            <div class="project-int">中学998元名师课程免费看</div>
+                        </div>
+                        <div class="project-box">
+                            <img class="project-img" src="http://file.eebbk.net/server-socialadmin/cloudIDN/social_admin/2018/08/06/174443030_e796c869289176c3.png"></img>
+                            <div class="project-int">2018步步高家教机 机型对比</div>
+                        </div>
+                        <div class="project-box">
+                            <img class="project-img" src="http://file.eebbk.net/server-socialadmin/cloudIDN/social_admin/2018/08/31/085212102_55564376639f2fc5.png"></img>
+                            <div class="project-int">新学期 新装备—步步高家教机（小布快搜</div>
+                        </div>
+                    </div>
+                    <div class="project-name">小天才官网 2018年10月</div>
+                    <div class="project">
+                        <div class="project-box">
+                            <img class="project-img" src="http://file.eebbk.net/server-socialadmin/cloudIDN/social_admin/2018/07/20/105614921_3be49705bf8588db.png"></img>
+                            <div class="project-int">998元小学名师课程免费看</div>
+                        </div>
+                        <div class="project-box">
+                            <img class="project-img" src="http://file.eebbk.net/server-socialadmin/cloudIDN/social_admin/2018/09/17/094134896_f57db02c68c1195c.png"></img>
+                            <div class="project-int">中学998元名师课程免费看</div>
+                        </div>
+                        <div class="project-box">
+                            <img class="project-img" src="http://file.eebbk.net/server-socialadmin/cloudIDN/social_admin/2018/08/06/174443030_e796c869289176c3.png"></img>
+                            <div class="project-int">2018步步高家教机 机型对比</div>
+                        </div>
+                        <div class="project-box">
+                            <img class="project-img" src="http://file.eebbk.net/server-socialadmin/cloudIDN/social_admin/2018/08/31/085212102_55564376639f2fc5.png"></img>
+                            <div class="project-int">新学期 新装备—步步高家教机（小布快搜</div>
+                        </div>
+                    </div>
                 </div>
             </div>
             <!-- 信息 -->

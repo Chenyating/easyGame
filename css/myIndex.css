@@ -9,6 +9,7 @@ html {
 }
 
 #myIndex {
+  font-size: 0.35rem;
   /* padding: 0.3rem; */
 }
 .top-tab{
@@ -114,6 +115,10 @@ em{
   line-height: 1rem;
 }
 .link a{
+  display: flex;
+  flex-wrap:wrap;
+  justify-content:space-between;
+  align-items: center;
   color: #000000;
 }
 .title{
@@ -123,4 +128,39 @@ em{
 }
 .int-div{
   line-height: .8rem;
+}
+/* 更多图标 */
+span{
+  background: url("../img/index/more.png");
+  background-size: 100% 100%;
+  width: .4rem;
+  height: .4rem;
+  float: right;
+  margin-right: 0.1rem;
+}
+/* 项目介绍 */
+.project-name{
+  margin: .3rem 0 0 .3rem;
+}
+.project{
+  padding: .1rem;
+  display: flex;
+  flex-wrap: wrap;
+}
+.project-box{
+  margin: .1rem .07rem;
+  padding: .1rem;
+  display: flex;
+  flex-wrap: nowrap;
+  border: solid 1px #f1f3f4;
+  border-radius: .266667rem;
+  align-items: center;
+}
+.project-img{
+  width: 1.5rem;
+  height: 1.5rem;
+}
+.project-int{
+  width: 2.7rem;
+  margin: 0 .1rem;
 }
