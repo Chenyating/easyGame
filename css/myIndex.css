@@ -10,8 +10,8 @@ html {
   margin: 0;
 }
 
-#index {
-  background: red;
+#myIndex {
+  /* padding: 0.3rem; */
 }
 .top-tab{
   text-align: center;
@@ -24,22 +24,77 @@ html {
 .search-box{
   border: solid 1px #000000;
   height: 1rem;
-  margin: 0 0.5rem;
   display: flex;
   flex-wrap: wrap;
   align-items: center;
+  justify-content: space-between;
   padding: 0 0.1rem;
+  margin: 0 0.3rem;
   font-size: 0.4rem;
+
+}
+.flex-left{
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
 }
 .small-log{
   width: 0.8rem;
   height: 0.8rem;
 }
 .name{
-  width:6rem;
   text-align: left;
 }
 .connect{
   color: #38f;
   font-weight: bold;
+  margin: 0 0.2rem;
+}
+/* tab */
+/* 列表，以下修改了bootstrap的样式 */
+.nav-tabs{
+  border-bottom: 0px;
+  font-size: 0.35rem;
+}
+.nav-tabs>li.active>a, .nav-tabs>li.active>a:focus, .nav-tabs>li.active>a:hover {
+  color: #555;
+  cursor: default;
+  background-color: #fff;
+  border: 0px solid #ddd;
+  border-bottom: .066667rem solid #000;
+}
+.nav-tabs>li>a {
+  margin-right: 0px;
+  line-height: 1.42857143;
+  border: 1px solid transparent;
+  border-radius: 4px 4px 0 0;
+}
+.nav-tabs {
+display: flex;
+flex-wrap: nowrap;
+}
+/* 个人信息 */
+.tab-content{
+  text-align: left;
+}
+.inf-box{
+  padding: 0.3rem;
+  border-bottom: solid 0.2rem #f1f3f4;
+  font-size: .346667rem;
+  line-height: .6rem;
+}
+.main-info{
+  background: #1862ab;
+  width: 100%;
+  color: #ffffff;
+  padding: 0.2rem;
+}
+.main-introduction{
+  display: flex;
+  flex-wrap: nowrap;
+}
+.my-photo{
+  width: 3rem;
+  height: 3rem;
+  margin-right: 0.3rem;
 }

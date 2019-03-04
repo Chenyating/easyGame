@@ -7,10 +7,18 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <title>首页-YATING</title>
     <!-- <meta name="viewport" content="width=device-width, initial-scale=1"> -->
-    <link rel="stylesheet" href="css/myIndex.css" />
     <script src="js/flexible.js"></script>
     <script src="js/vue.js"></script>
     <script src="js/jquery.js"></script>
+    <!-- 新 Bootstrap 核心 CSS 文件 -->
+    <link href="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
+    
+    <!-- jQuery文件。务必在bootstrap.min.js 之前引入 -->
+    <script src="https://cdn.staticfile.org/jquery/2.1.1/jquery.min.js"></script>
+    
+    <!-- 最新的 Bootstrap 核心 JavaScript 文件 -->
+    <script src="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="css/myIndex.css" />
 </head>
 
 <body>
@@ -19,21 +27,63 @@
             <img src="https://www.baidu.com/img/bd_logo1.png" class="logo"></img>
             <!-- 搜索框 -->
             <div class="search-box">
-                <img src="./img/baidu.png" class="small-log"></img>
-                <div class="name">陈雅婷</div>
+                <div class="flex-left">
+                    <img src="./img/index/baidu.png" class="small-log"></img>
+                    <div class="name">陈雅婷</div>
+                </div>
                 <div class="connect">联系一下</div>
             </div>
             <!-- 列表 -->
+            <ul id="myTab" class="nav nav-tabs">
+                <li class="active">
+                    <a href="#all" data-toggle="tab">
+                        全部
+                    </a>
+                </li>
+                <li><a href="#ios" data-toggle="tab">图片</a></li>
+                <li><a href="#ios" data-toggle="tab">咨询</a></li>
+                <li><a href="#ios" data-toggle="tab">视频</a></li>
+                <li><a href="#ios" data-toggle="tab">热议</a></li>
+                <li><a href="#ios" data-toggle="tab">贴吧</a></li>
+            </ul>
+            <div id="myTabContent" class="tab-content">
+                <!-- 个人信息 -->
+                <div class="tab-pane fade in active" id="all">
+                    <div class="main-info">
+                        <h2>{{name}}</h2>
+                        <h5>WEB前端开发工程师</h5>
+                    </div>
+                    <div class="inf-box">
+                        <div class="main-introduction">
+                            <img src="./img/index/yating.jpg" class="my-photo"/>
+                            <div>{{introduction}}</div>
+                            <div>
+
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="inf-box">
+                            <div class="main-introduction">
+                                <img src="./img/index/zhanku.jpg" class="my-photo"/>
+                                <div>{{introduction}}</div>
+                            </div>
+                            <div>
+                                https://chenyating.zcool.com.cn/
+                            </div>
+    
+                        </div>
+
+                </div>
+                <div class="tab-pane fade" id="ios">
+                    <p>1</p>
+                </div>
+            </div>
+            <!-- 信息 -->
+
         </div>
     </div>
     <script src="js/myIndex.js"></script>
-    <script>
-        document.body.addEventListener('touchmove', function (e) {
-            e.preventDefault(); //阻止默认的处理方式(阻止下拉滑动的效果)
-        }, {
-            passive: false
-        }); //passive 参数不能省略，用来兼容ios和android
-    </script>
 </body>
 
 </html>
