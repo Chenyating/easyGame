@@ -113,6 +113,9 @@ em{
   font-size: 0.35rem;
   line-height: 1rem;
 }
+.link a{
+  color: #000000;
+}
 .title{
   font-size: 0.6rem;
   font-weight: bold;
