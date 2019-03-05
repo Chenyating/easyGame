@@ -171,3 +171,16 @@ span{
   width: 2.7rem;
   margin: 0 .15rem;
 }
+/* 技能介绍 */
+#skill{
+  padding: .3rem;
+}
+/* 个人经历 */
+#experience{
+  padding: .3rem;
+}
+.experience-title{
+  font-weight: bold;
+  margin-bottom: .3rem;
+  font-size: .35rem;
+}

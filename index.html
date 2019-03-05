@@ -41,13 +41,13 @@
                         基本资料
                     </a>
                 </li>
-                <li><a href="#ios" data-toggle="tab">项目展示</a></li>
-                <li><a href="#ios" data-toggle="tab">技能介绍</a></li>
-                <li><a href="#ios" data-toggle="tab">个人经历</a></li>
+                <li><a href="#project" data-toggle="tab">项目展示</a></li>
+                <li><a href="#skill" data-toggle="tab">技能介绍</a></li>
+                <li><a href="#experience" data-toggle="tab">个人经历</a></li>
             </ul>
             <div id="myTabContent" class="tab-content">
                 <!-- 基本资料 -->
-                <div class="tab-pane fade" id="all">
+                <div class="tab-pane fade " id="all">
                     <div class="main-info">
                         <h2>{{name}}</h2>
                         <h5>WEB前端开发工程师</h5>
@@ -75,17 +75,13 @@
                             </div>
                         </div>
                         <div>
-                            <div class="link"><a
-                                    href="https://blog.csdn.net/lemisi/article/details/88051630">详解球球保卫大作战：html+js+canvas实现原理<span></span></a>
+                            <div class="link"><a href="https://blog.csdn.net/lemisi/article/details/88051630">详解球球保卫大作战：html+js+canvas实现原理<span></span></a>
                             </div>
-                            <div class="link"><a
-                                    href="https://blog.csdn.net/lemisi/article/details/83242543">详解前端扫雷代码：HTML+JS+DIV实现原理<span></span></a>
+                            <div class="link"><a href="https://blog.csdn.net/lemisi/article/details/83242543">详解前端扫雷代码：HTML+JS+DIV实现原理<span></span></a>
                             </div>
-                            <div class="link"><a
-                                    href="https://blog.csdn.net/lemisi/article/details/82824676">详解前端俄罗斯方块代码：HTML+JS+CANVAS实现原理<span></span></a>
+                            <div class="link"><a href="https://blog.csdn.net/lemisi/article/details/82824676">详解前端俄罗斯方块代码：HTML+JS+CANVAS实现原理<span></span></a>
                             </div>
-                            <div class="link"><a
-                                    href="https://blog.csdn.net/lemisi/article/details/82219322">贪吃蛇前端代码<span></span></a>
+                            <div class="link"><a href="https://blog.csdn.net/lemisi/article/details/82219322">贪吃蛇前端代码<span></span></a>
                             </div>
                         </div>
                         <div class="time">
@@ -102,8 +98,7 @@
                                 <em>ofront-end development engineer!</em></div>
                         </div>
                         <div>
-                            <div class="link"><a
-                                    href="https://github.com/Chenyating/easyGame">小游戏集合：https://github.com/Chenyating/easyGame<span></span></a>
+                            <div class="link"><a href="https://github.com/Chenyating/easyGame">小游戏集合：https://github.com/Chenyating/easyGame<span></span></a>
                             </div>
                         </div>
                         <div class="time">
@@ -126,28 +121,24 @@
                 </div>
 
                 <!-- 项目介绍 -->
-                <div class="tab-pane fade in active" id="ios">
+                <div class="tab-pane fade " id="project">
                     <!-- H5页面 -->
-                    <div class="project-name">主要微信H5页面活动运营页面<span></span></div>
+                    <div class="project-name">主要微信H5页面活动运营页面</div>
                     <div class="project">
                         <div class="project-box" @click="goH5(0)">
-                            <img class="project-img"
-                                src="http://file.eebbk.net/server-socialadmin/cloudIDN/social_admin/2018/07/20/105614921_3be49705bf8588db.png" />
+                            <img class="project-img" src="http://file.eebbk.net/server-socialadmin/cloudIDN/social_admin/2018/07/20/105614921_3be49705bf8588db.png" />
                             <div class="project-int">998元小学名师课程免费看</div>
                         </div>
                         <div class="project-box" @click="goH5(1)">
-                            <img class="project-img"
-                                src="http://file.eebbk.net/server-socialadmin/cloudIDN/social_admin/2018/09/17/094134896_f57db02c68c1195c.png" />
+                            <img class="project-img" src="http://file.eebbk.net/server-socialadmin/cloudIDN/social_admin/2018/09/17/094134896_f57db02c68c1195c.png" />
                             <div class="project-int">中学998元名师课程免费看</div>
                         </div>
                         <div class="project-box" @click="goH5(2)">
-                            <img class="project-img"
-                                src="http://file.eebbk.net/server-socialadmin/cloudIDN/social_admin/2018/08/06/174443030_e796c869289176c3.png" />
+                            <img class="project-img" src="http://file.eebbk.net/server-socialadmin/cloudIDN/social_admin/2018/08/06/174443030_e796c869289176c3.png" />
                             <div class="project-int">2018步步高家教机 机型对比</div>
                         </div>
                         <div class="project-box" @click="goH5(3)">
-                            <img class="project-img"
-                                src="http://file.eebbk.net/server-socialadmin/cloudIDN/social_admin/2018/08/31/085212102_55564376639f2fc5.png" />
+                            <img class="project-img" src="http://file.eebbk.net/server-socialadmin/cloudIDN/social_admin/2018/08/31/085212102_55564376639f2fc5.png" />
                             <div class="project-int">新学期 新装备—步步高家教机（小布快搜</div>
                         </div>
                     </div>
@@ -202,7 +193,44 @@
                             <div class="project-int">小天才泰国官网 —— Y01产品页 ( PC&移动 )</div>
                         </div>
                     </div>
-                    <div class="project-name"  @click="goGame(0)">更多<span></span></div>
+                    <div class="project-name" @click="goGame(0)">更多<span></span></div>
+                </div>
+                <!-- 技能介绍 -->
+                <div class="tab-pane fade" id="skill">
+                    <p>掌握前端基础HTML、CSS:</p>
+                    <div class="progress progress-striped active">
+                        <div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="60"
+                            aria-valuemin="0" aria-valuemax="100" style="width: 80%;">
+                        </div>
+                    </div>
+                    <p>掌握前端基础HTML、CSS:</p>
+                    <div class="progress progress-striped active">
+                        <div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="60"
+                            aria-valuemin="0" aria-valuemax="100" style="width: 40%;">
+                        </div>
+                    </div>
+                    <p>掌握前端基础HTML、CSS:</p>
+                    <div class="progress progress-striped active">
+                        <div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="60"
+                            aria-valuemin="0" aria-valuemax="100" style="width: 40%;">
+                        </div>
+                    </div>
+                </div>
+                <!-- 技能介绍 -->
+                <div class="tab-pane fade in active" id="experience">
+                    <div class="alert alert-success">
+                        <div class="experience-title">广东小天才科技有限公司 ( 2018年7月—— 至今 ) </div>
+                        <div><span class="glyphicon glyphicon-user"></span>WEB前端开发工程师</div>
+
+                    </div>
+                    <div class="alert alert-info">
+                        <div class="experience-title">步步高教育电子有限公司 ( 2018年3月 )</div>
+                        <div><span class="glyphicon glyphicon-user"></span>WEB前端开发实习生</div>
+                    </div>
+                    <div class="alert alert-danger">
+                        <div class="experience-title"><span class="glyphicon glyphicon-home"></span>天津工业大学</div>
+                        <div>2014年9月 —— 2018年6月</div>
+                    </div>
                 </div>
             </div>
             <!-- 信息 -->
@@ -211,4 +239,4 @@
     <script src="js/myIndex.js"></script>
 </body>
 
-</html>
+</html>      
