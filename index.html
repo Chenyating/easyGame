@@ -24,11 +24,11 @@
 <body>
     <div id="myIndex">
         <div class="top-tab">
-            <img src="https://www.baidu.com/img/bd_logo1.png" class="logo"></img>
+            <img src="https://www.baidu.com/img/bd_logo1.png" class="logo" />
             <!-- 搜索框 -->
             <div class="search-box">
                 <div class="flex-left">
-                    <img src="./img/index/baidu.png" class="small-log"></img>
+                    <img src="./img/index/baidu.png" class="small-log" />
                     <div class="name">陈雅婷</div>
                 </div>
                 <div class="connect">联系一下</div>
@@ -40,13 +40,13 @@
                         基本资料
                     </a>
                 </li>
-                <li><a href="#ios" data-toggle="tab">项目介绍</a></li>
+                <li><a href="#ios" data-toggle="tab">项目展示</a></li>
                 <li><a href="#ios" data-toggle="tab">技能介绍</a></li>
                 <li><a href="#ios" data-toggle="tab">个人经历</a></li>
             </ul>
             <div id="myTabContent" class="tab-content">
                 <!-- 基本资料 -->
-                <div class="tab-pane fade " id="all">
+                <div class="tab-pane fade" id="all">
                     <div class="main-info">
                         <h2>{{name}}</h2>
                         <h5>WEB前端开发工程师</h5>
@@ -74,13 +74,18 @@
                             </div>
                         </div>
                         <div>
-                            <div class="link"><a href="https://blog.csdn.net/lemisi/article/details/88051630">详解球球保卫大作战：html+js+canvas实现原理<span></span></a>
+                            <div class="link"><a
+                                    href="https://blog.csdn.net/lemisi/article/details/88051630">详解球球保卫大作战：html+js+canvas实现原理<span></span></a>
                             </div>
-                            <div class="link"><a href="https://blog.csdn.net/lemisi/article/details/83242543">详解前端扫雷代码：HTML+JS+DIV实现原理<span></span></a>
+                            <div class="link"><a
+                                    href="https://blog.csdn.net/lemisi/article/details/83242543">详解前端扫雷代码：HTML+JS+DIV实现原理<span></span></a>
                             </div>
-                            <div class="link"><a href="https://blog.csdn.net/lemisi/article/details/82824676">详解前端俄罗斯方块代码：HTML+JS+CANVAS实现原理<span></span></a>
+                            <div class="link"><a
+                                    href="https://blog.csdn.net/lemisi/article/details/82824676">详解前端俄罗斯方块代码：HTML+JS+CANVAS实现原理<span></span></a>
                             </div>
-                            <div class="link"><a href="https://blog.csdn.net/lemisi/article/details/82219322">贪吃蛇前端代码<span></span></a></div>
+                            <div class="link"><a
+                                    href="https://blog.csdn.net/lemisi/article/details/82219322">贪吃蛇前端代码<span></span></a>
+                            </div>
                         </div>
                         <div class="time">
                             2017年7月25日：https://blog.csdn.net/lemisi
@@ -96,7 +101,8 @@
                                 <em>ofront-end development engineer!</em></div>
                         </div>
                         <div>
-                            <div class="link"><a href="https://github.com/Chenyating/easyGame">小游戏集合：https://github.com/Chenyating/easyGame<span></span></a>
+                            <div class="link"><a
+                                    href="https://github.com/Chenyating/easyGame">小游戏集合：https://github.com/Chenyating/easyGame<span></span></a>
                             </div>
                         </div>
                         <div class="time">
@@ -120,44 +126,82 @@
 
                 <!-- 项目介绍 -->
                 <div class="tab-pane fade in active" id="ios">
-                    <div class="project-name">微信H5页面 同步课程：2018.7月-10月</div>
+                    <!-- H5页面 -->
+                    <div class="project-name">主要微信H5页面活动运营页面<span></span></div>
                     <div class="project">
-                        <div class="project-box">
-                            <img class="project-img" src="http://file.eebbk.net/server-socialadmin/cloudIDN/social_admin/2018/07/20/105614921_3be49705bf8588db.png"></img>
+                        <div class="project-box" @click="goH5(0)">
+                            <img class="project-img"
+                                src="http://file.eebbk.net/server-socialadmin/cloudIDN/social_admin/2018/07/20/105614921_3be49705bf8588db.png" />
                             <div class="project-int">998元小学名师课程免费看</div>
                         </div>
-                        <div class="project-box">
-                            <img class="project-img" src="http://file.eebbk.net/server-socialadmin/cloudIDN/social_admin/2018/09/17/094134896_f57db02c68c1195c.png"></img>
+                        <div class="project-box" @click="goH5(1)">
+                            <img class="project-img"
+                                src="http://file.eebbk.net/server-socialadmin/cloudIDN/social_admin/2018/09/17/094134896_f57db02c68c1195c.png" />
                             <div class="project-int">中学998元名师课程免费看</div>
                         </div>
-                        <div class="project-box">
-                            <img class="project-img" src="http://file.eebbk.net/server-socialadmin/cloudIDN/social_admin/2018/08/06/174443030_e796c869289176c3.png"></img>
+                        <div class="project-box" @click="goH5(2)">
+                            <img class="project-img"
+                                src="http://file.eebbk.net/server-socialadmin/cloudIDN/social_admin/2018/08/06/174443030_e796c869289176c3.png" />
                             <div class="project-int">2018步步高家教机 机型对比</div>
                         </div>
-                        <div class="project-box">
-                            <img class="project-img" src="http://file.eebbk.net/server-socialadmin/cloudIDN/social_admin/2018/08/31/085212102_55564376639f2fc5.png"></img>
+                        <div class="project-box" @click="goH5(3)">
+                            <img class="project-img"
+                                src="http://file.eebbk.net/server-socialadmin/cloudIDN/social_admin/2018/08/31/085212102_55564376639f2fc5.png" />
                             <div class="project-int">新学期 新装备—步步高家教机（小布快搜</div>
                         </div>
                     </div>
-                    <div class="project-name">小天才官网 2018年10月</div>
+                    <div class="project-name" @click="goOfficial(0)">主要个人简单页面开发( PC&移动 )</div>
                     <div class="project">
-                        <div class="project-box">
-                            <img class="project-img" src="http://file.eebbk.net/server-socialadmin/cloudIDN/social_admin/2018/07/20/105614921_3be49705bf8588db.png"></img>
-                            <div class="project-int">998元小学名师课程免费看</div>
+                        <div class="project-box" @click="goGame(1)">
+                            <img class="project-img" src="./img/index/protectBall.png" />
+                            <div class="project-int">球球保卫大作战 ( PC )</div>
                         </div>
-                        <div class="project-box">
-                            <img class="project-img" src="http://file.eebbk.net/server-socialadmin/cloudIDN/social_admin/2018/09/17/094134896_f57db02c68c1195c.png"></img>
-                            <div class="project-int">中学998元名师课程免费看</div>
+                        <div class="project-box" @click="goGame(2)">
+                            <img class="project-img" src="./img/index/tetris.png" />
+                            <div class="project-int">俄罗斯方块 ( 移动 )</div>
                         </div>
-                        <div class="project-box">
-                            <img class="project-img" src="http://file.eebbk.net/server-socialadmin/cloudIDN/social_admin/2018/08/06/174443030_e796c869289176c3.png"></img>
-                            <div class="project-int">2018步步高家教机 机型对比</div>
+                        <div class="project-box" @click="goGame(3)">
+                            <img class="project-img" src="./img/index/retroSnaker.png" />
+                            <div class="project-int">贪吃蛇 ( 移动 )</div>
                         </div>
-                        <div class="project-box">
-                            <img class="project-img" src="http://file.eebbk.net/server-socialadmin/cloudIDN/social_admin/2018/08/31/085212102_55564376639f2fc5.png"></img>
-                            <div class="project-int">新学期 新装备—步步高家教机（小布快搜</div>
+                        <div class="project-box" @click="goGame(4)">
+                            <img class="project-img" src="./img/index/mine.png" />
+                            <div class="project-int">扫雷 ( 移动 )</div>
+                        </div>
+                        <div class="project-box" @click="goGame(5)">
+                            <img class="project-img" src="./img/index/maze.png" />
+                            <div class="project-int">迷宫 ( 移动 )</div>
+                        </div>
+
+                        <div class="project-box" @click="goGame(6)">
+                            <img class="project-img" src="./img/index/fruit.png" />
+                            <div class="project-int">随机购买下午茶水果 ( PC&移动 )</div>
                         </div>
                     </div>
+                    <div class="project-name" @click="goOfficial(0)">主要官方页面开发( PC&移动 )</div>
+                    <div class="project">
+                        <div class="project-box" @click="goOfficial(0)">
+                            <img class="project-img" src="./img/index/xiao.png" />
+                            <div class="project-int"> 小天才官网 —— 维修进度查询 ( PC&移动 )</div>
+                        </div>
+                        <div class="project-box" @click="goOfficial(1)">
+                            <img class="project-img" src="./img/index/tian.png" />
+                            <div class="project-int"> 小天才论坛 —— 产品专区、宝币兑换、最新公告、才迷乐园</div>
+                        </div>
+                        <div class="project-box" @click="goOfficial(2)">
+                            <img class="project-img" src="./img/index/cai.png" />
+                            <div class="project-int">小天才国际官网 —— Z5产品页 ( PC&移动 ) </div>
+                        </div>
+                        <div class="project-box" @click="goOfficial(3)">
+                            <img class="project-img" src="./img/index/guan.png" />
+                            <div class="project-int">小天才印尼官网 —— Y01产品页 ( PC&移动 )</div>
+                        </div>
+                        <div class="project-box" @click="goOfficial(4)">
+                            <img class="project-img" src="./img/index/wang.png" />
+                            <div class="project-int">小天才泰国官网 —— Y01产品页 ( PC&移动 )</div>
+                        </div>
+                    </div>
+                    <div class="project-name"  @click="goGame(0)">更多<span></span></div>
                 </div>
             </div>
             <!-- 信息 -->
