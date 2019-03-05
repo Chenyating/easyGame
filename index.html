@@ -47,7 +47,7 @@
             </ul>
             <div id="myTabContent" class="tab-content">
                 <!-- 基本资料 -->
-                <div class="tab-pane fade " id="all">
+                <div class="tab-pane fade in active" id="all">
                     <div class="main-info">
                         <h2>{{name}}</h2>
                         <h5>WEB前端开发工程师</h5>
@@ -196,28 +196,46 @@
                     <div class="project-name" @click="goGame(0)">更多<span></span></div>
                 </div>
                 <!-- 技能介绍 -->
-                <div class="tab-pane fade" id="skill">
-                    <p>掌握前端基础HTML、CSS:</p>
+                <div class="tab-pane fade " id="skill">
+                    <p>掌握前端基础HTML、CSS：</p>
                     <div class="progress progress-striped active">
-                        <div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="60"
+                        <div class="progress-bar progress-bar-info" role="progressbar" aria-valuenow="60"
                             aria-valuemin="0" aria-valuemax="100" style="width: 80%;">
                         </div>
                     </div>
-                    <p>掌握前端基础HTML、CSS:</p>
+                    <p>熟悉javascript脚本语言：jquery库、vue</p>
                     <div class="progress progress-striped active">
                         <div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="60"
-                            aria-valuemin="0" aria-valuemax="100" style="width: 40%;">
+                            aria-valuemin="0" aria-valuemax="100" style="width: 75%;">
                         </div>
                     </div>
-                    <p>掌握前端基础HTML、CSS:</p>
+                    <p>熟悉vue、vue-cli脚手架、拥有后台系统的前端开发经验：</p>
+                    <div class="progress progress-striped active">
+                        <div class="progress-bar progress-bar-warning" role="progressbar" aria-valuenow="60"
+                            aria-valuemin="0" aria-valuemax="100" style="width: 60%;">
+                        </div>
+                    </div>
+                    <p>熟悉Bootstrap、iview前端样式框架：</p>
+                    <div class="progress progress-striped active">
+                        <div class="progress-bar progress-bar-danger" role="progressbar" aria-valuenow="60"
+                            aria-valuemin="0" aria-valuemax="100" style="width: 70%;">
+                        </div>
+                    </div>
+                    <p>熟练掌握PHOTOSHOP技术，拥有4年平面设计经验：</p>
                     <div class="progress progress-striped active">
                         <div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="60"
-                            aria-valuemin="0" aria-valuemax="100" style="width: 40%;">
+                            aria-valuemin="0" aria-valuemax="100" style="width: 95%;">
+                        </div>
+                    </div>
+                    <p>有小程序开发经验</p>
+                    <div class="progress progress-striped active">
+                        <div class="progress-bar progress-bar-info" role="progressbar" aria-valuenow="60"
+                            aria-valuemin="0" aria-valuemax="100" style="width:50%;">
                         </div>
                     </div>
                 </div>
                 <!-- 技能介绍 -->
-                <div class="tab-pane fade in active" id="experience">
+                <div class="tab-pane fade" id="experience">
                     <div class="alert alert-success">
                         <div class="experience-title">广东小天才科技有限公司 ( 2018年7月—— 至今 ) </div>
                         <div><span class="glyphicon glyphicon-user"></span>WEB前端开发工程师</div>
