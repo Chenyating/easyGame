@@ -10,17 +10,32 @@ html {
 
 #myIndex {
   font-size: 0.35rem;
-  /* padding: 0.3rem; */
 }
-.top-tab{
+[v-cloak] {
+  display: none;
+}
+.top-box {
+  position: fixed;
+  width: 100%;
+  background: #ffffff;
+}
+
+.body-box {
+  padding-top: 4rem;
+}
+
+/* 搜索框 */
+.top-tab {
   text-align: center;
 }
-.logo{
+
+.logo {
   margin: 0 auto;
   width: 4rem;
 }
+
 /* 搜索框 */
-.search-box{
+.search-box {
   border: solid 1px #000000;
   height: 1rem;
   display: flex;
@@ -32,105 +47,125 @@ html {
   font-size: 0.4rem;
 
 }
-.flex-left{
+
+.flex-left {
   display: flex;
   flex-wrap: wrap;
   align-items: center;
 }
-.small-log{
+
+.small-log {
   width: 0.8rem;
   height: 0.8rem;
 }
-.name{
+
+.name {
   text-align: left;
 }
-.connect{
+
+.connect {
   color: #38f;
   font-weight: bold;
   margin: 0 0.2rem;
 }
+
 /* tab */
 /* 列表，以下修改了bootstrap的样式 */
-.nav-tabs{
-  border-bottom: 0px;
-  font-size: 0.35rem;
+.nav {
+  display: flex;
+  flex-wrap: wrap;
 }
-.nav-tabs>li.active>a, .nav-tabs>li.active>a:focus, .nav-tabs>li.active>a:hover {
-  color: #555;
-  cursor: default;
-  background-color: #fff;
-  border: 0px solid #ddd;
-  border-bottom: .066667rem solid #000;
+
+.ungetli {
+  font-size: .4rem;
+  margin: 0 .3rem;
+  padding: .3rem 0;
+  color: #666;
 }
-.nav-tabs>li>a {
-  margin-right: 0px;
-  line-height: 1.42857143;
-  border: 1px solid transparent;
-  border-radius: 4px 4px 0 0;
+
+.getli {
+  font-size: .4rem;
+  margin: 0 .3rem;
+  padding: .3rem 0;
+  color: #000;
+  border-bottom: solid .066667rem #000000;
 }
-.nav-tabs {
-display: flex;
-flex-wrap: nowrap;
-}
+
 /* 个人信息 */
-.tab-content{
+.tab-content {
   text-align: left;
 }
-.inf-box{
+
+.inf-box {
   padding: 0.3rem;
   border-bottom: solid 0.2rem #f1f3f4;
   font-size: .346667rem;
   line-height: .6rem;
 }
-.main-info{
+
+.main-info {
   background: #1862ab;
   width: 100%;
   color: #ffffff;
   padding: 0.2rem;
 }
-.inf-inf{
+
+.my-int {
+  width: 7rem;
+}
+
+.inf-inf {
   width: 6.5rem;
 }
-.main-introduction{
+
+.main-introduction {
   display: flex;
   flex-wrap: nowrap;
 }
-.my-photo{
+
+.my-photo {
   width: 2.5rem;
   height: 2.5rem;
   margin-right: 0.3rem;
   margin-bottom: 0.2rem;
 }
-em{
+
+em {
   color: #d00;
 }
-.time{
+
+.time {
   margin-top: .3rem;
   color: #999999;
 }
-.link{
+
+.link {
   border-bottom: solid 1px #f1f3f4;
   line-height: 1rem;
   font-size: 0.35rem;
   line-height: 1rem;
 }
-.link a{
+
+.link a {
   display: flex;
-  flex-wrap:wrap;
-  justify-content:space-between;
+  flex-wrap: wrap;
+  justify-content: space-between;
   align-items: center;
   color: #000000;
 }
-.title{
+
+.title {
   font-size: 0.6rem;
   font-weight: bold;
   line-height: 1rem;
 }
-.int-div{
+
+.int-div {
   line-height: .8rem;
 }
+
 /* 更多图标 */
-span{
+span {
   background: url("../img/index/more.png");
   background-size: 100% 100%;
   width: .4rem;
@@ -138,19 +173,22 @@ span{
   float: right;
   margin-right: 0.1rem;
 }
+
 /* 项目介绍 */
-.project-name{
+.project-name {
   margin: .3rem 0 .3rem .3rem;
   display: flex;
   flex-wrap: wrap;
   justify-content: space-between;
 }
-.project{
+
+.project {
   padding: .1rem;
   display: flex;
   flex-wrap: wrap;
 }
-.project-box{
+
+.project-box {
   margin: .1rem .07rem;
   padding: .1rem;
   display: flex;
@@ -159,28 +197,52 @@ span{
   border-radius: .266667rem;
   align-items: center;
 }
-.project-img{
+
+.project-img {
   width: 1.5rem;
   height: 1.5rem;
 }
-.game-img{
+
+.game-img {
   width: 1rem;
   height: 1rem;
 }
-.project-int{
+
+.project-int {
   width: 2.7rem;
   margin: 0 .15rem;
 }
+
 /* 技能介绍 */
-#skill{
+#skill {
   padding: .3rem;
 }
+
 /* 个人经历 */
-#experience{
+#experience {
   padding: .3rem;
 }
-.experience-title{
+
+.experience-title {
   font-weight: bold;
   margin-bottom: .3rem;
   font-size: .35rem;
+}
+
+/* 与我联系 */
+.modal-dialog {
+  padding-top: 5rem;
+}
+
+.modal-content {
+  display: inline-block;
+}
+
+.modal-content {
+  padding: .5rem;
+}
+
+.contect-img {
+  width: 3rem;
+  height: 3rem;
 }

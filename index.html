@@ -23,238 +23,219 @@
 </head>
 
 <body>
-    <div id="myIndex">
+    <div id="myIndex" v-cloak>
         <div class="top-tab">
-            <img src="https://www.baidu.com/img/bd_logo1.png" class="logo" />
-            <!-- 搜索框 -->
-            <div class="search-box">
-                <div class="flex-left">
-                    <img src="./img/index/baidu.png" class="small-log" />
-                    <div class="name">陈雅婷</div>
+            <div class="top-box">
+                <img src="https://www.baidu.com/img/bd_logo1.png" class="logo" />
+                <!-- 搜索框 -->
+                <div class="search-box">
+                    <div class="flex-left">
+                        <img src="./img/index/baidu.png" class="small-log" />
+                        <div class="name">陈雅婷</div>
+                    </div>
+                    <div class="connect" data-toggle="modal" data-target="#myModal">联系一下</div>
                 </div>
-                <div class="connect">联系一下</div>
+                <!-- 列表 -->
+                <ul  class="nav">
+                    <li @click="changeInterface(0)" class="ungetli" :class="{getli:interface==0}" > 基本资料</li>
+                    <li @click="changeInterface(1)" class="ungetli" :class="{getli:interface==1}" > 项目展示</li>
+                    <li @click="changeInterface(2)" class="ungetli" :class="{getli:interface==2}" >技能介绍</li>
+                    <li @click="changeInterface(3)" class="ungetli" :class="{getli:interface==3}" >个人经历</li>
+                </ul>
             </div>
-            <!-- 列表 -->
-            <ul id="myTab" class="nav nav-tabs">
-                <li class="active">
-                    <a href="#all" data-toggle="tab">
-                        基本资料
-                    </a>
-                </li>
-                <li><a href="#project" data-toggle="tab">项目展示</a></li>
-                <li><a href="#skill" data-toggle="tab">技能介绍</a></li>
-                <li><a href="#experience" data-toggle="tab">个人经历</a></li>
-            </ul>
-            <div id="myTabContent" class="tab-content">
-                <!-- 基本资料 -->
-                <div class="tab-pane fade in active" id="all">
-                    <div class="main-info">
-                        <h2>{{name}}</h2>
-                        <h5>WEB前端开发工程师</h5>
+            <div class="body-box">
+                <div id="myTabContent" class="tab-content">
+                    <!-- 基本资料 -->
+                    <div v-if="interface==0" id="all">
+                        <div class="main-info">
+                            <h2>{{name}}</h2>
+                            <h5>WEB前端开发工程师</h5>
+                        </div>
+                        <div class="inf-box">
+                            <div class="main-introduction">
+                                <img src="./img/index/yating.jpg" class="my-photo" />
+                                <div class="my-int">{{introduction}}</div>
+                            </div>
+                            <div class="int-div">
+                                <div>毕业院校：天津工业大学 (2014年9月——2018年7月)</div>
+                                <div>专业：软件工程（本科）</div>
+                                <div>英语水平：大学英语四级</div>
+                                <div>是一个喜欢接触新的事物，喜欢专研新的东西，思维活跃，富有创意，认真负责，待人亲切，有团队意识的小伙伴</div>
+                            </div>
+    
+                        </div>
+                        <!-- csdn -->
+                        <div class="inf-box">
+                            <div class="title" @click="goLink(1)"><em>CSDN:</em>YaTing 的 Soil solution</div>
+                            <div class="main-introduction" @click="goLink(1)">
+                                <img src="./img/index/csdn.jpg" class="my-photo" />
+                                <div class="inf-inf">
+                                    在<em>CSDN</em>中,写博客已经快<em>2</em>年了,原创<em>54</em>篇,总浏览量<em>1万</em>。每天记录自己在技术方面的成长，由一只小小菜鸟演变成一只<em>菜鸟</em>，只为通往大神的方向……
+                                </div>
+                            </div>
+                            <div>
+                                <div class="link"><a href="https://blog.csdn.net/lemisi/article/details/88051630">详解球球保卫大作战：html+js+canvas实现原理<span></span></a>
+                                </div>
+                                <div class="link"><a href="https://blog.csdn.net/lemisi/article/details/83242543">详解前端扫雷代码：HTML+JS+DIV实现原理<span></span></a>
+                                </div>
+                                <div class="link"><a href="https://blog.csdn.net/lemisi/article/details/82824676">详解前端俄罗斯方块代码：HTML+JS+CANVAS实现原理<span></span></a>
+                                </div>
+                                <div class="link"><a href="https://blog.csdn.net/lemisi/article/details/82219322">贪吃蛇前端代码<span></span></a>
+                                </div>
+                            </div>
+                            <div class="time">
+                                2017年7月25日：https://blog.csdn.net/lemisi
+                            </div>
+                        </div>
+                        <!-- github -->
+                        <div class="inf-box">
+                            <div class="title" @click="goLink(2)"><em>github</em> Chenyating</div>
+                            <div class="main-introduction" @click="goLink(2)">
+                                <img src="./img/index/github.jpg" class="my-photo" />
+                                <div class="inf-inf">My interest is to write <em>interesting small games</em>, through
+                                    thinking about the logic of the game, to achieve it, beautify it.Because I'm a
+                                    <em>ofront-end development engineer!</em></div>
+                            </div>
+                            <div>
+                                <div class="link"><a href="https://github.com/Chenyating/easyGame">小游戏集合：https://github.com/Chenyating/easyGame<span></span></a>
+                                </div>
+                            </div>
+                            <div class="time">
+                                https://github.com/Chenyating
+                            </div>
+                        </div>
+                        <!-- 站酷 -->
+                        <div class="inf-box">
+                            <div class="title" @click="goLink(3)"><em>站酷(ZCOOL)</em>-chen雅婷的主页</div>
+                            <div class="main-introduction" @click="goLink(3)">
+                                <img src="./img/index/zhanku.jpg" class="my-photo" />
+                                <div class="inf-inf">
+                                    拥有<em>11</em>年ps使用经验,<em>4年</em>平面设计经验，非科班出身，累计成交<em>60</em>多单交易，好评率<em>99%</em>。累计<em>100</em>多个原创设计作品，把兴趣当成一种爱好，修出美丽的世界……
+                                </div>
+                            </div>
+                            <div class="time">
+                                2008年9月：https://chenyating.zcool.com.cn/
+                            </div>
+                        </div>
                     </div>
-                    <div class="inf-box">
-                        <div class="main-introduction">
-                            <img src="./img/index/yating.jpg" class="my-photo" />
-                            <div>{{introduction}}</div>
+                    <!-- 项目介绍 -->
+                    <div v-if="interface==1" id="project">
+                        <!-- H5页面 -->
+                        <div class="project-name">主要微信H5页面活动运营页面</div>
+                        <div class="project">
+                            <div class="project-box" @click="goH5(0)">
+                                <img class="project-img" src="http://file.eebbk.net/server-socialadmin/cloudIDN/social_admin/2018/07/20/105614921_3be49705bf8588db.png" />
+                                <div class="project-int">998元小学名师课程免费看</div>
+                            </div>
+                            <div class="project-box" @click="goH5(1)">
+                                <img class="project-img" src="http://file.eebbk.net/server-socialadmin/cloudIDN/social_admin/2018/09/17/094134896_f57db02c68c1195c.png" />
+                                <div class="project-int">中学998元名师课程免费看</div>
+                            </div>
+                            <div class="project-box" @click="goH5(2)">
+                                <img class="project-img" src="http://file.eebbk.net/server-socialadmin/cloudIDN/social_admin/2018/08/06/174443030_e796c869289176c3.png" />
+                                <div class="project-int">2018步步高家教机 机型对比</div>
+                            </div>
+                            <div class="project-box" @click="goH5(3)">
+                                <img class="project-img" src="http://file.eebbk.net/server-socialadmin/cloudIDN/social_admin/2018/08/31/085212102_55564376639f2fc5.png" />
+                                <div class="project-int">新学期 新装备—步步高家教机（小布快搜</div>
+                            </div>
                         </div>
-                        <div class="int-div">
-                            <div>毕业院校：天津工业大学 (2014年9月——2018年7月)</div>
-                            <div>专业：软件工程（本科）</div>
-                            <div>英语水平：大学英语四级</div>
-                            <div>是一个喜欢接触新的事物，喜欢专研新的东西，思维活跃，富有创意，认真负责，待人亲切，有团队意识的小伙伴</div>
+                        <!-- 个人页面开发 -->
+                        <div class="project-name" @click="goOfficial(0)">主要个人简单页面开发( PC&移动 )</div>
+                        <div class="project">
+                            <div class="project-box" @click="goGame(1)">
+                                <img class="project-img" src="./img/index/protectBall.png" />
+                                <div class="project-int">球球保卫大作战 ( PC )</div>
+                            </div>
+                            <div class="project-box" @click="goGame(2)">
+                                <img class="project-img" src="./img/index/tetris.png" />
+                                <div class="project-int">俄罗斯方块 ( 移动 )</div>
+                            </div>
+                            <div class="project-box" @click="goGame(3)">
+                                <img class="project-img" src="./img/index/retroSnaker.png" />
+                                <div class="project-int">贪吃蛇 ( 移动 )</div>
+                            </div>
+                            <div class="project-box" @click="goGame(4)">
+                                <img class="project-img" src="./img/index/mine.png" />
+                                <div class="project-int">扫雷 ( 移动 )</div>
+                            </div>
+                            <div class="project-box" @click="goGame(5)">
+                                <img class="project-img" src="./img/index/maze.png" />
+                                <div class="project-int">迷宫 ( 移动 )</div>
+                            </div>
+    
+                            <div class="project-box" @click="goGame(6)">
+                                <img class="project-img" src="./img/index/fruit.png" />
+                                <div class="project-int">随机购买下午茶水果 ( PC&移动 )</div>
+                            </div>
                         </div>
-
+                        <!-- 官网开发 -->
+                        <div class="project-name" @click="goOfficial(0)">主要官方页面开发( PC&移动 )</div>
+                        <div class="project">
+                            <div class="project-box" @click="goOfficial(0)">
+                                <img class="project-img" src="./img/index/xiao.png" />
+                                <div class="project-int"> 小天才官网 —— 维修进度查询 ( PC&移动 )</div>
+                            </div>
+                            <div class="project-box" @click="goOfficial(1)">
+                                <img class="project-img" src="./img/index/tian.png" />
+                                <div class="project-int"> 小天才论坛 —— 产品专区、宝币兑换、最新公告、才迷乐园</div>
+                            </div>
+                            <div class="project-box" @click="goOfficial(2)">
+                                <img class="project-img" src="./img/index/cai.png" />
+                                <div class="project-int">小天才国际官网 —— Z5产品页 ( PC&移动 ) </div>
+                            </div>
+                            <div class="project-box" @click="goOfficial(3)">
+                                <img class="project-img" src="./img/index/guan.png" />
+                                <div class="project-int">小天才印尼官网 —— Y01产品页 ( PC&移动 )</div>
+                            </div>
+                            <div class="project-box" @click="goOfficial(4)">
+                                <img class="project-img" src="./img/index/wang.png" />
+                                <div class="project-int">小天才泰国官网 —— Y01产品页 ( PC&移动 )</div>
+                            </div>
+                        </div>
+                        <div class="project-name" @click="goGame(0)">更多<span></span></div>
                     </div>
-                    <!-- csdn -->
-                    <div class="inf-box">
-                        <div class="title" @click="goLink(1)"><em>CSDN:</em>YaTing 的 Soil solution</div>
-                        <div class="main-introduction" @click="goLink(1)">
-                            <img src="./img/index/csdn.jpg" class="my-photo" />
-                            <div class="inf-inf">
-                                在<em>CSDN</em>中,写博客已经快<em>2</em>年了,原创<em>54</em>篇,总浏览量<em>1万</em>。每天记录自己在技术方面的成长，由一只小小菜鸟演变成一只<em>菜鸟</em>，只为通往大神的方向……
+                    <!-- 技能介绍 -->
+                    <div v-if="interface==2" id="skill">
+                        <div v-for="item in skills">
+                            <p>{{item.skill}}</p>
+                            <div class="progress progress-striped active">
+                                <div class="progress-bar progress-bar-info" role="progressbar" aria-valuenow="60"
+                                    aria-valuemin="0" aria-valuemax="100" v-bind:style="{ width: item.master }">
+                                </div>
                             </div>
-                        </div>
-                        <div>
-                            <div class="link"><a href="https://blog.csdn.net/lemisi/article/details/88051630">详解球球保卫大作战：html+js+canvas实现原理<span></span></a>
-                            </div>
-                            <div class="link"><a href="https://blog.csdn.net/lemisi/article/details/83242543">详解前端扫雷代码：HTML+JS+DIV实现原理<span></span></a>
-                            </div>
-                            <div class="link"><a href="https://blog.csdn.net/lemisi/article/details/82824676">详解前端俄罗斯方块代码：HTML+JS+CANVAS实现原理<span></span></a>
-                            </div>
-                            <div class="link"><a href="https://blog.csdn.net/lemisi/article/details/82219322">贪吃蛇前端代码<span></span></a>
-                            </div>
-                        </div>
-                        <div class="time">
-                            2017年7月25日：https://blog.csdn.net/lemisi
                         </div>
                     </div>
-                    <!-- github -->
-                    <div class="inf-box">
-                        <div class="title" @click="goLink(2)"><em>github</em> Chenyating</div>
-                        <div class="main-introduction" @click="goLink(2)">
-                            <img src="./img/index/github.jpg" class="my-photo" />
-                            <div class="inf-inf">My interest is to write <em>interesting small games</em>, through
-                                thinking about the logic of the game, to achieve it, beautify it.Because I'm a
-                                <em>ofront-end development engineer!</em></div>
+                    <!-- 技能介绍 -->
+                    <div v-if="interface==3" id="experience">
+                        <div class="alert alert-success">
+                            <div class="experience-title">广东小天才科技有限公司 ( 2018年3月—— 至今 ) </div>
+                            <div><span class="glyphicon glyphicon-user"></span>WEB前端开发工程师</div>
                         </div>
-                        <div>
-                            <div class="link"><a href="https://github.com/Chenyating/easyGame">小游戏集合：https://github.com/Chenyating/easyGame<span></span></a>
-                            </div>
-                        </div>
-                        <div class="time">
-                            https://github.com/Chenyating
-                        </div>
-                    </div>
-                    <!-- 站酷 -->
-                    <div class="inf-box">
-                        <div class="title" @click="goLink(3)"><em>站酷(ZCOOL)</em>-chen雅婷的主页</div>
-                        <div class="main-introduction" @click="goLink(3)">
-                            <img src="./img/index/zhanku.jpg" class="my-photo" />
-                            <div class="inf-inf">
-                                拥有<em>11</em>年ps使用经验,<em>4年</em>平面设计经验，非科班出身，累计成交<em>60</em>多单交易，好评率<em>99%</em>。累计<em>100</em>多个原创设计作品，把兴趣当成一种爱好，修出美丽的世界……
-                            </div>
-                        </div>
-                        <div class="time">
-                            2008年9月：https://chenyating.zcool.com.cn/
+                        <div class="alert alert-danger">
+                            <div class="experience-title"><span class="glyphicon glyphicon-home"></span>天津工业大学</div>
+                            <div>2014年9月 —— 2018年6月</div>
                         </div>
                     </div>
                 </div>
-
-                <!-- 项目介绍 -->
-                <div class="tab-pane fade " id="project">
-                    <!-- H5页面 -->
-                    <div class="project-name">主要微信H5页面活动运营页面</div>
-                    <div class="project">
-                        <div class="project-box" @click="goH5(0)">
-                            <img class="project-img" src="http://file.eebbk.net/server-socialadmin/cloudIDN/social_admin/2018/07/20/105614921_3be49705bf8588db.png" />
-                            <div class="project-int">998元小学名师课程免费看</div>
+                <!-- 联系方式 -->
+                <!-- 模态框（Modal） -->
+                <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <img class="contect-img" src="./img/index/2wm.gif" />
+                            <div class="modal-body">
+                                <em>扫一扫</em> 或 <em>识别</em> 微信二维码
+                            </div>
+                            <button type="button" class="btn btn-default" data-dismiss="modal">关闭
+                            </button>
                         </div>
-                        <div class="project-box" @click="goH5(1)">
-                            <img class="project-img" src="http://file.eebbk.net/server-socialadmin/cloudIDN/social_admin/2018/09/17/094134896_f57db02c68c1195c.png" />
-                            <div class="project-int">中学998元名师课程免费看</div>
-                        </div>
-                        <div class="project-box" @click="goH5(2)">
-                            <img class="project-img" src="http://file.eebbk.net/server-socialadmin/cloudIDN/social_admin/2018/08/06/174443030_e796c869289176c3.png" />
-                            <div class="project-int">2018步步高家教机 机型对比</div>
-                        </div>
-                        <div class="project-box" @click="goH5(3)">
-                            <img class="project-img" src="http://file.eebbk.net/server-socialadmin/cloudIDN/social_admin/2018/08/31/085212102_55564376639f2fc5.png" />
-                            <div class="project-int">新学期 新装备—步步高家教机（小布快搜</div>
-                        </div>
-                    </div>
-                    <div class="project-name" @click="goOfficial(0)">主要个人简单页面开发( PC&移动 )</div>
-                    <div class="project">
-                        <div class="project-box" @click="goGame(1)">
-                            <img class="project-img" src="./img/index/protectBall.png" />
-                            <div class="project-int">球球保卫大作战 ( PC )</div>
-                        </div>
-                        <div class="project-box" @click="goGame(2)">
-                            <img class="project-img" src="./img/index/tetris.png" />
-                            <div class="project-int">俄罗斯方块 ( 移动 )</div>
-                        </div>
-                        <div class="project-box" @click="goGame(3)">
-                            <img class="project-img" src="./img/index/retroSnaker.png" />
-                            <div class="project-int">贪吃蛇 ( 移动 )</div>
-                        </div>
-                        <div class="project-box" @click="goGame(4)">
-                            <img class="project-img" src="./img/index/mine.png" />
-                            <div class="project-int">扫雷 ( 移动 )</div>
-                        </div>
-                        <div class="project-box" @click="goGame(5)">
-                            <img class="project-img" src="./img/index/maze.png" />
-                            <div class="project-int">迷宫 ( 移动 )</div>
-                        </div>
-
-                        <div class="project-box" @click="goGame(6)">
-                            <img class="project-img" src="./img/index/fruit.png" />
-                            <div class="project-int">随机购买下午茶水果 ( PC&移动 )</div>
-                        </div>
-                    </div>
-                    <div class="project-name" @click="goOfficial(0)">主要官方页面开发( PC&移动 )</div>
-                    <div class="project">
-                        <div class="project-box" @click="goOfficial(0)">
-                            <img class="project-img" src="./img/index/xiao.png" />
-                            <div class="project-int"> 小天才官网 —— 维修进度查询 ( PC&移动 )</div>
-                        </div>
-                        <div class="project-box" @click="goOfficial(1)">
-                            <img class="project-img" src="./img/index/tian.png" />
-                            <div class="project-int"> 小天才论坛 —— 产品专区、宝币兑换、最新公告、才迷乐园</div>
-                        </div>
-                        <div class="project-box" @click="goOfficial(2)">
-                            <img class="project-img" src="./img/index/cai.png" />
-                            <div class="project-int">小天才国际官网 —— Z5产品页 ( PC&移动 ) </div>
-                        </div>
-                        <div class="project-box" @click="goOfficial(3)">
-                            <img class="project-img" src="./img/index/guan.png" />
-                            <div class="project-int">小天才印尼官网 —— Y01产品页 ( PC&移动 )</div>
-                        </div>
-                        <div class="project-box" @click="goOfficial(4)">
-                            <img class="project-img" src="./img/index/wang.png" />
-                            <div class="project-int">小天才泰国官网 —— Y01产品页 ( PC&移动 )</div>
-                        </div>
-                    </div>
-                    <div class="project-name" @click="goGame(0)">更多<span></span></div>
-                </div>
-                <!-- 技能介绍 -->
-                <div class="tab-pane fade " id="skill">
-                    <p>掌握前端基础HTML、CSS：</p>
-                    <div class="progress progress-striped active">
-                        <div class="progress-bar progress-bar-info" role="progressbar" aria-valuenow="60"
-                            aria-valuemin="0" aria-valuemax="100" style="width: 80%;">
-                        </div>
-                    </div>
-                    <p>熟悉javascript脚本语言：jquery库、vue</p>
-                    <div class="progress progress-striped active">
-                        <div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="60"
-                            aria-valuemin="0" aria-valuemax="100" style="width: 75%;">
-                        </div>
-                    </div>
-                    <p>熟悉vue、vue-cli脚手架、拥有后台系统的前端开发经验：</p>
-                    <div class="progress progress-striped active">
-                        <div class="progress-bar progress-bar-warning" role="progressbar" aria-valuenow="60"
-                            aria-valuemin="0" aria-valuemax="100" style="width: 60%;">
-                        </div>
-                    </div>
-                    <p>熟悉Bootstrap、iview前端样式框架：</p>
-                    <div class="progress progress-striped active">
-                        <div class="progress-bar progress-bar-danger" role="progressbar" aria-valuenow="60"
-                            aria-valuemin="0" aria-valuemax="100" style="width: 70%;">
-                        </div>
-                    </div>
-                    <p>熟练掌握PHOTOSHOP技术，拥有4年平面设计经验：</p>
-                    <div class="progress progress-striped active">
-                        <div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="60"
-                            aria-valuemin="0" aria-valuemax="100" style="width: 95%;">
-                        </div>
-                    </div>
-                    <p>有小程序开发经验</p>
-                    <div class="progress progress-striped active">
-                        <div class="progress-bar progress-bar-info" role="progressbar" aria-valuenow="60"
-                            aria-valuemin="0" aria-valuemax="100" style="width:50%;">
-                        </div>
-                    </div>
-                </div>
-                <!-- 技能介绍 -->
-                <div class="tab-pane fade" id="experience">
-                    <div class="alert alert-success">
-                        <div class="experience-title">广东小天才科技有限公司 ( 2018年7月—— 至今 ) </div>
-                        <div><span class="glyphicon glyphicon-user"></span>WEB前端开发工程师</div>
-
-                    </div>
-                    <div class="alert alert-info">
-                        <div class="experience-title">步步高教育电子有限公司 ( 2018年3月 )</div>
-                        <div><span class="glyphicon glyphicon-user"></span>WEB前端开发实习生</div>
-                    </div>
-                    <div class="alert alert-danger">
-                        <div class="experience-title"><span class="glyphicon glyphicon-home"></span>天津工业大学</div>
-                        <div>2014年9月 —— 2018年6月</div>
                     </div>
                 </div>
             </div>
-            <!-- 信息 -->
         </div>
     </div>
     <script src="js/myIndex.js"></script>
 </body>
 
-</html>      
+</html>
