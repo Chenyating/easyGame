@@ -1,4 +1,4 @@
-# 主页 [http://www.yating.online](http://www.yating.online)
+# 主页（移动端） [http://www.yating.online](http://www.yating.online)
 
 ### 保护小球大作战：[http://www.yating.online/game/protectBall.html](http://www.yating.online/game/protectBall.html)
 
