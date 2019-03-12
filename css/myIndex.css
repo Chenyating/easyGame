@@ -246,3 +246,8 @@ span {
   width: 3rem;
   height: 3rem;
 }
+/* 人数 */
+#visits{
+  text-align: center;
+  padding: .266667rem;
+}

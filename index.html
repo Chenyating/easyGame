@@ -36,11 +36,11 @@
                     <div class="connect" data-toggle="modal" data-target="#myModal">联系一下</div>
                 </div>
                 <!-- 列表 -->
-                <ul  class="nav">
-                    <li @click="changeInterface(0)" class="ungetli" :class="{getli:interface==0}" > 基本资料</li>
-                    <li @click="changeInterface(1)" class="ungetli" :class="{getli:interface==1}" > 项目展示</li>
-                    <li @click="changeInterface(2)" class="ungetli" :class="{getli:interface==2}" >技能介绍</li>
-                    <li @click="changeInterface(3)" class="ungetli" :class="{getli:interface==3}" >个人经历</li>
+                <ul class="nav">
+                    <li @click="changeInterface(0)" class="ungetli" :class="{getli:interface==0}"> 基本资料</li>
+                    <li @click="changeInterface(1)" class="ungetli" :class="{getli:interface==1}"> 项目展示</li>
+                    <li @click="changeInterface(2)" class="ungetli" :class="{getli:interface==2}">技能介绍</li>
+                    <li @click="changeInterface(3)" class="ungetli" :class="{getli:interface==3}">个人经历</li>
                 </ul>
             </div>
             <div class="body-box">
@@ -62,7 +62,7 @@
                                 <div>英语水平：大学英语四级</div>
                                 <div>是一个喜欢接触新的事物，喜欢专研新的东西，思维活跃，富有创意，认真负责，待人亲切，有团队意识的小伙伴</div>
                             </div>
-    
+
                         </div>
                         <!-- csdn -->
                         <div class="inf-box">
@@ -163,7 +163,7 @@
                                 <img class="project-img" src="./img/index/maze.png" />
                                 <div class="project-int">迷宫 ( 移动 )</div>
                             </div>
-    
+
                             <div class="project-box" @click="goGame(6)">
                                 <img class="project-img" src="./img/index/fruit.png" />
                                 <div class="project-int">随机购买下午茶水果 ( PC&移动 )</div>
@@ -220,7 +220,8 @@
                 </div>
                 <!-- 联系方式 -->
                 <!-- 模态框（Modal） -->
-                <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+                    aria-hidden="true">
                     <div class="modal-dialog">
                         <div class="modal-content">
                             <img class="contect-img" src="./img/index/2wm.gif" />
@@ -235,6 +236,11 @@
             </div>
         </div>
     </div>
+    <div id="visits"></div>
+    <script src="js/totalPeople.js"></script>
+    <script language="JavaScript">
+        $("#visits").append("欢迎您，您是第：" + visits + " 个访问该地址的访客");
+    </script>
     <script src="js/myIndex.js"></script>
 </body>
 
