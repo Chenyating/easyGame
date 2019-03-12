@@ -5,11 +5,11 @@ var protectBall = new Vue({
     ballStage: null, //这是小球球
     // 画布长宽
     canvasWidth: 400,
-    canvasHeight: 800,
+    canvasHeight: 400,
     // 大圆圈
     circleDeg: 1.5 * Math.PI,
     circleX: 200,
-    circleY: 400,
+    circleY: 200,
     circleR: 50,
     // 中心小球
     centerCircleR: 10,

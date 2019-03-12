@@ -14,14 +14,45 @@
 
 <body>
   <div id="protectBall">
+    <div class="info">
+      <div id="title" class="text" @click=" begin()">游戏开始</div>
+      <div>分数：{{scope}}</div>
+      <div>时间：{{gameTime}}秒</div>
+    </div>
     <div class="interface-bg">
-      <div class="info">
-        <div id="title" class="text" @click=" begin()">游戏开始</div>
-        <div>分数：{{scope}}</div>
-        <div>时间：{{gameTime}}秒</div>
+      <canvas id="bgStage" width="400" height="400"> </canvas>
+      <canvas id="ballStage" width="400" height="400"> </canvas>
+    </div>
+    <div class="descript">
+      <p>
+        简单的介绍一下我的小游戏：
+      </p>
+      <div>
+        外面的小球球说：你就是那个中心的小圆，而我只会朝那冲去，纵使铜墙铁壁阻拦，粉身碎骨照样前进；
       </div>
-      <canvas id="bgStage" width="400" height="800"> </canvas>
-      <canvas id="ballStage" width="400" height="800"> </canvas>
+      <p>
+        操作说明：
+      </p>
+      <div>
+        点击游戏开始；通过鼠标点击外框角度，防止黄色小球进入内框；</div>
+      <p>
+        游戏规则：
+      </p>
+      <div>
+        黄色小球球进入中心球，中心球<em>半径变大</em>；
+      </div>
+      <div>
+        随着分数<em>越来越大</em>，防御<em>外框半径变小</em>，防御<em>角度变小</em>；
+      </div>
+      <div>
+        蓝色小球进入中心，分数加10；外框<em>半径增加</em>；（蓝色小球起的是保护防御作用）
+      </div>
+      <p>
+        结束条件：
+      </p>
+      <div>
+        预防角度为0度时； 中心球的半径始终大于外框的半径；
+      </div>
     </div>
   </div>
   <script src="js/protectBall.js"></script>

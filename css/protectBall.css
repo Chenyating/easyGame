@@ -23,15 +23,17 @@ html {
 }
 
 .interface-bg {
-  margin: 0 auto;
+  text-align: center;
 }
 
 .info{
-  padding: 1rem;
+  padding: .5rem;
   display: flex;
   flex-wrap: wrap;
   color: #ffffff;
   justify-content: space-around;
+  width: 100%;
+  font-size: 1rem;
 }
 .explain{
   text-align: center;
@@ -44,9 +46,29 @@ html {
   margin: 0 auto;
   background: radial-gradient(#004141, #000000);
   border: solid 0.3rem #333333;
+  width: 400px;
 }
 
 #ballStage {
   position: relative;
   border: solid 0.3rem #333333;
+  width: 400px;
+}
+.descript{
+  padding:.5rem 1rem;
+  color: #ffffff;
+}
+.descript p{
+  padding: .4rem 0;
+  color: #ffffff;
+  font-size: 1rem;
+  font-weight: bold;
+}
+.descript div{
+  color: #ffffff;
+  font-size: .7rem;
+}
+em{
+  color: red;
+  font-weight: bold;
 }
