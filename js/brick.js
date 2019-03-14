@@ -126,7 +126,6 @@ var brick = new Vue({
         // 初始化砖头们的值，
         blocksArray() {
             var that = this;
-            console.log("aaa",that.canvasWidth / 10,that.canvasHeight / 10)
             this.blocks = []
             for (var i = 0; i < (that.canvasWidth / 10); i++) {
                 this.blocks[i] = []
@@ -233,7 +232,6 @@ var brick = new Vue({
                     // 3.1判断小红在长条上,要改变k和m的值；
                     console.log("在长条上")
                     this.changgeKM();
-                    console.log(this.redK, this.redM)
                     return;
                 } else {
                     console.log("不在长条上")
@@ -254,7 +252,6 @@ var brick = new Vue({
                     // 判断一下头顶有没有小白
                     this.blocks[i][j][2] = 0;
                     this.blocksContext.clearRect(this.blocks[i][j][0], this.blocks[i][j][1], this.blocksWidth, this.blocksWidth);
-                    console.log(this.blocks[i][j][2])
                     // 分值计算
                     var nowscore = this.score + 1;
     
