@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title>消方块-YATING</title>
+    <!-- <meta name="viewport" content="width=device-width, initial-scale=1"> -->
+    <link rel="stylesheet" href="css/brick.css" />
+    <script src="js/vue.js"></script>
+    <script src="js/jquery.js"></script>
+    <script src="js/flexible.js"></script>
+</head>
+
+<body>
+    <div id="brick">
+        <div class="title">
+            <div class="btn" @click="begin()">开始</div>
+            <div>BRICK-消方块</div>
+            <div class="btn" @click="gameOver()">重新开始</div>
+        </div>
+        <div class="news">垃圾，你已经落地<em>{{fail}}</em>次了,吃掉小白,<em>{{score}}</em>个。</div>
+        <div class="brick-bg">
+            <!-- 众多砖块 -->
+            <canvas class="block" id="bg" width="310" height="500"></canvas>
+            <!-- 移动小红砖块 -->
+            <div class="move-box">
+                <canvas class="red-bolck" id="red" width="310" height="500"></canvas>
+                <!-- 底部滑块 -->
+                <canvas class="slier" id="slider" width="310" height="500"></canvas>
+            </div>
+        </div>
+    </div>
+    <script src="js/brick.js"></script>
+    <script>
+        document.body.addEventListener('touchmove', function (e) {
+            e.preventDefault(); //阻止默认的处理方式(阻止下拉滑动的效果)
+        }, {
+            passive: false
+        }); //passive 参数不能省略，用来兼容ios和android
+        document
+            .getElementById("slider")
+            .addEventListener("mousemove", function (e) {
+                brick.sliderDot(e);
+            });
+    </script>
+</body>
+
+</html>
