@@ -1,6 +1,6 @@
 # 主页（移动端） [http://www.yating.online](http://www.yating.online)
 
-### 生成艺术二维码：[http://http://www.yating.online/artQR.html](http://http://www.yating.online/artQR.html)
+### 生成艺术二维码：[http://http://www.yating.online/artQR.html](http://www.yating.online/artQR.html)
 
 ### 消方块：[http://www.yating.online/birck.html](http://www.yating.online/brick.html)
 
