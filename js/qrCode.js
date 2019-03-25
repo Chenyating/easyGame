@@ -58,34 +58,34 @@ var qrBox = new Vue({
         // 返回图片src
         imgSrc(num, type) {
             if (num == 4 && type == "row") {
-                return __uri("/img/qr/row4.png")+"?d=" + +new Date();
+                return "../img/qr/row4.png";
             }
             if (num == 4 && type == "col") {
-                return __uri("/img/qr/col4.png")+"?d=" + +new Date();
+                return "../img/qr/col4.png";
             }
             if (num == 3 && type == "row") {
-                return __uri("/img/qr/row3.png")+"?d=" + +new Date();
+                return "../img/qr/row3.png";
             }
             if (num == 3 && type == "col") {
-                return __uri("/img/qr/col3.png")+"?d=" + +new Date();
+                return "../img/qr/col3.png";
             }
             if (num == 7 && type == "re") {
-                return __uri("/img/qr/re7.png")+"?d=" + +new Date();
+                return "../img/qr/re7.png";
             }
             if (num == 7 && type == "po") {
-                return __uri("/img/qr/po7.png")+"?d=" + +new Date();
+                return "../img/qr/po7.png";
             }
             if (num == 22 && type == "tian") {
-                return __uri("/img/qr/tian.png")+"?d=" + +new Date();
+                return "../img/qr/tian.png";
             }
             if (num == 2 && type == "row") {
-                return __uri("/img/qr/row2.png")+"?d=" + +new Date();
+                return "../img/qr/row2.png";
             }
             if (num == 2 && type == "col") {
-                return __uri("/img/qr/col2.png")+"?d=" + +new Date();
+                return "../img/qr/col2.png";
             }
             if (num == 1 && type == "one") {
-                return __uri("/img/qr/one.png")+"?d=" + +new Date();
+                return "../img/qr/one.png";
             }
         },
         // 绘制艺术二维码
@@ -107,8 +107,7 @@ var qrBox = new Vue({
         // 绘制艺术二维码
         painEye() {
             var img = new Image();
-            img.src = __uri("img/qr/eye.png")+"?d=" + +new Date();
-            // img.src = "../img/qr/eye.png";
+            img.src = "../img/qr/eye.png";
             //浏览器加载图片完毕后再绘制图片
             img.onload = () => {
                 this.canvasBg.drawImage(img, 0 * this.unit, 0 * this.unit, 7 * this.unit, 7 * this.unit);
