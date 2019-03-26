@@ -4,7 +4,7 @@ var qrBox = new Vue({
         qrLength: 180,
         unit: null,
         canvasBg: null,
-        inputMessage: "hello,I am Yating",
+        inputMessage: "hello,I am Yating.",
         arrayLength: null,
         array: null,
         array4: {
@@ -401,8 +401,8 @@ var qrBox = new Vue({
             // 开始绘制
             this.countType("array4", 4)
             this.countTian();
-            this.count7();
             this.countType("array3", 3)
+            this.count7();
             this.countType("array2", 2)
             this.count1();
             this.painEye();

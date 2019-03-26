@@ -8,6 +8,9 @@ html {
   padding: 0;
   margin: 0;
 }
+[v-cloak] {
+    display: none;
+  }
 #qrBox{
     margin: 0 auto;
     text-align: center;
@@ -39,7 +42,7 @@ html {
 /* // 二维码 */
 #canvasQR{
     margin: 0 auto;
-    margin-top: 60px;
+    margin-top: 80px;
     width: 180px;
     height: 180px;
 }

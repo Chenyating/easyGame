@@ -11,7 +11,9 @@ html {
     padding: 0;
     margin: 0;
 }
-
+[v-cloak] {
+    display: none;
+  }
 .brick-bg {
     position: relative;
     background: white;

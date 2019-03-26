@@ -8,7 +8,6 @@
     <title>QR-艺术二维码</title>
     <link rel="shortcut icon" href="img/index/qr.png">
     <!-- <meta name="viewport" content="width=device-width, initial-scale=1"> -->
-    <script src="js/flexible.js"></script>
     <link rel="stylesheet" href="./css/qrCode.css" />
     <script src="https://cdn.staticfile.org/jquery/1.10.2/jquery.min.js"></script>
     <script src="https://cdn.staticfile.org/vue/2.2.2/vue.min.js"></script>
@@ -17,7 +16,7 @@
 </head>
 
 <body>
-    <div id="qrBox">
+    <div id="qrBox" v-cloak>
         <!-- 按钮 -->
         <textarea class="input-box" v-model="inputMessage" placeholder="请输入英文或者数字，目前暂不支持中文"></textarea>
         <div class="button-box">
