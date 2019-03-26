@@ -1,7 +1,7 @@
 var qrBox = new Vue({
     el: "#qrBox",
     data: {
-        qrLength: 200,
+        qrLength: 180,
         unit: null,
         canvasBg: null,
         inputMessage: "hello,I am Yating",

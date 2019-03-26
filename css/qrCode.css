@@ -39,9 +39,9 @@ html {
 /* // 二维码 */
 #canvasQR{
     margin: 0 auto;
-    margin-top: 90px;
-    width: 200px;
-    height: 200px;
+    margin-top: 60px;
+    width: 180px;
+    height: 180px;
 }
 
 #bg{
@@ -49,8 +49,8 @@ html {
     background: url("../img/qr/bg.png");
     background-size: 100%;
     background-repeat: no-repeat;
-    width: 400px;
-    height: 600px;
+    width: 350px;
+    height: 550px;
     /* // border:  dotted 2px #547248; */
     margin: 0 auto;
     margin-bottom: 20px;
