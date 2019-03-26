@@ -39,7 +39,7 @@ html {
 /* // 二维码 */
 #canvasQR{
     margin: 0 auto;
-    margin-top: 80px;
+    margin-top: 90px;
     width: 200px;
     height: 200px;
 }
@@ -49,8 +49,9 @@ html {
     background: url("../img/qr/bg.png");
     background-size: 100%;
     background-repeat: no-repeat;
-    width: 350px;
-    height: 500px;
+    width: 400px;
+    height: 600px;
     /* // border:  dotted 2px #547248; */
     margin: 0 auto;
+    margin-bottom: 20px;
 }
