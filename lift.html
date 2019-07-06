@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html>
+
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+
+    <title>电梯控制</title>
+    <link rel="shortcut icon" href="img/lift/lift.png">
+    <!--
+      <meta name="viewport" content="width=device-width, initial-scale=1">
+    -->
+    <script src="./js/vue.js"></script>
+    <script src="js/jquery.js"></script>
+    <script src="js/flexible.js"></script>
+    <style>
+        #lift {
+            text-align: center;
+        }
+
+        .lift-box {
+            display: flex;
+            width: 600px;
+            align-items: center;
+        }
+
+        .lift {
+            border: solid 1px black;
+            margin: 20px;
+        }
+
+        .active-lift {
+            background: red;
+        }
+        .in-btn {
+            background: #f1f2f4;
+            padding: 4px;
+            border-radius: 20px;
+            margin-left: 4px;
+
+        }
+
+        .active-in-btn {
+            background: yellow;
+
+        }
+
+        .btn-box {
+            display: flex;
+            justify-content: start;
+            width: 100px;
+            margin: 20px;
+        }
+
+        .btn {
+            border: solid 2px black;
+            display: inline-block;
+            width: 50px;
+            height: 20px;
+            border-radius: 40px;
+        }
+
+        .active-btn {
+            background: yellow;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="lift" v-cloak>
+        <div class="lift-box" v-for="item in lift_number">
+            <div>{{item}}</div>
+            <!-- 里面电梯的按钮  -->
+            <div :class="{'active-lift': floor_now==item}" class="lift">
+                <div class="btn-box">
+                    <div v-for="item in lift_number" :class="{'active-in-btn': lift_in[item]==true}" class="in-btn" @click=" goLift(item)">{{item}}</div>
+                </div>
+            </div>
+            <!--外面的上下按钮  -->
+            <div class="btn-box">
+                <div v-if="lift_number.length-1!=item" :class="{'active-btn': lift_out_up[item]==true}" class="btn"
+                    @click="up(item)">上{{lift_out_up[item]}}</div>
+                <div v-if="item!=0" :class="{'active-btn': lift_out_down[item]==true}" class="btn" @click="down(item)">
+                    下{{lift_out_down[item]}}</div>
+            </div>
+        </div>
+    </div>
+    <script src="js/lift.js"></script>
+</body>
+
+</html>
