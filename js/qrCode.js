@@ -406,6 +406,13 @@ var qrBox = new Vue({
             this.countType("array2", 2)
             this.count1();
             this.painEye();
+            console.log("横竖4格坐标集合：",this.array4)
+            console.log("横竖田坐标集合：",this.arrayTian)
+            console.log("横竖3格坐标集合：",this.array3)
+            console.log("正7记录坐标集合",this.arrayPositive7)
+            console.log("反7记录坐标集合",this.arrayRever7)
+            console.log("横竖2格坐标集合：",this.array2)
+            console.log("单个格子坐标集合",this.array1)
         },
         // 清空原来的二维码，把内容二维码转为table格式；
         toBeTableQR() {
