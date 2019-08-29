@@ -58,34 +58,34 @@ var qrBox = new Vue({
         // 返回图片src
         imgSrc(num, type) {
             if (num == 4 && type == "row") {
-                return "../img/qr/row4.png";
+                return __uri("img/qr/row4.png");
             }
             if (num == 4 && type == "col") {
-                return "../img/qr/col4.png";
+                return __uri("img/qr/col4.png");
             }
             if (num == 3 && type == "row") {
-                return "../img/qr/row3.png";
+                return __uri("img/qr/row3.png");
             }
             if (num == 3 && type == "col") {
-                return "../img/qr/col3.png";
+                return __uri("img/qr/col3.png");
             }
             if (num == 7 && type == "re") {
-                return "../img/qr/re7.png";
+                return __uri("img/qr/re7.png");
             }
             if (num == 7 && type == "po") {
-                return "../img/qr/po7.png";
+                return __uri("img/qr/po7.png");
             }
             if (num == 22 && type == "tian") {
-                return "../img/qr/tian.png";
+                return __uri("img/qr/tian.png");
             }
             if (num == 2 && type == "row") {
-                return "../img/qr/row2.png";
+                return __uri("img/qr/row2.png");
             }
             if (num == 2 && type == "col") {
-                return "../img/qr/col2.png";
+                return __uri("img/qr/col2.png");
             }
             if (num == 1 && type == "one") {
-                return "../img/qr/one.png";
+                return __uri("img/qr/one.png");
             }
         },
         // 绘制艺术二维码
