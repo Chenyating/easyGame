@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title>启龙食品月饼开售啦！</title>
+    <link rel="shortcut icon" href="img/cake/cake.png">
+    <!--
+      <meta name="viewport" content="width=device-width, initial-scale=1">
+    -->
+    <script src="./js/vue.js"></script>
+    <script src="js/jquery.js"></script>
+    <script src="js/flexible.js"></script>
+    <!-- 新 Bootstrap 核心 CSS 文件 -->
+    <link href="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" />
+    <!-- jQuery文件。务必在bootstrap.min.js 之前引入 -->
+    <script src="https://cdn.staticfile.org/jquery/2.1.1/jquery.min.js"></script>
+    <!-- 最新的 Bootstrap 核心 JavaScript 文件 -->
+    <script src="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script src="https://hm.baidu.com/hm.jsd69321757dcfbfbe09dbddd4dca87b28"></script>
+</head>
+<style>
+    .body,
+    html {
+        font-size: 0.32rem;
+        font-size: 0.32rem;
+        background: #000000;
+    }
+
+    .box {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        font-size: 0.32rem;
+    }
+
+    #fruit {
+        background: #000000;
+        color: white;
+        margin: 0 auto;
+        width: 10rem;
+        padding: .3125rem;
+    }
+    .connect-baba {
+        width: 7rem;
+        margin: 0 auto;
+    }
+
+    .big-img {
+        width: 2rem;
+        height: 2rem;
+    }
+
+    .title-img {
+        width: 6.25rem;
+        height: auto;
+    }
+
+    .liao-box {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-around;
+    }
+
+    .liao-img {
+        width: 4rem;
+        height: 3rem;
+        margin: .3125rem;
+    }
+
+    .content {
+        text-indent: 2em;
+    }
+
+    em {
+        color: red;
+        font-size: .625rem;
+    }
+
+    span {
+        color: yellow;
+        font-size: .625rem;
+    }
+
+    .title {
+        font-size: .625rem;
+        font-weight: bold;
+        margin: .625rem;
+    }
+</style>
+
+<body>
+    <div id="fruit" v-cloak>
+        <!-- 标题 -->
+        <div class="box">
+            <img class="big-img" src="img/cake/moon.png" />
+            <h1>启龙食品</h1>
+            <img class="big-img" src="img/cake/moon.png" />
+        </div>
+        <div class="title">中秋快来了，还不来这里买月饼！</div>
+        <div class="content">你想要的口味这里都有：<em>双黄，莲榕，芝麻，五仁，果仁</em>，<span>散装6~25元</span>不等。</div>
+        <div class="content">厂家直销，没有中间商赚差价，比商铺更便宜。</div>
+        <div class="content">分量足,一个月饼<span>100克到500克！！</span>让你感受沉淀的的祝福</div>
+        <div class="content">
+            <ul>
+                <li> 一个双黄的<em>9元/132克</em> </li>
+                <li> 其他月饼，<span>6~7元/100克~132克</span></li>
+                <li> <em>12元/200克</em>，<span>25元/500克</span></li>
+            </ul>
+        </div>
+        <div class="liao-box">
+            <img class="liao-img" src="img/cake/liao1.jpg">
+            <img class="liao-img" src="img/cake/liao2.jpg">
+            <img class="liao-img" src="img/cake/liao3.jpg">
+            <img class="liao-img" src="img/cake/liao4.jpg">
+        </div>
+        <div class="content"><span>更有高端礼盒，送朋友，送亲戚，更有面儿！！</span>
+            <p>高端礼盒6只装。只要<em>78元</em></p>
+        </div>
+        <div class="liao-box">
+            <img class="liao-img" src="img/cake/h1.jpg">
+            <img class="liao-img" src="img/cake/h2.jpg">
+            <img class="liao-img" src="img/cake/h3.jpg">
+            <img class="liao-img" src="img/cake/h11.jpg">
+            <img class="liao-img" src="img/cake/h5.jpg">
+            <img class="liao-img" src="img/cake/h6.jpg">
+            <img class="liao-img" src="img/cake/h7.jpg">
+            <img class="liao-img" src="img/cake/h8.jpg">
+        </div>
+        <div class="content"><span>更有高端礼盒，送朋友，送亲戚，更有面儿！！</span>
+            <p>礼盒4只装。只要<em>22元</em></p>
+        </div>
+        <div class="liao-box">
+            <img class="liao-img" src="img/cake/h4.jpg">
+            <img class="liao-img" src="img/cake/h9.jpg">
+            <img class="liao-img" src="img/cake/h12.jpg">
+            <img class="liao-img" src="img/cake/want.jpg">
+        </div>
+        <div class="content"><span>好吃又便宜，高端又大气，送朋友，送亲戚，送同学。</span>
+            <br>
+            <em>晋江配送！买多，优惠更多！！</em>
+            <div class="title">联系电话：159599502189</div>
+        </div>
+        <div  class="connect-baba">
+            <img class="connect-baba" src="img/cake/baba.jpg">
+        </div>
+        <div class="title">添加微信，谈一谈，不买也交个朋友！</div>
+    </div>
+    <script>
+    $.getJSON("http://www.yating.online/api/times/addTimes?name=moonCake&jsoncallback=?", function(data) {
+        alert(data.data);
+    });
+    </script>
+    <script>
+       $.getJSON("http://www.yating.online/api/times/getTimes?name=moonCake&jsoncallback=?", function(data) {
+        alert(data.data);
+    });
+    </script>
+</body>
+
+</html>
