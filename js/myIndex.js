@@ -1,8 +1,8 @@
 var myIndex = new Vue({
     el: "#myIndex",
     data: {
-        name: "陈雅婷",
-        introduction: "陈雅婷，女，毕业于天津工业大学，籍贯福建，2018年3月开始参加工作，开始从事于前端开发工作。她的梦想是成为一名优秀的前端开发工程师！",
+        name: "YATING",
+        introduction: "2018年3月开始参加工作，开始从事于前端开发工作。她的梦想是成为一名优秀的前端开发工程师！",
         H5url: [
             "https://actcdn.eebbk.com/wx-spread-course/same-step/index.html",
              "https://actcdn.eebbk.com/wx-spread-course/998middle/index.html",
@@ -17,13 +17,13 @@ var myIndex = new Vue({
         gameUrl: [
             "https://github.com/Chenyating/Developed-page",
             "http://www.yating.online/protectBall.html",
-            "http://www.yating.online/tetris.html",
-            "http://www.yating.online/retroSnaker.html",
-            "http://www.yating.online/mine.html",
+            "http://www.yating.online/tools/tetris",
+            "http://www.yating.online/tools/snaker",
+            "http://www.yating.online/tool/mine",
             "http://www.yating.online/maze.html",
             "http://www.yating.online/fruit.html",
             "http://www.yating.online/brick.html",
-            "http://www.yating.online/artQR.html",
+            "http://www.yating.online/tools/artQR.html",
         ],
         skills: [{
                 skill: "掌握前端基础HTML、CSS",
