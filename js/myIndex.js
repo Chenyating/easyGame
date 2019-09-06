@@ -17,13 +17,13 @@ var myIndex = new Vue({
         gameUrl: [
             "https://github.com/Chenyating/Developed-page",
             "http://www.yating.online/protectBall.html",
-            "http://www.yating.online/tools/tetris",
-            "http://www.yating.online/tools/snaker",
-            "http://www.yating.online/tool/mine",
+            "http://www.yating.online/tetris.html",
+            "http://www.yating.online/retroSnaker.html",
+            "http://www.yating.online/mine.html",
             "http://www.yating.online/maze.html",
             "http://www.yating.online/fruit.html",
             "http://www.yating.online/brick.html",
-            "http://www.yating.online/tools/artQR.html",
+            "http://www.yating.online/artQR.html",
         ],
         skills: [{
                 skill: "掌握前端基础HTML、CSS",
