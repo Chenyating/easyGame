@@ -1,7 +1,11 @@
 var myIndex = new Vue({
     el: "#myIndex",
     data: {
+<<<<<<< HEAD
         name: "CHENYATING",
+=======
+        name: "YATING",
+>>>>>>> 6ebcc304a00bfb4fcbe8a9a2716eadc70732a692
         introduction: "2018年3月开始参加工作，开始从事于前端开发工作。她的梦想是成为一名优秀的前端开发工程师！",
         H5url: [
             "https://actcdn.eebbk.com/wx-spread-course/same-step/index.html",
@@ -23,7 +27,11 @@ var myIndex = new Vue({
             "http://www.yating.online/game/maze.html",
             "http://www.yating.online/game/fruit.html",
             "http://www.yating.online/game/brick.html",
+<<<<<<< HEAD
             "https://www.yating.online/tools/artQR",
+=======
+            "http://www.yating.online/game/artQR.html",
+>>>>>>> 6ebcc304a00bfb4fcbe8a9a2716eadc70732a692
         ],
         skills: [{
                 skill: "掌握前端基础HTML、CSS",
